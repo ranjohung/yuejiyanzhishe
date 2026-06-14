@@ -1,0 +1,19 @@
+{
+    "pages": [
+        {
+            "path": "pages/tab1/report",
+            "style": {
+                "navigationBarTitleText": "测评报告",
+                "navigationBarBackgroundColor": "#ffffff",
+                "navigationBarTextStyle": "black"
+            }
+        }
+    ],
+    "globalStyle": {
+        "navigationBarTextStyle": "black",
+        "navigationBarTitleText": "约肌形象社",
+        "navigationBarBackgroundColor": "#FFFFFF",
+        "backgroundColor": "#F8F8F8"
+    },
+    "uniIdRouter": {}
+}

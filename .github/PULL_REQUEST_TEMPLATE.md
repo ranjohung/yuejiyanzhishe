@@ -22,6 +22,7 @@
 - [ ] 我没有把 `project.private.config.json`、`.env`、密钥等敏感信息加进提交
 - [ ] 我没直推 `main`（本 PR 是通过分支发起的）
 - [ ] 提交信息遵循 Conventional Commits（`feat:` / `fix:` / `refactor:` / `docs:` / `chore:`）
+- [ ] **本次 PR 包含 breaking change**（改 package.json / 改目录结构 / 改配置文件 / 改接口契约）— 若是，已在 PR 描述里加 ⚠️ **Breaking Change** 段，并**新建/更新了 `docs/MIGRATION-*.md`**
 
 ## 关联
 

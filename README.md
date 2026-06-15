@@ -36,10 +36,10 @@
 # 1. 安装依赖
 npm install
 
-# 2. 启动微信小程序编译（产物输出到 unpackage/dist/dev/mp-weixin）
+# 2. 启动微信小程序编译（产物输出到 dist/dev/mp-weixin）
 npm run dev:mp-weixin
 
-# 3. 打开微信开发者工具 → 导入项目 → 目录选择 unpackage/dist/dev/mp-weixin
+# 3. 打开微信开发者工具 → 导入项目 → 目录选择 dist/dev/mp-weixin
 #    （AppID 在导入时绑定本地即可，不要提交 project.private.config.json）
 
 # 其它平台

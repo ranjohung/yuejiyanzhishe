@@ -15,5 +15,15 @@
         "navigationBarBackgroundColor": "#FFFFFF",
         "backgroundColor": "#F8F8F8"
     },
+    "easycom": {
+        "autoscan": true,
+        "custom": {
+            "^FaceSection$": "@/components/report/FaceSection.vue",
+            "^BodySection$": "@/components/report/BodySection.vue",
+            "^StyleSection$": "@/components/report/StyleSection.vue",
+            "^OutfitSection$": "@/components/report/OutfitSection.vue",
+            "^HairstyleSection$": "@/components/report/HairstyleSection.vue"
+        }
+    },
     "uniIdRouter": {}
 }

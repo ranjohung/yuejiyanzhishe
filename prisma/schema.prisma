@@ -1,0 +1,411 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                 String          @id @default(cuid())
+  phone              String          @unique
+  password           String
+  nickname           String          @unique
+  avatar             String?
+  gender             Int             @default(0)
+  age                Int?
+  email              String?         @unique
+  member_level       Int             @default(0)
+  member_expire_time DateTime?
+  status             Int             @default(1)
+  created_at         DateTime        @default(now())
+  updated_at         DateTime        @updatedAt
+
+  profile            UserProfile?
+  analyses           Analysis[]
+  style_tests        StyleTest[]
+  plans              Plan[]
+  contents           Content[]
+  followers          Follower[]      @relation("follower")
+  followees          Follower[]      @relation("followee")
+  comments           Comment[]
+  user_achievements  UserAchievement[]
+  conversations      Conversation[]
+  shares             Share[]
+  referrals          Referral[]
+
+  @@map("users")
+}
+
+model UserProfile {
+  id                String   @id @default(cuid())
+  user_id           String   @unique
+  user              User     @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  birthday          DateTime?
+  height            Int?
+  weight            Decimal?
+  skin_type         Int?
+  style_preference  Json?
+  interests         Json?
+  bio               String?
+  created_at        DateTime @default(now())
+  updated_at        DateTime @updatedAt
+
+  @@map("user_profiles")
+}
+
+model Membership {
+  id          String   @id @default(cuid())
+  level       Int      @unique
+  name        String
+  price       Decimal
+  duration    Int
+  features    Json?
+  status      Int      @default(1)
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
+
+  @@map("memberships")
+}
+
+model Analysis {
+  id              String           @id @default(cuid())
+  user_id         String
+  user            User             @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  image_url       String
+  analysis_type   Int
+  status          Int              @default(0)
+  created_at      DateTime         @default(now())
+  completed_at    DateTime?
+
+  result          AnalysisResult?
+
+  @@map("analyses")
+}
+
+model AnalysisResult {
+  id              String   @id @default(cuid())
+  analysis_id     String   @unique
+  analysis        Analysis @relation(fields: [analysis_id], references: [id], onDelete: Cascade)
+  face_shape      String?
+  skin_type       Int?
+  skin_problems   Json?
+  complexion      String?
+  features        Json?
+  suggestions     Json?
+  score           Decimal?
+  created_at      DateTime @default(now())
+
+  @@map("analysis_results")
+}
+
+model SkinType {
+  id          String   @id @default(cuid())
+  name        String   @unique
+  description String?
+  care_tips   Json?
+
+  @@map("skin_types")
+}
+
+model StyleTest {
+  id          String       @id @default(cuid())
+  user_id     String
+  user        User         @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  answers     Json
+  status      Int          @default(0)
+  created_at  DateTime     @default(now())
+  completed_at DateTime?
+
+  result      StyleResult?
+
+  @@map("style_tests")
+}
+
+model StyleResult {
+  id                 String          @id @default(cuid())
+  test_id            String          @unique
+  test               StyleTest       @relation(fields: [test_id], references: [id], onDelete: Cascade)
+  personal_style     String
+  style_description  String?
+  style_tags         Json?
+  created_at         DateTime        @default(now())
+
+  recommendations    Recommendation[]
+
+  @@map("style_results")
+}
+
+model Recommendation {
+  id                 String       @id @default(cuid())
+  user_id            String
+  user               User         @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  result_id          String?
+  result             StyleResult? @relation(fields: [result_id], references: [id], onDelete: Cascade)
+  recommendation_type Int
+  content            Json
+  image_url          String?
+  created_at         DateTime     @default(now())
+
+  @@map("recommendations")
+}
+
+model Plan {
+  id          String      @id @default(cuid())
+  user_id     String
+  user        User        @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  title       String
+  plan_type   Int
+  description String?
+  start_date  DateTime
+  end_date    DateTime
+  status      Int         @default(1)
+  created_at  DateTime    @default(now())
+  updated_at  DateTime    @updatedAt
+
+  items       PlanItem[]
+
+  @@map("plans")
+}
+
+model PlanItem {
+  id          String    @id @default(cuid())
+  plan_id     String
+  plan        Plan      @relation(fields: [plan_id], references: [id], onDelete: Cascade)
+  title       String
+  description String?
+  day_index   Int
+  time_of_day Int?
+  created_at  DateTime  @default(now())
+
+  checkins    Checkin[]
+
+  @@map("plan_items")
+}
+
+model Checkin {
+  id           String    @id @default(cuid())
+  plan_item_id String
+  plan_item    PlanItem  @relation(fields: [plan_item_id], references: [id], onDelete: Cascade)
+  user_id      String
+  user         User      @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  checkin_date DateTime
+  status       Int
+  note         String?
+  created_at   DateTime  @default(now())
+
+  @@map("checkins")
+}
+
+model Content {
+  id             String     @id @default(cuid())
+  user_id        String
+  user           User       @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  title          String
+  content        String?
+  cover_image    String?
+  topic_id       String?
+  topic          Topic?     @relation(fields: [topic_id], references: [id], onDelete: SetNull)
+  tags           Json?
+  views          Int        @default(0)
+  likes          Int        @default(0)
+  shares         Int        @default(0)
+  comments_count Int        @default(0)
+  status         Int        @default(2)
+  is_featured    Boolean    @default(false)
+  created_at     DateTime   @default(now())
+  updated_at     DateTime   @updatedAt
+
+  collections    Collection[]
+  comments       Comment[]
+
+  @@map("contents")
+  @@fulltext([title])
+}
+
+model Topic {
+  id              String     @id @default(cuid())
+  name            String     @unique
+  description     String?
+  cover_image     String?
+  content_count   Int        @default(0)
+  followers_count Int        @default(0)
+  status          Int        @default(1)
+  created_at      DateTime   @default(now())
+  updated_at      DateTime   @updatedAt
+
+  contents        Content[]
+
+  @@map("topics")
+}
+
+model Tag {
+  id          String     @id @default(cuid())
+  name        String     @unique
+  color       String?
+  usage_count Int        @default(0)
+  created_at  DateTime   @default(now())
+
+  @@map("tags")
+}
+
+model Collection {
+  id         String    @id @default(cuid())
+  user_id    String
+  user       User      @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  content_id String
+  content    Content   @relation(fields: [content_id], references: [id], onDelete: Cascade)
+  created_at DateTime  @default(now())
+
+  @@unique([user_id, content_id])
+  @@map("collections")
+}
+
+model Follower {
+  id          String    @id @default(cuid())
+  follower_id String
+  follower    User      @relation("follower", fields: [follower_id], references: [id], onDelete: Cascade)
+  followee_id String
+  followee    User      @relation("followee", fields: [followee_id], references: [id], onDelete: Cascade)
+  created_at  DateTime  @default(now())
+
+  @@unique([follower_id, followee_id])
+  @@map("followers")
+}
+
+model Comment {
+  id          String    @id @default(cuid())
+  user_id     String
+  user        User      @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  content_id  String
+  content     Content   @relation(fields: [content_id], references: [id], onDelete: Cascade)
+  parent_id   String?
+  parent      Comment?  @relation("parent", fields: [parent_id], references: [id], onDelete: SetNull)
+  reply       Comment[] @relation("parent")
+  comment     String
+  likes       Int       @default(0)
+  status      Int       @default(1)
+  created_at  DateTime  @default(now())
+
+  @@map("comments")
+}
+
+model Achievement {
+  id               String              @id @default(cuid())
+  name             String              @unique
+  description      String?
+  icon             String?
+  points           Int                 @default(0)
+  achievement_type Int
+  condition        Json
+  created_at       DateTime            @default(now())
+
+  user_achievements UserAchievement[]
+
+  @@map("achievements")
+}
+
+model UserAchievement {
+  id              String      @id @default(cuid())
+  user_id         String
+  user            User        @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  achievement_id  String
+  achievement     Achievement @relation(fields: [achievement_id], references: [id], onDelete: Cascade)
+  unlocked_at     DateTime    @default(now())
+  progress        Int         @default(0)
+
+  @@unique([user_id, achievement_id])
+  @@map("user_achievements")
+}
+
+model Leaderboard {
+  id           String    @id @default(cuid())
+  user_id      String    @unique
+  user         User      @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  total_points Int       @default(0)
+  rank         Int       @default(0)
+  last_updated DateTime  @default(now())
+
+  @@map("leaderboard")
+}
+
+model Conversation {
+  id          String    @id @default(cuid())
+  user_id     String
+  user        User      @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  title       String?
+  status      Int       @default(1)
+  created_at  DateTime  @default(now())
+  updated_at  DateTime  @updatedAt
+
+  messages    Message[]
+
+  @@map("conversations")
+}
+
+model Message {
+  id              String        @id @default(cuid())
+  conversation_id String
+  conversation    Conversation @relation(fields: [conversation_id], references: [id], onDelete: Cascade)
+  user_id         String
+  user            User         @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  role            String
+  content         String
+  created_at      DateTime     @default(now())
+
+  @@map("messages")
+}
+
+model Share {
+  id         String    @id @default(cuid())
+  user_id    String
+  user       User      @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  content_id String?
+  content    Content?  @relation(fields: [content_id], references: [id], onDelete: SetNull)
+  share_type Int
+  platform   Int?
+  created_at DateTime  @default(now())
+
+  poster     SharePoster?
+
+  @@map("shares")
+}
+
+model SharePoster {
+  id              String    @id @default(cuid())
+  share_id        String    @unique
+  share           Share     @relation(fields: [share_id], references: [id], onDelete: Cascade)
+  poster_url      String
+  poster_template Int       @default(1)
+  created_at      DateTime  @default(now())
+
+  @@map("share_posters")
+}
+
+model Referral {
+  id            String            @id @default(cuid())
+  referrer_id   String
+  referrer      User              @relation(fields: [referrer_id], references: [id], onDelete: Cascade)
+  referral_code String            @unique
+  created_at    DateTime          @default(now())
+
+  rewards       ReferralReward[]
+
+  @@map("referrals")
+}
+
+model ReferralReward {
+  id            String    @id @default(cuid())
+  referral_id   String
+  referral      Referral  @relation(fields: [referral_id], references: [id], onDelete: Cascade)
+  new_user_id   String    @unique
+  new_user      User      @relation(fields: [new_user_id], references: [id], onDelete: Cascade)
+  reward_type   Int
+  reward_value  Int
+  status        Int       @default(0)
+  created_at    DateTime  @default(now())
+  awarded_at    DateTime?
+
+  @@map("referral_rewards")
+}

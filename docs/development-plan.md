@@ -718,9 +718,15 @@ model Share {
   content     Content?  @relation(fields: [content_id], references: [id], onDelete: SetNull)
   share_type  Int
   platform    Int?
+  share_mode  Int       @default(0)
+  status      Int       @default(0)
+  view_count  Int       @default(0)
+  expire_at   DateTime?
   created_at  DateTime  @default(now())
+  updated_at  DateTime  @updatedAt
 
   poster      SharePoster?
+  statistics  ShareStatistics?
 
   @@map("shares")
 }
@@ -734,6 +740,18 @@ model SharePoster {
   created_at      DateTime  @default(now())
 
   @@map("share_posters")
+}
+
+model ShareStatistics {
+  id              String    @id @default(cuid())
+  share_id        String    @unique
+  share           Share     @relation(fields: [share_id], references: [id], onDelete: Cascade)
+  click_count     Int       @default(0)
+  register_count  Int       @default(0)
+  created_at      DateTime  @default(now())
+  updated_at      DateTime  @updatedAt
+
+  @@map("share_statistics")
 }
 
 model Referral {
@@ -991,20 +1009,36 @@ model ReferralReward {
 | 6.4 | 创建邀请链接API | 2小时 |
 | 6.5 | 创建分享海报API | 3小时 |
 | 6.6 | 创建推荐奖励API | 2小时 |
-| 6.7 | 创建AI顾问页面 (`/consultant`) | 4小时 |
-| 6.8 | 创建分享页面 (`/share`) | 3小时 |
-| 6.9 | 实现聊天消息组件 | 3小时 |
-| 6.10 | 实现分享海报组件 | 2小时 |
+| 6.7 | 创建分享内容选择器API | 2小时 |
+| 6.8 | 创建分享平台API（微信/QQ/抖音/小红书/快手） | 3小时 |
+| 6.9 | 创建分享记录管理API（列表/撤回/统计） | 3小时 |
+| 6.10 | 创建分享落地页API | 2小时 |
+| 6.11 | 创建AI顾问页面 (`/consultant`) | 4小时 |
+| 6.12 | 创建分享页面 (`/share`) | 3小时 |
+| 6.13 | 创建分享记录页面 (`/share/history`) | 3小时 |
+| 6.14 | 创建分享落地页 (`/share/landing`) | 3小时 |
+| 6.15 | 实现聊天消息组件 | 3小时 |
+| 6.16 | 实现分享海报组件 | 2小时 |
+| 6.17 | 实现分享内容选择器组件 | 3小时 |
+| 6.18 | 实现分享平台选择组件 | 3小时 |
+| 6.19 | 实现分享记录管理组件 | 3小时 |
 
 **输出**：
 - AI智能对话
 - 对话历史管理
 - AI顾问安全护栏规则（关键词过滤、语义检测、用户意图拦截、尾部追加、次数限制）
-- 分享海报生成（完整模式/匿名模式/教学模式）
-- 分享卡片生成规范（750×1000px）
+- 分享内容选择器（完整/匿名/教学/脱敏模式，不同场景可选模式不同）
+- 多平台分享支持（微信好友、微信朋友圈、QQ好友、抖音、小红书、快手、复制链接、保存图片）
+- 分享海报生成（完整模式/匿名模式/教学模式，尺寸750×1000px）
+- 抖音/快手短视频生成（15-30秒变美过程）
+- 小红书风格分享图生成（1080×1440px，1-9张）
+- 分享卡片生成规范（尺寸、内容元素、底部文案）
 - 分享链接有效期（24小时）
-- 分享撤回功能
-- 分享落地页
+- 分享追踪参数（share_id、user_id加密、share_type、platform、share_mode、timestamp）
+- 分享统计指标（分享次数、落地页访问量、新用户注册数、分享回流率）
+- 分享撤回功能（二次确认、立即失效、不可恢复）
+- 分享落地页（展示分享内容、分享者昵称、有效期提示、引导注册）
+- 我的分享记录（按类型筛选、状态显示、撤回操作）
 - 邀请奖励系统
 
 ### 6.8 Phase 6：风控系统与测试部署

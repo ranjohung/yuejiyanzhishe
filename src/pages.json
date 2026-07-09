@@ -7,6 +7,24 @@
                 "navigationBarBackgroundColor": "#ffffff",
                 "navigationBarTextStyle": "black"
             }
+        },
+        {
+            "path": "pages/style/test",
+            "style": {
+                "navigationBarTitleText": "风格测试",
+                "navigationStyle": "custom",
+                "navigationBarBackgroundColor": "#ffffff",
+                "navigationBarTextStyle": "black"
+            }
+        },
+        {
+            "path": "pages/style/result",
+            "style": {
+                "navigationBarTitleText": "测试结果",
+                "navigationStyle": "custom",
+                "navigationBarBackgroundColor": "#ffffff",
+                "navigationBarTextStyle": "black"
+            }
         }
     ],
     "globalStyle": {

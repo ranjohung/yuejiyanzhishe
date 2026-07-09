@@ -287,7 +287,7 @@ function onBack() {
 .action-bar {
   display: flex;
   gap: 20rpx;
-  padding: 24rpx 32rpx 140rpx;
+  padding: 24rpx 32rpx 200rpx;
   background: #fff;
   border-top: 1rpx solid #f0f0f0;
 }

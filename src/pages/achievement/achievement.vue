@@ -10,131 +10,134 @@
       <view class="nav-placeholder" />
     </view>
 
-    <!-- 成就概览 -->
-    <view class="stats-overview">
-      <view class="stats-card">
-        <view class="stats-item">
-          <text class="stats-icon">🏅</text>
-          <text class="stats-value">{{ stats.unlockedCount }}</text>
-          <text class="stats-label">已获得</text>
-        </view>
-        <view class="stats-divider" />
-        <view class="stats-item">
-          <text class="stats-icon">⭐</text>
-          <text class="stats-value">{{ stats.totalPoints }}</text>
-          <text class="stats-label">总积分</text>
-        </view>
-        <view class="stats-divider" />
-        <view class="stats-item">
-          <text class="stats-icon">📊</text>
-          <text class="stats-value">{{ stats.totalCount }}</text>
-          <text class="stats-label">总成就</text>
-        </view>
-      </view>
-      <view class="stats-progress-bar">
-        <view
-          class="stats-progress-fill"
-          :style="{ width: (stats.unlockedCount / stats.totalCount * 100) + '%' }"
-        />
-      </view>
-    </view>
-
-    <!-- 分类筛选 -->
-    <view class="category-tabs">
-      <scroll-view class="category-scroll" scroll-x show-scrollbar="false">
-        <view
-          v-for="(cat, key) in ACHIEVEMENT_CATEGORIES"
-          :key="key"
-          class="category-tab"
-          :class="{ 'category-tab-active': activeCategory === key }"
-          @click="activeCategory = key"
-        >
-          <text class="category-tab-icon">{{ cat.icon }}</text>
-          <text class="category-tab-label">{{ cat.label }}</text>
-        </view>
-      </scroll-view>
-    </view>
-
-    <!-- 成就列表 -->
-    <view class="achievement-list">
-      <!-- 已解锁 -->
-      <view class="ach-section" v-if="filteredUnlocked.length > 0">
-        <text class="ach-section-label">已解锁</text>
-        <view
-          v-for="ach in filteredUnlocked"
-          :key="ach.id"
-          class="ach-card ach-card-unlocked"
-          @click="showDetail(ach)"
-        >
-          <view class="ach-icon-wrap">
-            <text class="ach-icon">{{ ach.icon }}</text>
+    <!-- 可滚动内容区 -->
+    <scroll-view class="ach-scroll-body" scroll-y :style="{ height: scrollHeight + 'px' }">
+      <!-- 成就概览 -->
+      <view class="stats-overview">
+        <view class="stats-card">
+          <view class="stats-item">
+            <text class="stats-icon">🏅</text>
+            <text class="stats-value">{{ stats.unlockedCount }}</text>
+            <text class="stats-label">已获得</text>
           </view>
-          <view class="ach-info">
-            <text class="ach-name">{{ ach.name }}</text>
-            <text class="ach-desc">{{ ach.description }}</text>
-            <text class="ach-time" v-if="ach.userAch.unlockedAt">
-              解锁于 {{ formatUnlockTime(ach.userAch.unlockedAt) }}
-            </text>
+          <view class="stats-divider" />
+          <view class="stats-item">
+            <text class="stats-icon">⭐</text>
+            <text class="stats-value">{{ stats.totalPoints }}</text>
+            <text class="stats-label">总积分</text>
           </view>
-          <view class="ach-points">
-            <text class="ach-points-value">+{{ ach.points }}</text>
-            <text class="ach-points-label">积分</text>
+          <view class="stats-divider" />
+          <view class="stats-item">
+            <text class="stats-icon">📊</text>
+            <text class="stats-value">{{ stats.totalCount }}</text>
+            <text class="stats-label">总成就</text>
           </view>
+        </view>
+        <view class="stats-progress-bar">
+          <view
+            class="stats-progress-fill"
+            :style="{ width: (stats.unlockedCount / stats.totalCount * 100) + '%' }"
+          />
         </view>
       </view>
 
-      <!-- 未解锁 -->
-      <view class="ach-section" v-if="filteredLocked.length > 0">
-        <text class="ach-section-label">未解锁</text>
-        <view
-          v-for="ach in filteredLocked"
-          :key="ach.id"
-          class="ach-card ach-card-locked"
-          @click="showDetail(ach)"
-        >
-          <view class="ach-icon-wrap ach-icon-wrap-locked">
-            <text class="ach-icon ach-icon-locked">🔒</text>
+      <!-- 分类筛选 -->
+      <view class="category-tabs">
+        <scroll-view class="category-scroll" scroll-x show-scrollbar="false">
+          <view
+            v-for="(cat, key) in ACHIEVEMENT_CATEGORIES"
+            :key="key"
+            class="category-tab"
+            :class="{ 'category-tab-active': activeCategory === key }"
+            @click="activeCategory = key"
+          >
+            <text class="category-tab-icon">{{ cat.icon }}</text>
+            <text class="category-tab-label">{{ cat.label }}</text>
           </view>
-          <view class="ach-info">
-            <text class="ach-name">{{ ach.name }}</text>
-            <text class="ach-desc">{{ ach.description }}</text>
-            <view class="ach-progress-row">
-              <view class="ach-progress-bar">
-                <view
-                  class="ach-progress-fill"
-                  :style="{ width: (ach.userAch.progress / ach.progressMax * 100) + '%' }"
-                />
-              </view>
-              <text class="ach-progress-text">{{ ach.userAch.progress }}/{{ ach.progressMax }}</text>
+        </scroll-view>
+      </view>
+
+      <!-- 成就列表 -->
+      <view class="achievement-list">
+        <!-- 已解锁 -->
+        <view class="ach-section" v-if="filteredUnlocked.length > 0">
+          <text class="ach-section-label">已解锁</text>
+          <view
+            v-for="ach in filteredUnlocked"
+            :key="ach.id"
+            class="ach-card ach-card-unlocked"
+            @click="showDetail(ach)"
+          >
+            <view class="ach-icon-wrap">
+              <text class="ach-icon">{{ ach.icon }}</text>
+            </view>
+            <view class="ach-info">
+              <text class="ach-name">{{ ach.name }}</text>
+              <text class="ach-desc">{{ ach.description }}</text>
+              <text class="ach-time" v-if="ach.userAch.unlockedAt">
+                解锁于 {{ formatUnlockTime(ach.userAch.unlockedAt) }}
+              </text>
+            </view>
+            <view class="ach-points">
+              <text class="ach-points-value">+{{ ach.points }}</text>
+              <text class="ach-points-label">积分</text>
             </view>
           </view>
-          <view class="ach-points">
-            <text class="ach-points-value">+{{ ach.points }}</text>
-            <text class="ach-points-label">积分</text>
+        </view>
+
+        <!-- 未解锁 -->
+        <view class="ach-section" v-if="filteredLocked.length > 0">
+          <text class="ach-section-label">未解锁</text>
+          <view
+            v-for="ach in filteredLocked"
+            :key="ach.id"
+            class="ach-card ach-card-locked"
+            @click="showDetail(ach)"
+          >
+            <view class="ach-icon-wrap ach-icon-wrap-locked">
+              <text class="ach-icon ach-icon-locked">🔒</text>
+            </view>
+            <view class="ach-info">
+              <text class="ach-name">{{ ach.name }}</text>
+              <text class="ach-desc">{{ ach.description }}</text>
+              <view class="ach-progress-row">
+                <view class="ach-progress-bar">
+                  <view
+                    class="ach-progress-fill"
+                    :style="{ width: (ach.userAch.progress / ach.progressMax * 100) + '%' }"
+                  />
+                </view>
+                <text class="ach-progress-text">{{ ach.userAch.progress }}/{{ ach.progressMax }}</text>
+              </view>
+            </view>
+            <view class="ach-points">
+              <text class="ach-points-value">+{{ ach.points }}</text>
+              <text class="ach-points-label">积分</text>
+            </view>
           </view>
+        </view>
+
+        <!-- 空状态 -->
+        <view class="ach-empty" v-if="filteredUnlocked.length === 0 && filteredLocked.length === 0">
+          <text class="ach-empty-icon">🏅</text>
+          <text class="ach-empty-text">该分类暂无成就</text>
         </view>
       </view>
 
-      <!-- 空状态 -->
-      <view class="ach-empty" v-if="filteredUnlocked.length === 0 && filteredLocked.length === 0">
-        <text class="ach-empty-icon">🏅</text>
-        <text class="ach-empty-text">该分类暂无成就</text>
+      <!-- 抽奖模拟按钮（V1 测试用） -->
+      <view class="dev-tools" v-if="showDevTools">
+        <text class="dev-tools-title">测试工具</text>
+        <view class="dev-tools-grid">
+          <button class="dev-btn" @click="simulateAction('analysis_done')">模拟分析完成</button>
+          <button class="dev-btn" @click="simulateAction('plan_checkin')">模拟打卡</button>
+          <button class="dev-btn" @click="simulateAction('plan_completed')">模拟计划完成</button>
+          <button class="dev-btn" @click="simulateAction('style_test_done')">模拟风格测试</button>
+          <button class="dev-btn" @click="simulateAction('share_done')">模拟分享</button>
+          <button class="dev-btn" @click="simulateAction('ai_consult')">模拟AI对话</button>
+          <button class="dev-btn" @click="resetAll">重置所有成就</button>
+        </view>
       </view>
-    </view>
-
-    <!-- 抽奖模拟按钮（V1 测试用） -->
-    <view class="dev-tools" v-if="showDevTools">
-      <text class="dev-tools-title">测试工具</text>
-      <view class="dev-tools-grid">
-        <button class="dev-btn" @click="simulateAction('analysis_done')">模拟分析完成</button>
-        <button class="dev-btn" @click="simulateAction('plan_checkin')">模拟打卡</button>
-        <button class="dev-btn" @click="simulateAction('plan_completed')">模拟计划完成</button>
-        <button class="dev-btn" @click="simulateAction('style_test_done')">模拟风格测试</button>
-        <button class="dev-btn" @click="simulateAction('share_done')">模拟分享</button>
-        <button class="dev-btn" @click="simulateAction('ai_consult')">模拟AI对话</button>
-        <button class="dev-btn" @click="resetAll">重置所有成就</button>
-      </view>
-    </view>
+    </scroll-view>
   </view>
 </template>
 
@@ -151,6 +154,7 @@ import {
 const activeCategory = ref('all')
 const showDevTools = ref(true)
 const userData = ref(null)
+const scrollHeight = ref(600)
 
 const stats = computed(() => ({
   unlockedCount: userData.value?.unlockedCount || 0,
@@ -218,29 +222,30 @@ function onBack() {
 
 onMounted(() => {
   loadData()
+  // 计算可滚动区域高度：窗口高度 - 导航栏高度
+  const sysInfo = uni.getSystemInfoSync()
+  const navHeight = sysInfo.statusBarHeight + 44
+  scrollHeight.value = sysInfo.windowHeight - navHeight
 })
 </script>
 
 <style scoped>
 .achievement-page {
-  min-height: 100vh;
+  height: 100vh;
   background: #f8f9fa;
-  padding-bottom: 60rpx;
+  overflow: hidden;
 }
 
 /* 导航栏 */
 .nav-bar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 999;
+  position: relative;
+  z-index: 100;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 60rpx 32rpx 20rpx;
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
+  padding: 44rpx 32rpx 20rpx;
+  background: #fff;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.04);
 }
 .nav-back {
   display: flex;
@@ -272,7 +277,7 @@ onMounted(() => {
 
 /* 成就概览 */
 .stats-overview {
-  padding: 140rpx 32rpx 24rpx;
+  padding: 16rpx 32rpx 24rpx;
   background: #fff;
 }
 .stats-card {
@@ -355,6 +360,11 @@ onMounted(() => {
 /* 成就列表 */
 .achievement-list {
   padding: 16rpx 32rpx 0;
+}
+
+/* 可滚动区域 */
+.ach-scroll-body {
+  flex: 1;
 }
 .ach-section {
   margin-bottom: 24rpx;

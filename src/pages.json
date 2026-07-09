@@ -34,6 +34,24 @@
                 "navigationBarBackgroundColor": "#ffffff",
                 "navigationBarTextStyle": "black"
             }
+        },
+        {
+            "path": "pages/plan/plan",
+            "style": {
+                "navigationBarTitleText": "美容减脂",
+                "navigationStyle": "custom",
+                "navigationBarBackgroundColor": "#ffffff",
+                "navigationBarTextStyle": "black"
+            }
+        },
+        {
+            "path": "pages/plan/detail",
+            "style": {
+                "navigationBarTitleText": "计划详情",
+                "navigationStyle": "custom",
+                "navigationBarBackgroundColor": "#ffffff",
+                "navigationBarTextStyle": "black"
+            }
         }
     ],
     "globalStyle": {

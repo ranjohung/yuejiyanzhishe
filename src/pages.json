@@ -25,6 +25,15 @@
                 "navigationBarBackgroundColor": "#ffffff",
                 "navigationBarTextStyle": "black"
             }
+        },
+        {
+            "path": "pages/consultant/consultant",
+            "style": {
+                "navigationBarTitleText": "AI变美顾问",
+                "navigationStyle": "custom",
+                "navigationBarBackgroundColor": "#ffffff",
+                "navigationBarTextStyle": "black"
+            }
         }
     ],
     "globalStyle": {

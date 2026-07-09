@@ -225,26 +225,35 @@ onMounted(() => {
 .achievement-page {
   min-height: 100vh;
   background: #f8f9fa;
-  display: flex;
-  flex-direction: column;
 }
 
 /* 导航栏 */
 .nav-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 999;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 88rpx 32rpx 16rpx;
-  background: #fff;
+  padding: 60rpx 32rpx 20rpx;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
 }
 .nav-back {
   display: flex;
   align-items: center;
   gap: 8rpx;
-  padding: 8rpx 0;
+  padding: 12rpx 16rpx;
+  border-radius: 20rpx;
+  background: #f5f5f5;
+}
+.nav-back:active {
+  background: #e8e8e8;
 }
 .nav-back-icon {
-  font-size: 36rpx;
+  font-size: 32rpx;
   color: #333;
 }
 .nav-back-text {
@@ -262,7 +271,7 @@ onMounted(() => {
 
 /* 成就概览 */
 .stats-overview {
-  padding: 16rpx 32rpx 24rpx;
+  padding: 140rpx 32rpx 24rpx;
   background: #fff;
 }
 .stats-card {
@@ -344,8 +353,8 @@ onMounted(() => {
 
 /* 成就列表 */
 .achievement-list {
-  flex: 1;
-  padding: 16rpx 32rpx 40rpx;
+  height: calc(100vh - 140rpx);
+  padding: 16rpx 32rpx 160rpx;
 }
 .ach-section {
   margin-bottom: 24rpx;

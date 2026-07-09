@@ -52,6 +52,15 @@
                 "navigationBarBackgroundColor": "#ffffff",
                 "navigationBarTextStyle": "black"
             }
+        },
+        {
+            "path": "pages/achievement/achievement",
+            "style": {
+                "navigationBarTitleText": "我的成就",
+                "navigationStyle": "custom",
+                "navigationBarBackgroundColor": "#ffffff",
+                "navigationBarTextStyle": "black"
+            }
         }
     ],
     "globalStyle": {

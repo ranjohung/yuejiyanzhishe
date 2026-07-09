@@ -56,7 +56,7 @@
     </view>
 
     <!-- 成就列表 -->
-    <scroll-view class="achievement-list" scroll-y>
+    <view class="achievement-list">
       <!-- 已解锁 -->
       <view class="ach-section" v-if="filteredUnlocked.length > 0">
         <text class="ach-section-label">已解锁</text>
@@ -120,7 +120,7 @@
         <text class="ach-empty-icon">🏅</text>
         <text class="ach-empty-text">该分类暂无成就</text>
       </view>
-    </scroll-view>
+    </view>
 
     <!-- 抽奖模拟按钮（V1 测试用） -->
     <view class="dev-tools" v-if="showDevTools">
@@ -225,6 +225,7 @@ onMounted(() => {
 .achievement-page {
   min-height: 100vh;
   background: #f8f9fa;
+  padding-bottom: 60rpx;
 }
 
 /* 导航栏 */
@@ -353,8 +354,7 @@ onMounted(() => {
 
 /* 成就列表 */
 .achievement-list {
-  height: calc(100vh - 140rpx);
-  padding: 16rpx 32rpx 160rpx;
+  padding: 16rpx 32rpx 0;
 }
 .ach-section {
   margin-bottom: 24rpx;

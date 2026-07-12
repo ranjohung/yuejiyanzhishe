@@ -3078,6 +3078,13 @@
                     mobileBottomNav.style.display = 'flex';
                 }
             }
+            // 未登录时返回引导页隐藏底部导航栏
+            if (pageId === 'analysis' && !isLoggedIn) {
+                const mobileBottomNav = document.getElementById('mobile-bottom-nav');
+                if (mobileBottomNav) {
+                    mobileBottomNav.style.display = 'none';
+                }
+            }
 
             const tabIds = ['analysis', 'inspiration', 'ai-consultant', 'beauty', 'profile'];
             tabIds.forEach(tab => {

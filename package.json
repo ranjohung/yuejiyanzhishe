@@ -4,6 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "dev:h5": "npx vite --mode development",
+    "dev:mp-weixin": "npx vite --mode development -p mp-weixin",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
@@ -15,6 +17,15 @@
     "prisma:generate": "prisma generate"
   },
   "dependencies": {
+    "@dcloudio/uni-app-plus": "^2.0.2-5010520260709001",
+    "@dcloudio/uni-cli-i18n": "^2.0.2-5010520260709001",
+    "@dcloudio/uni-cli-shared": "^2.0.2-5010520260709001",
+    "@dcloudio/uni-components": "^3.0.0-alpha-3000020210521001",
+    "@dcloudio/uni-h5": "^2.0.2-5010520260709001",
+    "@dcloudio/uni-mp-weixin": "^2.0.2-5010520260709001",
+    "@dcloudio/uni-stacktracey": "^2.0.2-5010520260709001",
+    "@dcloudio/uni-ui": "^1.5.12",
+    "@dcloudio/vite-plugin-uni": "^3.0.0-alpha-3000020210521001",
     "@prisma/client": "^5.16.1",
     "axios": "^1.7.2",
     "bcrypt": "^5.1.1",
@@ -23,6 +34,7 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-hook-form": "^7.52.1",
+    "vite": "^8.1.4",
     "zustand": "^4.5.4"
   },
   "devDependencies": {

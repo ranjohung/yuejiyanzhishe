@@ -2928,26 +2928,31 @@
         let pendingBeautySection = null;
 
         let currentGuidePage = 0;
+        const guideButtonTexts = ['开始了解我', '查看专属建议', '生成今日方案', '进入我的美学空间'];
 
         function safeSetText(id, text) { const el = document.getElementById(id); if (el) el.innerText = text; }
         function safeSetSrc(id, src) { const el = document.getElementById(id); if (el) el.src = src; }
 
-        function nextGuidePage() {
-            switchPage('register');
-        }
-
-        function slideGuidePage(direction) {
-            var newPage = currentGuidePage + direction;
-            if (newPage < 0 || newPage >= 4) return;
-            currentGuidePage = newPage;
+        function updateGuideUI() {
             var carousel = document.getElementById('guide-carousel');
             var dots = document.querySelectorAll('.guide-dot');
+            var ctaBtn = document.getElementById('guide-cta-btn');
             if (carousel) {
                 carousel.style.transform = 'translateX(-' + (currentGuidePage * 100) + '%)';
             }
             dots.forEach(function(dot, index) {
                 dot.className = 'guide-dot w-2 h-2 rounded-full ' + (index === currentGuidePage ? 'bg-pink-400' : 'bg-gray-300') + ' cursor-pointer';
             });
+            if (ctaBtn) {
+                ctaBtn.innerText = guideButtonTexts[currentGuidePage] || guideButtonTexts[0];
+            }
+        }
+
+        function slideGuidePage(direction) {
+            var newPage = currentGuidePage + direction;
+            if (newPage < 0 || newPage >= 4) return;
+            currentGuidePage = newPage;
+            updateGuideUI();
         }
 
         function prevGuidePage() {
@@ -2957,14 +2962,7 @@
         function goGuidePage(pageIndex) {
             if (pageIndex < 0 || pageIndex >= 4) return;
             currentGuidePage = pageIndex;
-            var carousel = document.getElementById('guide-carousel');
-            var dots = document.querySelectorAll('.guide-dot');
-            if (carousel) {
-                carousel.style.transform = 'translateX(-' + (currentGuidePage * 100) + '%)';
-            }
-            dots.forEach(function(dot, index) {
-                dot.className = 'guide-dot w-2 h-2 rounded-full ' + (index === currentGuidePage ? 'bg-pink-400' : 'bg-gray-300') + ' cursor-pointer';
-            });
+            updateGuideUI();
         }
 
         function skipGuide() {
@@ -2998,18 +2996,21 @@
             // Attach event listeners for guide page buttons and dots
             var ctaBtn = document.getElementById('guide-cta-btn');
             if (ctaBtn) {
-                ctaBtn.onclick = function() { switchPage('register'); };
+                ctaBtn.addEventListener('click', function() { switchPage('register'); });
             }
 
             var skipBtn = document.getElementById('guide-skip-btn');
             if (skipBtn) {
-                skipBtn.onclick = function() { switchPage('register'); };
+                skipBtn.addEventListener('click', function() { switchPage('register'); });
             }
 
             var dots = document.querySelectorAll('.guide-dot');
             dots.forEach(function(dot, index) {
-                dot.onclick = function() { goGuidePage(index); };
+                dot.addEventListener('click', function() { goGuidePage(index); });
             });
+
+            // Sync UI on initial load
+            updateGuideUI();
         }
 
         function handleGuideSwipe() {

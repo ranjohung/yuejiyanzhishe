@@ -28,11 +28,17 @@
       <text class="footer-tip">V1 内部测试版 · 数据为占位示例</text>
     </view>
 
-    <ShareModal 
-      :visible="showShareModal" 
+    <ShareModal
+      :visible="showShareModal"
       :reportId="reportId"
       :reportType="'analysis'"
-      @close="showShareModal = false" 
+      @close="showShareModal = false"
+    />
+
+    <QuestionnaireModal
+      :visible="showQuestionnaire"
+      @close="showQuestionnaire = false"
+      @submit="handleQuestionnaireSubmit"
     />
   </view>
 </template>
@@ -40,6 +46,7 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import ShareModal from '@/components/share/ShareModal.vue'
+import QuestionnaireModal from '@/components/questionnaire/QuestionnaireModal.vue'
 import { shareManager } from '@/utils/share'
 
 const report = ref({
@@ -72,10 +79,20 @@ const report = ref({
 
 const reportId = ref('preview-001')
 const showShareModal = ref(false)
+const showQuestionnaire = ref(true)
 
 onMounted(() => {
   shareManager.showShareMenu()
 })
+
+function handleQuestionnaireSubmit(data) {
+  showQuestionnaire.value = false
+  uni.showToast({
+    title: '问卷已提交，正在生成报告...',
+    icon: 'loading',
+    duration: 1500
+  })
+}
 
 function onReset () {
   uni.navigateBack({ delta: 1 })

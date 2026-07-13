@@ -91,7 +91,8 @@
             "^StyleSection$": "@/components/report/StyleSection.vue",
             "^OutfitSection$": "@/components/report/OutfitSection.vue",
             "^HairstyleSection$": "@/components/report/HairstyleSection.vue",
-            "^ShareModal$": "@/components/share/ShareModal.vue"
+            "^ShareModal$": "@/components/share/ShareModal.vue",
+            "^QuestionnaireModal$": "@/components/questionnaire/QuestionnaireModal.vue"
         }
     }
 }

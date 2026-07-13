@@ -1,77 +1,46 @@
 <template>
   <view class="style-test-page">
-    <!-- 顶部导航 -->
-    <view class="nav-bar">
-      <view class="nav-back" @click="onBack">
-        <text class="nav-back-icon">←</text>
-        <text class="nav-back-text">返回</text>
+    <!-- 顶部标题栏：固定高度48px -->
+    <view class="top-bar">
+      <view class="top-bar-back" @click="onBack">
+        <text class="back-arrow">←</text>
       </view>
-      <text class="nav-title">风格测试</text>
-      <view class="nav-placeholder" />
+      <text class="top-bar-title">风格测试</text>
+      <text class="top-bar-page" v-if="currentPage < 3">{{ currentPage + 1 }}/3</text>
     </view>
 
-    <!-- 进度信息 -->
-    <view class="progress-section">
-      <view class="progress-info">
-        <text class="progress-label">第 {{ currentIndex + 1 }} 题</text>
-        <text class="progress-count">共 {{ questions.length }} 题</text>
-      </view>
-      <view class="progress-bar-bg">
-        <view
-          class="progress-bar-fill"
-          :style="{ width: ((currentIndex + 1) / questions.length * 100) + '%' }"
-        />
-      </view>
-    </view>
-
-    <!-- 题目区域 -->
-    <view class="question-section" v-if="questions[currentIndex]">
-      <view class="question-card">
-        <text class="question-number">Q{{ String(currentIndex + 1).padStart(2, '0') }}</text>
-        <text class="question-text">{{ questions[currentIndex].text }}</text>
-      </view>
-
-      <view class="options-list">
-        <view
-          v-for="(option, oi) in questions[currentIndex].options"
-          :key="oi"
-          class="option-item"
-          :class="{ 'option-selected': answers[questions[currentIndex].id] === option.value }"
-          @click="selectOption(questions[currentIndex].id, option.value)"
-        >
-          <view class="option-radio">
+    <!-- 中间可滚动内容区 -->
+    <view class="content-scroll">
+      <view class="questions-container">
+        <view class="question-card" v-for="(q, qi) in currentQuestions" :key="q.id">
+          <text class="question-number">Q{{ String(pageStartIndex + qi + 1).padStart(2, '0') }}</text>
+          <text class="question-text">{{ q.text }}</text>
+          <view class="options-list">
             <view
-              class="option-radio-dot"
-              :class="{ 'option-radio-dot-active': answers[questions[currentIndex].id] === option.value }"
-            />
+              v-for="(option, oi) in q.options"
+              :key="oi"
+              class="option-item"
+              :class="{ 'option-selected': answers[q.id] === option.value }"
+              @click="selectOption(q.id, option.value)"
+            >
+              <view class="option-radio">
+                <view
+                  class="option-radio-dot"
+                  :class="{ 'option-radio-dot-active': answers[q.id] === option.value }"
+                />
+              </view>
+              <text class="option-label">{{ option.label }}</text>
+            </view>
           </view>
-          <text class="option-label">{{ option.label }}</text>
         </view>
       </view>
     </view>
 
-    <!-- 底部操作栏 -->
-    <view class="action-bar">
-      <button
-        class="btn btn-prev"
-        :class="{ 'btn-disabled': currentIndex === 0 }"
-        :disabled="currentIndex === 0"
-        @click="prevQuestion"
-      >上一题</button>
-      <button
-        v-if="currentIndex < questions.length - 1"
-        class="btn btn-next"
-        :class="{ 'btn-disabled': !answers[questions[currentIndex]?.id] }"
-        :disabled="!answers[questions[currentIndex]?.id]"
-        @click="nextQuestion"
-      >下一题</button>
-      <button
-        v-else
-        class="btn btn-submit"
-        :class="{ 'btn-disabled': !answers[questions[currentIndex]?.id] }"
-        :disabled="!answers[questions[currentIndex]?.id]"
-        @click="submitTest"
-      >查看结果</button>
+    <!-- 底部固定按钮区：高度60px（含安全区） -->
+    <view class="bottom-bar">
+      <button class="main-btn" @click="onMainButtonClick">
+        {{ mainButtonText }}
+      </button>
     </view>
   </view>
 </template>
@@ -80,24 +49,54 @@
 import { ref, computed } from 'vue'
 import { questions, calculateStyleResult } from '@/utils/styleTestData.js'
 
-const currentIndex = ref(0)
+// 每页题目数量：4 + 3 + 3 = 10
+const QUESTIONS_PER_PAGE = [4, 3, 3]
+const TOTAL_PAGES = QUESTIONS_PER_PAGE.length
+
+const currentPage = ref(0)
 const answers = ref({})
 
-const currentQuestion = computed(() => questions[currentIndex.value])
+// 当前页起始索引
+const pageStartIndex = computed(() => {
+  let start = 0
+  for (let i = 0; i < currentPage.value; i++) {
+    start += QUESTIONS_PER_PAGE[i]
+  }
+  return start
+})
+
+// 当前页题目
+const currentQuestions = computed(() => {
+  const start = pageStartIndex.value
+  const count = QUESTIONS_PER_PAGE[currentPage.value]
+  return questions.slice(start, start + count)
+})
+
+// 底部按钮文案
+const mainButtonText = computed(() => {
+  if (currentPage.value < TOTAL_PAGES - 1) return '下一题'
+  return '查看结果'
+})
 
 function selectOption(qId, value) {
   answers.value[qId] = value
 }
 
-function nextQuestion() {
-  if (currentIndex.value < questions.length - 1) {
-    currentIndex.value++
-  }
-}
-
-function prevQuestion() {
-  if (currentIndex.value > 0) {
-    currentIndex.value--
+function onMainButtonClick() {
+  if (currentPage.value < TOTAL_PAGES - 1) {
+    // 检查当前页所有题目是否已作答
+    const unanswered = currentQuestions.value.filter(q => !answers.value[q.id])
+    if (unanswered.length > 0) {
+      uni.showToast({
+        title: '请完成当前页所有题目',
+        icon: 'none'
+      })
+      return
+    }
+    // 切换到下一页
+    currentPage.value++
+  } else {
+    submitTest()
   }
 }
 
@@ -109,9 +108,18 @@ function submitTest() {
       title: '请完成所有题目',
       icon: 'none'
     })
-    // 跳转到第一个未回答的题目
-    const firstUnanswered = questions.indexOf(unanswered[0])
-    currentIndex.value = firstUnanswered
+    // 跳转到第一个未回答的题目所在页
+    const firstIdx = questions.indexOf(unanswered[0])
+    let page = 0
+    let count = 0
+    for (let i = 0; i < QUESTIONS_PER_PAGE.length; i++) {
+      count += QUESTIONS_PER_PAGE[i]
+      if (firstIdx < count) {
+        page = i
+        break
+      }
+    }
+    currentPage.value = page
     return
   }
 
@@ -129,122 +137,117 @@ function submitTest() {
 }
 
 function onBack() {
-  uni.navigateBack()
+  uni.showModal({
+    title: '提示',
+    content: '确定退出风格测试吗？已选择的内容将不会被保存。',
+    success(res) {
+      if (res.confirm) {
+        uni.navigateBack()
+      }
+    }
+  })
 }
 </script>
 
 <style scoped>
 .style-test-page {
-  min-height: 100vh;
-  background: linear-gradient(180deg, #f8f0ff 0%, #fafafa 30%);
   display: flex;
   flex-direction: column;
+  height: 100vh;
+  background: linear-gradient(180deg, #f8f0ff 0%, #fafafa 30%);
 }
 
-/* 导航栏 */
-.nav-bar {
+/* ===== 顶部标题栏：固定高度48px ===== */
+.top-bar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 88rpx 32rpx 16rpx;
+  height: 48px;
+  padding: 0 16px;
+  padding-top: constant(safe-area-inset-top);
+  padding-top: env(safe-area-inset-top);
   background: transparent;
+  flex-shrink: 0;
+  box-sizing: content-box;
 }
-.nav-back {
+.top-bar-back {
   display: flex;
   align-items: center;
-  gap: 8rpx;
-  padding: 8rpx 0;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+  cursor: pointer;
 }
-.nav-back-icon {
-  font-size: 36rpx;
+.top-bar-back:active {
+  background: rgba(0,0,0,0.05);
+}
+.back-arrow {
+  font-size: 22px;
   color: #333;
+  line-height: 1;
 }
-.nav-back-text {
-  font-size: 28rpx;
-  color: #333;
-}
-.nav-title {
-  font-size: 32rpx;
+.top-bar-title {
+  font-size: 17px;
   font-weight: 600;
   color: #222;
 }
-.nav-placeholder {
-  width: 100rpx;
-}
-
-/* 进度 */
-.progress-section {
-  padding: 24rpx 32rpx 32rpx;
-}
-.progress-info {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 16rpx;
-}
-.progress-label {
-  font-size: 28rpx;
-  font-weight: 600;
-  color: #7c3aed;
-}
-.progress-count {
-  font-size: 24rpx;
+.top-bar-page {
+  font-size: 14px;
   color: #999;
-}
-.progress-bar-bg {
-  height: 8rpx;
-  background: #e8e0f0;
-  border-radius: 4rpx;
-  overflow: hidden;
-}
-.progress-bar-fill {
-  height: 100%;
-  background: linear-gradient(90deg, #7c3aed, #a855f7);
-  border-radius: 4rpx;
-  transition: width 0.3s ease;
+  min-width: 40px;
+  text-align: right;
 }
 
-/* 题目 */
-.question-section {
+/* ===== 中间可滚动内容区 ===== */
+.content-scroll {
   flex: 1;
-  padding: 0 32rpx;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 0 16px;
+  padding-bottom: calc(60px + constant(safe-area-inset-bottom) + 60px);
+  padding-bottom: calc(60px + env(safe-area-inset-bottom) + 60px);
+}
+.questions-container {
+  padding-bottom: 8px;
 }
 .question-card {
   background: #fff;
   border-radius: 16rpx;
-  padding: 40rpx 32rpx;
-  margin-bottom: 32rpx;
+  padding: 24px 16px 20px;
+  margin-bottom: 16px;
   box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.04);
 }
 .question-number {
-  font-size: 24rpx;
+  font-size: 12px;
   color: #7c3aed;
   font-weight: 500;
   display: block;
-  margin-bottom: 16rpx;
+  margin-bottom: 8px;
 }
 .question-text {
-  font-size: 34rpx;
+  font-size: 17px;
   font-weight: 600;
   color: #222;
   line-height: 1.5;
   display: block;
+  margin-bottom: 16px;
 }
 
 /* 选项 */
 .options-list {
   display: flex;
   flex-direction: column;
-  gap: 20rpx;
+  gap: 10px;
 }
 .option-item {
   display: flex;
   align-items: center;
-  gap: 20rpx;
+  gap: 12px;
   background: #fff;
   border-radius: 14rpx;
-  padding: 28rpx 24rpx;
-  border: 2rpx solid #f0f0f0;
+  padding: 14px 12px;
+  border: 1.5px solid #f0f0f0;
   transition: all 0.2s ease;
 }
 .option-item:active {
@@ -255,18 +258,18 @@ function onBack() {
   background: #f5f0ff;
 }
 .option-radio {
-  width: 40rpx;
-  height: 40rpx;
+  width: 20px;
+  height: 20px;
   border-radius: 50%;
-  border: 3rpx solid #ddd;
+  border: 2px solid #ddd;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
 }
 .option-radio-dot {
-  width: 20rpx;
-  height: 20rpx;
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
   background: transparent;
   transition: all 0.2s ease;
@@ -278,43 +281,42 @@ function onBack() {
   border-color: #7c3aed;
 }
 .option-label {
-  font-size: 28rpx;
+  font-size: 14px;
   color: #333;
   line-height: 1.4;
 }
 
-/* 底部操作栏 */
-.action-bar {
-  display: flex;
-  gap: 20rpx;
-  padding: 24rpx 32rpx 200rpx;
+/* ===== 底部固定按钮区：高度60px（含安全区） ===== */
+.bottom-bar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 60px;
+  padding-bottom: constant(safe-area-inset-bottom);
+  padding-bottom: env(safe-area-inset-bottom);
   background: #fff;
-  border-top: 1rpx solid #f0f0f0;
+  border-top: 1px solid #f0f0f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  box-sizing: content-box;
 }
-.btn {
-  flex: 1;
-  height: 88rpx;
-  line-height: 88rpx;
-  border-radius: 44rpx;
-  font-size: 30rpx;
+.main-btn {
+  width: 80%;
+  height: 44px;
+  line-height: 44px;
+  border-radius: 22px;
+  font-size: 16px;
   font-weight: 500;
   text-align: center;
   border: none;
   padding: 0;
-}
-.btn-prev {
-  background: #f5f0ff;
-  color: #7c3aed;
-}
-.btn-next {
   background: linear-gradient(135deg, #7c3aed, #a855f7);
   color: #fff;
 }
-.btn-submit {
-  background: linear-gradient(135deg, #7c3aed, #a855f7);
-  color: #fff;
-}
-.btn-disabled {
-  opacity: 0.4;
+.main-btn:active {
+  opacity: 0.85;
 }
 </style>

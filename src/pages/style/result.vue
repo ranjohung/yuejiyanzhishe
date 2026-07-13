@@ -87,8 +87,7 @@
 
       <!-- 底部操作 -->
       <view class="action-bar">
-        <button class="btn btn-retest" @click="retest">重新测试</button>
-        <button class="btn btn-to-report" @click="goToReport">查看测评报告</button>
+        <button class="btn btn-to-outfit" @click="goToOutfit">查看适合我的穿搭</button>
       </view>
     </template>
   </view>
@@ -147,15 +146,10 @@ function onBack() {
   uni.navigateBack()
 }
 
-function retest() {
-  uni.redirectTo({
-    url: '/pages/style/test'
-  })
-}
-
-function goToReport() {
-  uni.switchTab({
-    url: '/pages/tab1/report'
+function goToOutfit() {
+  // 跳转到姿造美学穿搭子模块
+  uni.navigateTo({
+    url: '/pages/tab1/report?section=outfit'
   })
 }
 
@@ -372,7 +366,8 @@ function goTest() {
 /* 底部操作 */
 .action-bar {
   display: flex;
-  gap: 20rpx;
+  align-items: center;
+  justify-content: center;
   padding: 24rpx 32rpx 200rpx;
   background: #fff;
   border-top: 1rpx solid #f0f0f0;
@@ -389,12 +384,9 @@ function goTest() {
   border: none;
   padding: 0;
 }
-.btn-retest {
-  background: #f5f0ff;
-  color: #7c3aed;
-}
-.btn-to-report {
+.btn-to-outfit {
   background: linear-gradient(135deg, #7c3aed, #a855f7);
   color: #fff;
+  max-width: 80%;
 }
 </style>

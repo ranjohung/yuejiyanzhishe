@@ -10,14 +10,52 @@
 
     <scroll-view class="ach-scroll-body" scroll-y :style="{ height: scrollHeight + 'px' }">
       <view class="achievement-content">
-        <view class="unlocked-section">
+        <view class="stats-card">
+          <view class="stats-item">
+            <text class="stats-icon">⭐</text>
+            <text class="stats-value">{{ totalPoints }}</text>
+            <text class="stats-label">总积分</text>
+          </view>
+          <view class="stats-divider" />
+          <view class="stats-item">
+            <text class="stats-icon">🏅</text>
+            <text class="stats-value">{{ unlockedCount }}/{{ totalCount }}</text>
+            <text class="stats-label">成就数</text>
+          </view>
+          <view class="stats-divider" />
+          <view class="stats-item">
+            <text class="stats-icon">📊</text>
+            <text class="stats-value">{{ progressPercent }}%</text>
+            <text class="stats-label">完成度</text>
+          </view>
+        </view>
+        <view class="progress-bar">
+          <view class="progress-fill" :style="{ width: progressPercent + '%' }" />
+        </view>
+
+        <view class="category-tabs">
+          <scroll-view class="category-scroll" scroll-x show-scrollbar="false">
+            <view
+              v-for="(cat, key) in ACHIEVEMENT_CATEGORIES"
+              :key="key"
+              class="category-tab"
+              :class="{ 'category-tab-active': activeCategory === key }"
+              @click="activeCategory = key"
+            >
+              <text class="category-tab-icon">{{ cat.icon }}</text>
+              <text class="category-tab-label">{{ cat.label }}</text>
+            </view>
+          </scroll-view>
+        </view>
+
+        <view class="unlocked-section" v-if="filteredUnlocked.length > 0">
           <view class="section-header">
             <text class="section-title">已解锁勋章</text>
-            <text class="section-count">{{ unlockedCount }}/{{ totalCount }}</text>
+            <text class="section-count">{{ filteredUnlocked.length }}</text>
           </view>
           <view class="badge-grid">
             <view
-              v-for="ach in unlockedAchievements"
+              v-for="ach in filteredUnlocked"
               :key="ach.id"
               class="badge-item badge-item-unlocked"
               @click="showDetail(ach)"
@@ -26,17 +64,18 @@
                 <text class="badge-icon">{{ ach.icon }}</text>
               </view>
               <text class="badge-name">{{ ach.name }}</text>
+              <text class="badge-points">+{{ ach.points }}积分</text>
             </view>
           </view>
         </view>
 
-        <view class="locked-section">
+        <view class="locked-section" v-if="filteredLocked.length > 0">
           <view class="section-header">
             <text class="section-title">未解锁勋章</text>
           </view>
           <view class="badge-grid">
             <view
-              v-for="ach in lockedAchievements"
+              v-for="ach in filteredLocked"
               :key="ach.id"
               class="badge-item badge-item-locked"
               @click="showLockedDetail(ach)"
@@ -45,27 +84,19 @@
                 <text class="badge-icon badge-icon-locked">{{ ach.icon }}</text>
               </view>
               <text class="badge-name badge-name-locked">{{ ach.name }}</text>
+              <view class="badge-progress">
+                <view class="mini-progress-bar">
+                  <view class="mini-progress-fill" :style="{ width: (ach.progress / ach.progressMax * 100) + '%' }" />
+                </view>
+                <text class="mini-progress-text">{{ ach.progress }}/{{ ach.progressMax }}</text>
+              </view>
             </view>
           </view>
         </view>
 
-        <view class="stats-footer">
-          <view class="stats-row">
-            <view class="stat-item">
-              <text class="stat-value">{{ totalPoints }}</text>
-              <text class="stat-label">总积分</text>
-            </view>
-            <view class="stat-divider" />
-            <view class="stat-item">
-              <text class="stat-value">{{ unlockedCount }}</text>
-              <text class="stat-label">已获得</text>
-            </view>
-            <view class="stat-divider" />
-            <view class="stat-item">
-              <text class="stat-value">{{ totalCount }}</text>
-              <text class="stat-label">总成就</text>
-            </view>
-          </view>
+        <view class="empty-state" v-if="filteredUnlocked.length === 0 && filteredLocked.length === 0">
+          <text class="empty-icon">🏅</text>
+          <text class="empty-text">该分类暂无成就</text>
         </view>
       </view>
     </scroll-view>
@@ -78,6 +109,7 @@
         <text class="modal-name">{{ selectedAchievement?.name }}</text>
         <text class="modal-date" v-if="selectedAchievement?.unlockedAt">解锁于 {{ formatUnlockTime(selectedAchievement.unlockedAt) }}</text>
         <text class="modal-desc">{{ selectedAchievement?.description }}</text>
+        <text class="modal-points">积分奖励：+{{ selectedAchievement?.points }}</text>
         <view class="modal-actions">
           <button class="modal-btn secondary" @click="closeDetailModal">关闭</button>
           <button class="modal-btn primary" @click="shareAchievement">分享</button>
@@ -92,8 +124,8 @@
         </view>
         <text class="lock-icon">🔒</text>
         <text class="modal-name">{{ selectedLockedAchievement?.name }}</text>
-        <text class="modal-condition">达成条件：{{ selectedLockedAchievement?.condition }}</text>
-        <text class="modal-progress" v-if="selectedLockedAchievement">进度：{{ selectedLockedAchievement.progress }}/{{ selectedLockedAchievement.progressMax }}</text>
+        <text class="modal-condition">{{ selectedLockedAchievement?.condition }}</text>
+        <text class="modal-progress">当前进度：{{ selectedLockedAchievement?.progress }}/{{ selectedLockedAchievement?.progressMax }}</text>
         <button class="modal-btn full" @click="closeLockedModal">知道了</button>
       </view>
     </view>
@@ -104,6 +136,7 @@
 import { ref, computed, onMounted } from 'vue'
 import {
   ACHIEVEMENTS,
+  ACHIEVEMENT_CATEGORIES,
   getUserAchievements,
   formatUnlockTime
 } from '@/utils/achievementData.js'
@@ -114,10 +147,12 @@ const selectedAchievement = ref(null)
 const selectedLockedAchievement = ref(null)
 const userData = ref(null)
 const scrollHeight = ref(600)
+const activeCategory = ref('all')
 
 const totalCount = computed(() => ACHIEVEMENTS.length)
 const unlockedCount = computed(() => userData.value?.unlockedCount || 0)
 const totalPoints = computed(() => userData.value?.totalPoints || 0)
+const progressPercent = computed(() => Math.round((unlockedCount.value / totalCount.value) * 100))
 
 const mergedAchievements = computed(() => {
   if (!userData.value) return []
@@ -127,12 +162,18 @@ const mergedAchievements = computed(() => {
   }))
 })
 
-const unlockedAchievements = computed(() => {
-  return mergedAchievements.value.filter(ach => ach.unlocked)
+const filteredUnlocked = computed(() => {
+  return mergedAchievements.value.filter(ach => {
+    if (activeCategory.value !== 'all' && ach.category !== activeCategory.value) return false
+    return ach.unlocked
+  })
 })
 
-const lockedAchievements = computed(() => {
-  return mergedAchievements.value.filter(ach => !ach.unlocked)
+const filteredLocked = computed(() => {
+  return mergedAchievements.value.filter(ach => {
+    if (activeCategory.value !== 'all' && ach.category !== activeCategory.value) return false
+    return !ach.unlocked
+  })
 })
 
 function loadData() {
@@ -231,15 +272,103 @@ onMounted(() => {
   padding: 32rpx;
 }
 
-.unlocked-section {
-  margin-bottom: 48rpx;
+.stats-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 24rpx;
+  background: #fff;
+  border-radius: 16rpx;
+  border: 1rpx solid #F0E6D2;
+  margin-bottom: 16rpx;
+}
+
+.stats-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4rpx;
+}
+
+.stats-icon {
+  font-size: 32rpx;
+}
+
+.stats-value {
+  font-size: 32rpx;
+  font-weight: 700;
+  color: #5c4f4e;
+}
+
+.stats-label {
+  font-size: 22rpx;
+  color: #D6C5B3;
+}
+
+.stats-divider {
+  width: 1rpx;
+  height: 60rpx;
+  background: #F0E6D2;
+}
+
+.progress-bar {
+  height: 8rpx;
+  background: #F5F0EB;
+  border-radius: 4rpx;
+  margin-bottom: 32rpx;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #E59A8F, #C26B5D);
+  border-radius: 4rpx;
+  transition: width 0.5s ease;
+}
+
+.category-tabs {
+  background: #fff;
+  padding: 0 0 16rpx;
+  margin-bottom: 24rpx;
+  border-radius: 16rpx;
+}
+
+.category-scroll {
+  display: flex;
+  white-space: nowrap;
+}
+
+.category-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 8rpx;
+  padding: 12rpx 24rpx;
+  margin-right: 12rpx;
+  border-radius: 32rpx;
+  background: #F5F0EB;
+  font-size: 24rpx;
+  color: #8B7B6B;
+}
+
+.category-tab-active {
+  background: #E59A8F;
+  color: #fff;
+}
+
+.category-tab-icon {
+  font-size: 24rpx;
+}
+
+.category-tab-label {
+  font-size: 24rpx;
+  font-weight: 500;
 }
 
 .section-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 24rpx;
+  margin-bottom: 20rpx;
 }
 
 .section-title {
@@ -257,14 +386,14 @@ onMounted(() => {
 .badge-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 24rpx;
+  gap: 20rpx;
 }
 
 .badge-item {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 12rpx;
+  gap: 8rpx;
 }
 
 .badge-icon-wrap {
@@ -288,7 +417,8 @@ onMounted(() => {
 }
 
 .badge-icon-locked {
-  opacity: 0.5;
+  opacity: 0.4;
+  filter: grayscale(100%);
 }
 
 .badge-name {
@@ -302,46 +432,56 @@ onMounted(() => {
   color: #D6C5B3;
 }
 
-.badge-item-locked {
-  opacity: 0.7;
+.badge-points {
+  font-size: 20rpx;
+  color: #E59A8F;
 }
 
-.stats-footer {
-  margin-top: 48rpx;
-  padding: 24rpx;
-  background: #fff;
-  border-radius: 16rpx;
-  border: 1rpx solid #F0E6D2;
-}
-
-.stats-row {
+.badge-progress {
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  gap: 8rpx;
+  width: 100%;
 }
 
-.stat-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 4rpx;
+.mini-progress-bar {
+  flex: 1;
+  height: 4rpx;
+  background: #E8E0D5;
+  border-radius: 2rpx;
+  overflow: hidden;
 }
 
-.stat-value {
-  font-size: 36rpx;
-  font-weight: 700;
-  color: #5c4f4e;
+.mini-progress-fill {
+  height: 100%;
+  background: #D6C5B3;
+  border-radius: 2rpx;
 }
 
-.stat-label {
-  font-size: 22rpx;
+.mini-progress-text {
+  font-size: 18rpx;
   color: #D6C5B3;
 }
 
-.stat-divider {
-  width: 1rpx;
-  height: 48rpx;
-  background: #F0E6D2;
+.badge-item-locked {
+  opacity: 0.8;
+}
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 80rpx 0;
+  gap: 16rpx;
+}
+
+.empty-icon {
+  font-size: 64rpx;
+}
+
+.empty-text {
+  font-size: 26rpx;
+  color: #D6C5B3;
 }
 
 .detail-modal {
@@ -392,6 +532,7 @@ onMounted(() => {
 
 .modal-icon-locked {
   opacity: 0.5;
+  filter: grayscale(100%);
 }
 
 .lock-icon {
@@ -419,6 +560,13 @@ onMounted(() => {
   font-size: 26rpx;
   color: #8B7B6B;
   line-height: 1.6;
+  display: block;
+  margin-bottom: 16rpx;
+}
+
+.modal-points {
+  font-size: 24rpx;
+  color: #F59E0B;
   display: block;
   margin-bottom: 32rpx;
 }

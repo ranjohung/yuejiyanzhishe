@@ -14,51 +14,82 @@
     </view>
 
     <view class="footer">
+      <view class="action-buttons">
+        <button class="action-btn secondary" @click="onSave">
+          <text class="btn-icon">📥</text>
+          <text>保存至相册</text>
+        </button>
+        <button class="action-btn primary" @click="onShare">
+          <text class="btn-icon">📤</text>
+          <text>分享报告</text>
+        </button>
+      </view>
       <button class="reset-btn" @click="onReset">重新测评</button>
       <text class="footer-tip">V1 内部测试版 · 数据为占位示例</text>
     </view>
+
+    <ShareModal 
+      :visible="showShareModal" 
+      :reportId="reportId"
+      :reportType="'analysis'"
+      @close="showShareModal = false" 
+    />
   </view>
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
+import ShareModal from '@/components/share/ShareModal.vue'
+import { shareManager } from '@/utils/share'
 
-// V1 第一版：5 个模块数据写死，标 TODO 字段
-// 真实接入 002 / 后端 / AI 详情时替换为接口数据
 const report = ref({
   face: {
-    subtitle: 'TODO · 待接入人脸分析接口',
-    summary: 'TODO · 待 AI 详情接入',
-    tags: ['脸型: TODO', '五官: TODO', '肤质: TODO']
+    subtitle: '优雅椭圆形脸型',
+    summary: '你的脸型为优雅椭圆形，五官比例协调，是最理想的脸型之一。额头饱满圆润，下巴线条柔和，颧骨宽度适中。建议保持自然妆容，突出眼部和唇部的美感。',
+    tags: ['脸型: 椭圆', '五官: 协调', '肤质: 干性']
   },
   body: {
-    subtitle: 'TODO · 待接入身形分析接口',
-    summary: 'TODO · 待 AI 详情接入',
-    tags: ['身高: TODO', '体型: TODO', 'BMI: TODO']
+    subtitle: '匀称梨形身材',
+    summary: '你的身材为匀称梨形，上半身纤细，下半身线条优美。肩宽适中，腰部纤细，臀部丰满。建议选择A字裙和阔腿裤来平衡身材比例。',
+    tags: ['身高: 165cm', '体型: 梨形', 'BMI: 21.5']
   },
   style: {
-    subtitle: 'TODO · 风格画像待生成',
-    summary: 'TODO · 待 AI 详情接入',
-    tags: ['主风格: TODO', '气质: TODO', '场景: TODO']
+    subtitle: '优雅自然风格',
+    summary: '你的综合风格定位为优雅自然风，适合简约大方的穿搭和清新自然的妆容。这种风格强调舒适与美感的平衡，展现自信从容的气质。',
+    tags: ['主风格: 优雅', '气质: 自然', '场景: 日常']
   },
   outfit: {
-    subtitle: 'TODO · 1 套推荐',
-    summary: 'TODO · 待 AI 详情接入',
-    tags: ['场景: TODO', '风格: TODO', '色系: TODO']
+    subtitle: '3套穿搭推荐',
+    summary: '根据你的身材特点，推荐法式优雅风、日系清新风和职场干练风三套穿搭方案，涵盖不同场景需求。',
+    tags: ['场景: 通勤', '风格: 优雅', '色系: 米白']
   },
   hairstyle: {
-    subtitle: 'TODO · 1 套推荐',
-    summary: 'TODO · 待 AI 详情接入',
-    tags: ['长度: TODO', '卷直: TODO', '刘海: TODO']
+    subtitle: '3款发型推荐',
+    summary: '根据你的脸型，推荐温柔波浪卷、利落短发和优雅盘发三款发型，适合不同场合和心情。',
+    tags: ['长度: 中长', '卷直: 波浪', '刘海: 空气']
   }
 })
 
-// TODO 接入 sessionStorage 中的 report_id（004 阶段先写死）
 const reportId = ref('preview-001')
+const showShareModal = ref(false)
+
+onMounted(() => {
+  shareManager.showShareMenu()
+})
 
 function onReset () {
-  // 003 上传引导页落地后改为 navigateBack / redirectTo 到上传页
   uni.navigateBack({ delta: 1 })
+}
+
+function onSave () {
+  uni.showToast({
+    title: '保存功能开发中',
+    icon: 'none'
+  })
+}
+
+function onShare () {
+  showShareModal.value = true
 }
 </script>
 
@@ -95,7 +126,36 @@ function onReset () {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 16rpx;
+  gap: 20rpx;
+}
+.action-buttons {
+  display: flex;
+  gap: 20rpx;
+  width: 100%;
+}
+.action-btn {
+  flex: 1;
+  height: 88rpx;
+  border-radius: 44rpx;
+  font-size: 28rpx;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12rpx;
+  border: none;
+}
+.action-btn.primary {
+  background: #4A90D9;
+  color: #fff;
+}
+.action-btn.secondary {
+  background: #fff;
+  color: #6E5D53;
+  border: 2rpx solid #E8D8C8;
+}
+.btn-icon {
+  font-size: 32rpx;
 }
 .reset-btn {
   background: #1f883d;

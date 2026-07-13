@@ -1,6 +1,20 @@
 {
     "pages": [
         {
+            "path": "pages/guide/guide",
+            "style": {
+                "navigationStyle": "custom"
+            }
+        },
+        {
+            "path": "pages/login/login",
+            "style": {
+                "navigationBarTitleText": "登录",
+                "navigationBarBackgroundColor": "#ffffff",
+                "navigationBarTextStyle": "black"
+            }
+        },
+        {
             "path": "pages/tab1/report",
             "style": {
                 "navigationBarTitleText": "测评报告",
@@ -76,8 +90,8 @@
             "^BodySection$": "@/components/report/BodySection.vue",
             "^StyleSection$": "@/components/report/StyleSection.vue",
             "^OutfitSection$": "@/components/report/OutfitSection.vue",
-            "^HairstyleSection$": "@/components/report/HairstyleSection.vue"
+            "^HairstyleSection$": "@/components/report/HairstyleSection.vue",
+            "^ShareModal$": "@/components/share/ShareModal.vue"
         }
-    },
-    "uniIdRouter": {}
+    }
 }

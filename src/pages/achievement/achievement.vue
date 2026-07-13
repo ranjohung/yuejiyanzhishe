@@ -1,143 +1,102 @@
 <template>
   <view class="achievement-page">
-    <!-- 顶部导航 -->
     <view class="nav-bar">
       <view class="nav-back" @click="onBack">
         <text class="nav-back-icon">←</text>
-        <text class="nav-back-text">返回</text>
       </view>
       <text class="nav-title">我的成就</text>
       <view class="nav-placeholder" />
     </view>
 
-    <!-- 可滚动内容区 -->
     <scroll-view class="ach-scroll-body" scroll-y :style="{ height: scrollHeight + 'px' }">
-      <!-- 成就概览 -->
-      <view class="stats-overview">
-        <view class="stats-card">
-          <view class="stats-item">
-            <text class="stats-icon">🏅</text>
-            <text class="stats-value">{{ stats.unlockedCount }}</text>
-            <text class="stats-label">已获得</text>
+      <view class="achievement-content">
+        <view class="unlocked-section">
+          <view class="section-header">
+            <text class="section-title">已解锁勋章</text>
+            <text class="section-count">{{ unlockedCount }}/{{ totalCount }}</text>
           </view>
-          <view class="stats-divider" />
-          <view class="stats-item">
-            <text class="stats-icon">⭐</text>
-            <text class="stats-value">{{ stats.totalPoints }}</text>
-            <text class="stats-label">总积分</text>
-          </view>
-          <view class="stats-divider" />
-          <view class="stats-item">
-            <text class="stats-icon">📊</text>
-            <text class="stats-value">{{ stats.totalCount }}</text>
-            <text class="stats-label">总成就</text>
-          </view>
-        </view>
-        <view class="stats-progress-bar">
-          <view
-            class="stats-progress-fill"
-            :style="{ width: (stats.unlockedCount / stats.totalCount * 100) + '%' }"
-          />
-        </view>
-      </view>
-
-      <!-- 分类筛选 -->
-      <view class="category-tabs">
-        <scroll-view class="category-scroll" scroll-x show-scrollbar="false">
-          <view
-            v-for="(cat, key) in ACHIEVEMENT_CATEGORIES"
-            :key="key"
-            class="category-tab"
-            :class="{ 'category-tab-active': activeCategory === key }"
-            @click="activeCategory = key"
-          >
-            <text class="category-tab-icon">{{ cat.icon }}</text>
-            <text class="category-tab-label">{{ cat.label }}</text>
-          </view>
-        </scroll-view>
-      </view>
-
-      <!-- 成就列表 -->
-      <view class="achievement-list">
-        <!-- 已解锁 -->
-        <view class="ach-section" v-if="filteredUnlocked.length > 0">
-          <text class="ach-section-label">已解锁</text>
-          <view
-            v-for="ach in filteredUnlocked"
-            :key="ach.id"
-            class="ach-card ach-card-unlocked"
-            @click="showDetail(ach)"
-          >
-            <view class="ach-icon-wrap">
-              <text class="ach-icon">{{ ach.icon }}</text>
-            </view>
-            <view class="ach-info">
-              <text class="ach-name">{{ ach.name }}</text>
-              <text class="ach-desc">{{ ach.description }}</text>
-              <text class="ach-time" v-if="ach.userAch.unlockedAt">
-                解锁于 {{ formatUnlockTime(ach.userAch.unlockedAt) }}
-              </text>
-            </view>
-            <view class="ach-points">
-              <text class="ach-points-value">+{{ ach.points }}</text>
-              <text class="ach-points-label">积分</text>
-            </view>
-          </view>
-        </view>
-
-        <!-- 未解锁 -->
-        <view class="ach-section" v-if="filteredLocked.length > 0">
-          <text class="ach-section-label">未解锁</text>
-          <view
-            v-for="ach in filteredLocked"
-            :key="ach.id"
-            class="ach-card ach-card-locked"
-            @click="showDetail(ach)"
-          >
-            <view class="ach-icon-wrap ach-icon-wrap-locked">
-              <text class="ach-icon ach-icon-locked">🔒</text>
-            </view>
-            <view class="ach-info">
-              <text class="ach-name">{{ ach.name }}</text>
-              <text class="ach-desc">{{ ach.description }}</text>
-              <view class="ach-progress-row">
-                <view class="ach-progress-bar">
-                  <view
-                    class="ach-progress-fill"
-                    :style="{ width: (ach.userAch.progress / ach.progressMax * 100) + '%' }"
-                  />
-                </view>
-                <text class="ach-progress-text">{{ ach.userAch.progress }}/{{ ach.progressMax }}</text>
+          <view class="badge-grid">
+            <view
+              v-for="ach in unlockedAchievements"
+              :key="ach.id"
+              class="badge-item badge-item-unlocked"
+              @click="showDetail(ach)"
+            >
+              <view class="badge-icon-wrap">
+                <text class="badge-icon">{{ ach.icon }}</text>
               </view>
-            </view>
-            <view class="ach-points">
-              <text class="ach-points-value">+{{ ach.points }}</text>
-              <text class="ach-points-label">积分</text>
+              <text class="badge-name">{{ ach.name }}</text>
             </view>
           </view>
         </view>
 
-        <!-- 空状态 -->
-        <view class="ach-empty" v-if="filteredUnlocked.length === 0 && filteredLocked.length === 0">
-          <text class="ach-empty-icon">🏅</text>
-          <text class="ach-empty-text">该分类暂无成就</text>
+        <view class="locked-section">
+          <view class="section-header">
+            <text class="section-title">未解锁勋章</text>
+          </view>
+          <view class="badge-grid">
+            <view
+              v-for="ach in lockedAchievements"
+              :key="ach.id"
+              class="badge-item badge-item-locked"
+              @click="showLockedDetail(ach)"
+            >
+              <view class="badge-icon-wrap badge-icon-wrap-locked">
+                <text class="badge-icon badge-icon-locked">{{ ach.icon }}</text>
+              </view>
+              <text class="badge-name badge-name-locked">{{ ach.name }}</text>
+            </view>
+          </view>
         </view>
-      </view>
 
-      <!-- 抽奖模拟按钮（V1 测试用） -->
-      <view class="dev-tools" v-if="showDevTools">
-        <text class="dev-tools-title">测试工具</text>
-        <view class="dev-tools-grid">
-          <button class="dev-btn" @click="simulateAction('analysis_done')">模拟分析完成</button>
-          <button class="dev-btn" @click="simulateAction('plan_checkin')">模拟打卡</button>
-          <button class="dev-btn" @click="simulateAction('plan_completed')">模拟计划完成</button>
-          <button class="dev-btn" @click="simulateAction('style_test_done')">模拟风格测试</button>
-          <button class="dev-btn" @click="simulateAction('share_done')">模拟分享</button>
-          <button class="dev-btn" @click="simulateAction('ai_consult')">模拟AI对话</button>
-          <button class="dev-btn" @click="resetAll">重置所有成就</button>
+        <view class="stats-footer">
+          <view class="stats-row">
+            <view class="stat-item">
+              <text class="stat-value">{{ totalPoints }}</text>
+              <text class="stat-label">总积分</text>
+            </view>
+            <view class="stat-divider" />
+            <view class="stat-item">
+              <text class="stat-value">{{ unlockedCount }}</text>
+              <text class="stat-label">已获得</text>
+            </view>
+            <view class="stat-divider" />
+            <view class="stat-item">
+              <text class="stat-value">{{ totalCount }}</text>
+              <text class="stat-label">总成就</text>
+            </view>
+          </view>
         </view>
       </view>
     </scroll-view>
+
+    <view v-if="showDetailModal" class="detail-modal" @click="closeDetailModal">
+      <view class="modal-content" @click.stop>
+        <view class="modal-icon-wrap">
+          <text class="modal-icon">{{ selectedAchievement?.icon }}</text>
+        </view>
+        <text class="modal-name">{{ selectedAchievement?.name }}</text>
+        <text class="modal-date" v-if="selectedAchievement?.unlockedAt">解锁于 {{ formatUnlockTime(selectedAchievement.unlockedAt) }}</text>
+        <text class="modal-desc">{{ selectedAchievement?.description }}</text>
+        <view class="modal-actions">
+          <button class="modal-btn secondary" @click="closeDetailModal">关闭</button>
+          <button class="modal-btn primary" @click="shareAchievement">分享</button>
+        </view>
+      </view>
+    </view>
+
+    <view v-if="showLockedModal" class="detail-modal" @click="closeLockedModal">
+      <view class="modal-content modal-content-locked" @click.stop>
+        <view class="modal-icon-wrap modal-icon-wrap-locked">
+          <text class="modal-icon modal-icon-locked">{{ selectedLockedAchievement?.icon }}</text>
+        </view>
+        <text class="lock-icon">🔒</text>
+        <text class="modal-name">{{ selectedLockedAchievement?.name }}</text>
+        <text class="modal-condition">达成条件：{{ selectedLockedAchievement?.condition }}</text>
+        <text class="modal-progress" v-if="selectedLockedAchievement">进度：{{ selectedLockedAchievement.progress }}/{{ selectedLockedAchievement.progressMax }}</text>
+        <button class="modal-btn full" @click="closeLockedModal">知道了</button>
+      </view>
+    </view>
   </view>
 </template>
 
@@ -145,74 +104,66 @@
 import { ref, computed, onMounted } from 'vue'
 import {
   ACHIEVEMENTS,
-  ACHIEVEMENT_CATEGORIES,
   getUserAchievements,
-  triggerAchievementAction,
   formatUnlockTime
 } from '@/utils/achievementData.js'
 
-const activeCategory = ref('all')
-const showDevTools = ref(true)
+const showDetailModal = ref(false)
+const showLockedModal = ref(false)
+const selectedAchievement = ref(null)
+const selectedLockedAchievement = ref(null)
 const userData = ref(null)
 const scrollHeight = ref(600)
 
-const stats = computed(() => ({
-  unlockedCount: userData.value?.unlockedCount || 0,
-  totalPoints: userData.value?.totalPoints || 0,
-  totalCount: ACHIEVEMENTS.length
-}))
+const totalCount = computed(() => ACHIEVEMENTS.length)
+const unlockedCount = computed(() => userData.value?.unlockedCount || 0)
+const totalPoints = computed(() => userData.value?.totalPoints || 0)
 
-// 合并成就定义与用户状态
 const mergedAchievements = computed(() => {
   if (!userData.value) return []
   return ACHIEVEMENTS.map(ach => ({
     ...ach,
-    userAch: userData.value.achievements[ach.id] || { progress: 0, unlocked: false, unlockedAt: null }
+    ...(userData.value.achievements[ach.id] || { progress: 0, unlocked: false, unlockedAt: null })
   }))
 })
 
-const filteredUnlocked = computed(() => {
-  return mergedAchievements.value.filter(ach => {
-    if (activeCategory.value !== 'all' && ach.category !== activeCategory.value) return false
-    return ach.userAch.unlocked
-  })
+const unlockedAchievements = computed(() => {
+  return mergedAchievements.value.filter(ach => ach.unlocked)
 })
 
-const filteredLocked = computed(() => {
-  return mergedAchievements.value.filter(ach => {
-    if (activeCategory.value !== 'all' && ach.category !== activeCategory.value) return false
-    return !ach.userAch.unlocked
-  })
+const lockedAchievements = computed(() => {
+  return mergedAchievements.value.filter(ach => !ach.unlocked)
 })
 
 function loadData() {
   userData.value = getUserAchievements()
 }
 
-function simulateAction(action) {
-  userData.value = triggerAchievementAction(action)
-  uni.showToast({
-    title: '触发成功',
-    icon: 'success',
-    duration: 1000
-  })
-}
-
-function resetAll() {
-  uni.removeStorageSync('userAchievements')
-  loadData()
-  uni.showToast({
-    title: '已重置',
-    icon: 'none',
-    duration: 1000
-  })
-}
-
 function showDetail(ach) {
-  uni.showModal({
-    title: ach.name + (ach.userAch.unlocked ? ' ✅' : ' 🔒'),
-    content: ach.description + '\n\n达成条件：' + ach.condition + '\n积分奖励：' + ach.points + '分' + (ach.userAch.unlocked ? '\n\n解锁于：' + (ach.userAch.unlockedAt ? formatUnlockTime(ach.userAch.unlockedAt) : '') : '\n\n当前进度：' + ach.userAch.progress + '/' + ach.progressMax),
-    showCancel: false
+  selectedAchievement.value = ach
+  showDetailModal.value = true
+}
+
+function showLockedDetail(ach) {
+  selectedLockedAchievement.value = ach
+  showLockedModal.value = true
+}
+
+function closeDetailModal() {
+  showDetailModal.value = false
+  selectedAchievement.value = null
+}
+
+function closeLockedModal() {
+  showLockedModal.value = false
+  selectedLockedAchievement.value = null
+}
+
+function shareAchievement() {
+  closeDetailModal()
+  uni.showToast({
+    title: '分享功能开发中',
+    icon: 'none'
   })
 }
 
@@ -222,7 +173,6 @@ function onBack() {
 
 onMounted(() => {
   loadData()
-  // 计算可滚动区域高度：窗口高度 - 导航栏高度
   const sysInfo = uni.getSystemInfoSync()
   const navHeight = sysInfo.statusBarHeight + 44
   scrollHeight.value = sysInfo.windowHeight - navHeight
@@ -232,11 +182,10 @@ onMounted(() => {
 <style scoped>
 .achievement-page {
   height: 100vh;
-  background: #f8f9fa;
+  background: #FAF8F5;
   overflow: hidden;
 }
 
-/* 导航栏 */
 .nav-bar {
   position: relative;
   z-index: 100;
@@ -245,282 +194,278 @@ onMounted(() => {
   justify-content: space-between;
   padding: 44rpx 32rpx 20rpx;
   background: #fff;
-  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.04);
+  border-bottom: 1rpx solid #F0E6D2;
 }
+
 .nav-back {
   display: flex;
   align-items: center;
-  gap: 8rpx;
-  padding: 12rpx 16rpx;
+  padding: 12rpx;
   border-radius: 20rpx;
-  background: #f5f5f5;
 }
+
 .nav-back:active {
-  background: #e8e8e8;
+  background: #F5F0EB;
 }
+
 .nav-back-icon {
   font-size: 32rpx;
-  color: #333;
+  color: #5c4f4e;
 }
-.nav-back-text {
-  font-size: 28rpx;
-  color: #333;
-}
+
 .nav-title {
   font-size: 32rpx;
   font-weight: 600;
-  color: #222;
-}
-.nav-placeholder {
-  width: 100rpx;
+  color: #5c4f4e;
 }
 
-/* 成就概览 */
-.stats-overview {
-  padding: 16rpx 32rpx 24rpx;
-  background: #fff;
+.nav-placeholder {
+  width: 60rpx;
 }
-.stats-card {
+
+.ach-scroll-body {
+  flex: 1;
+}
+
+.achievement-content {
+  padding: 32rpx;
+}
+
+.unlocked-section {
+  margin-bottom: 48rpx;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24rpx;
+}
+
+.section-title {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #5c4f4e;
+}
+
+.section-count {
+  font-size: 24rpx;
+  font-weight: 600;
+  color: #E59A8F;
+}
+
+.badge-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24rpx;
+}
+
+.badge-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12rpx;
+}
+
+.badge-icon-wrap {
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50rpx;
+  background: #FFF1EE;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2rpx solid #E59A8F;
+}
+
+.badge-icon-wrap-locked {
+  background: #F5F0EB;
+  border-color: #D6C5B3;
+}
+
+.badge-icon {
+  font-size: 40rpx;
+}
+
+.badge-icon-locked {
+  opacity: 0.5;
+}
+
+.badge-name {
+  font-size: 24rpx;
+  font-weight: 500;
+  color: #5c4f4e;
+  text-align: center;
+}
+
+.badge-name-locked {
+  color: #D6C5B3;
+}
+
+.badge-item-locked {
+  opacity: 0.7;
+}
+
+.stats-footer {
+  margin-top: 48rpx;
+  padding: 24rpx;
+  background: #fff;
+  border-radius: 16rpx;
+  border: 1rpx solid #F0E6D2;
+}
+
+.stats-row {
   display: flex;
   align-items: center;
   justify-content: space-around;
-  padding: 24rpx 0;
-  background: linear-gradient(135deg, #7c3aed10, #a855f710);
-  border-radius: 16rpx;
 }
-.stats-item {
+
+.stat-item {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 4rpx;
 }
-.stats-icon {
-  font-size: 36rpx;
-}
-.stats-value {
+
+.stat-value {
   font-size: 36rpx;
   font-weight: 700;
-  color: #222;
+  color: #5c4f4e;
 }
-.stats-label {
+
+.stat-label {
   font-size: 22rpx;
-  color: #999;
+  color: #D6C5B3;
 }
-.stats-divider {
+
+.stat-divider {
   width: 1rpx;
-  height: 60rpx;
-  background: #e0e0e0;
-}
-.stats-progress-bar {
-  height: 8rpx;
-  background: #f0f0f0;
-  border-radius: 4rpx;
-  margin-top: 16rpx;
-  overflow: hidden;
-}
-.stats-progress-fill {
-  height: 100%;
-  background: linear-gradient(90deg, #7c3aed, #a855f7);
-  border-radius: 4rpx;
-  transition: width 0.5s ease;
+  height: 48rpx;
+  background: #F0E6D2;
 }
 
-/* 分类筛选 */
-.category-tabs {
-  background: #fff;
-  padding: 0 24rpx 16rpx;
-  border-bottom: 1rpx solid #f0f0f0;
-}
-.category-scroll {
-  display: flex;
-  white-space: nowrap;
-}
-.category-tab {
-  display: inline-flex;
-  align-items: center;
-  gap: 8rpx;
-  padding: 12rpx 24rpx;
-  margin-right: 12rpx;
-  border-radius: 32rpx;
-  background: #f5f5f5;
-  font-size: 24rpx;
-  color: #666;
-}
-.category-tab-active {
-  background: #7c3aed;
-  color: #fff;
-}
-.category-tab-icon {
-  font-size: 24rpx;
-}
-.category-tab-label {
-  font-size: 24rpx;
-}
-
-/* 成就列表 */
-.achievement-list {
-  padding: 16rpx 32rpx 0;
-}
-
-/* 可滚动区域 */
-.ach-scroll-body {
-  flex: 1;
-}
-.ach-section {
-  margin-bottom: 24rpx;
-}
-.ach-section-label {
-  font-size: 24rpx;
-  color: #999;
-  display: block;
-  margin-bottom: 12rpx;
-  padding-left: 8rpx;
-}
-.ach-card {
-  display: flex;
-  align-items: center;
-  gap: 16rpx;
-  background: #fff;
-  border-radius: 14rpx;
-  padding: 20rpx;
-  margin-bottom: 12rpx;
-  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.04);
-}
-.ach-card:active {
-  transform: scale(0.98);
-}
-.ach-card-unlocked {
-  border-left: 6rpx solid #7c3aed;
-}
-.ach-card-locked {
-  border-left: 6rpx solid #e0e0e0;
-  opacity: 0.7;
-}
-.ach-icon-wrap {
-  width: 72rpx;
-  height: 72rpx;
-  border-radius: 36rpx;
-  background: #f5f0ff;
+.detail-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.5);
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-shrink: 0;
 }
-.ach-icon-wrap-locked {
-  background: #f0f0f0;
+
+.modal-content {
+  background: #fff;
+  border-radius: 32rpx;
+  padding: 48rpx 32rpx;
+  margin: 32rpx;
+  width: 100%;
+  max-width: 600rpx;
+  text-align: center;
 }
-.ach-icon {
+
+.modal-content-locked {
+  max-width: 560rpx;
+}
+
+.modal-icon-wrap {
+  width: 128rpx;
+  height: 128rpx;
+  border-radius: 64rpx;
+  background: #FFF1EE;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 24rpx;
+  border: 4rpx solid #E59A8F;
+}
+
+.modal-icon-wrap-locked {
+  background: #F5F0EB;
+  border-color: #D6C5B3;
+  opacity: 0.6;
+}
+
+.modal-icon {
+  font-size: 56rpx;
+}
+
+.modal-icon-locked {
+  opacity: 0.5;
+}
+
+.lock-icon {
   font-size: 32rpx;
-}
-.ach-icon-locked {
-  font-size: 28rpx;
-}
-.ach-info {
-  flex: 1;
-  min-width: 0;
-}
-.ach-name {
-  font-size: 28rpx;
-  font-weight: 600;
-  color: #333;
-  display: block;
-  margin-bottom: 4rpx;
-}
-.ach-desc {
-  font-size: 22rpx;
-  color: #999;
-  display: block;
-  margin-bottom: 6rpx;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-.ach-time {
-  font-size: 20rpx;
-  color: #7c3aed;
-  display: block;
-}
-.ach-progress-row {
-  display: flex;
-  align-items: center;
-  gap: 8rpx;
-}
-.ach-progress-bar {
-  flex: 1;
-  height: 6rpx;
-  background: #f0f0f0;
-  border-radius: 3rpx;
-  overflow: hidden;
-}
-.ach-progress-fill {
-  height: 100%;
-  background: #7c3aed;
-  border-radius: 3rpx;
-  transition: width 0.3s ease;
-}
-.ach-progress-text {
-  font-size: 20rpx;
-  color: #bbb;
-  flex-shrink: 0;
-}
-.ach-points {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  flex-shrink: 0;
-}
-.ach-points-value {
-  font-size: 28rpx;
-  font-weight: 700;
-  color: #f59e0b;
-}
-.ach-points-label {
-  font-size: 20rpx;
-  color: #bbb;
-}
-
-/* 空状态 */
-.ach-empty {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 80rpx 0;
-  gap: 16rpx;
-}
-.ach-empty-icon {
-  font-size: 64rpx;
-}
-.ach-empty-text {
-  font-size: 26rpx;
-  color: #999;
-}
-
-/* 测试工具 */
-.dev-tools {
-  background: #fffbe6;
-  padding: 24rpx 32rpx 48rpx;
-  border-top: 1rpx solid #f0e68c;
-}
-.dev-tools-title {
-  font-size: 24rpx;
-  color: #b8860b;
-  font-weight: 500;
-  display: block;
+  color: #D6C5B3;
   margin-bottom: 16rpx;
 }
-.dev-tools-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12rpx;
+
+.modal-name {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #5c4f4e;
+  display: block;
+  margin-bottom: 8rpx;
 }
-.dev-btn {
-  font-size: 22rpx;
-  color: #7c3aed;
-  background: #f5f0ff;
-  border: 1rpx solid #7c3aed40;
-  border-radius: 8rpx;
-  padding: 8rpx 20rpx;
+
+.modal-date {
+  font-size: 24rpx;
+  color: #E59A8F;
+  display: block;
+  margin-bottom: 24rpx;
+}
+
+.modal-desc {
+  font-size: 26rpx;
+  color: #8B7B6B;
+  line-height: 1.6;
+  display: block;
+  margin-bottom: 32rpx;
+}
+
+.modal-condition {
+  font-size: 24rpx;
+  color: #8B7B6B;
   line-height: 1.5;
+  display: block;
+  margin-bottom: 12rpx;
+}
+
+.modal-progress {
+  font-size: 22rpx;
+  color: #D6C5B3;
+  display: block;
+  margin-bottom: 32rpx;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 16rpx;
+}
+
+.modal-btn {
+  flex: 1;
+  padding: 24rpx;
+  border-radius: 16rpx;
+  font-size: 28rpx;
+  font-weight: 600;
   height: auto;
+  line-height: 1.5;
+}
+
+.modal-btn.secondary {
+  background: #F5F0EB;
+  color: #5c4f4e;
+  border: none;
+}
+
+.modal-btn.primary {
+  background: #E59A8F;
+  color: #fff;
+  border: none;
+}
+
+.modal-btn.full {
+  width: 100%;
 }
 </style>

@@ -2822,12 +2822,12 @@
 
                     <!-- === PAGE 6: 灵感探索 === -->
                     <div id="mob-page-inspiration" class="hidden w-full min-h-full flex flex-col bg-[#FAF8F5]">
-                        <div class="px-4 pt-1 pb-1 flex-shrink-0">
+                        <div class="px-4 pt-1 pb-1">
                             <h2 class="serif-title text-xl font-bold tracking-wider text-flax-900">灵感广场</h2>
                             <p class="text-[9px] text-[#A69989] font-medium tracking-wide mt-0.5">发现你的专属风格灵感</p>
                         </div>
 
-                        <div class="px-4 mb-3 flex-shrink-0">
+                        <div class="px-4 mb-3">
                             <div class="flex justify-around w-full">
                                 <button onclick="filterInspiration('all')" class="flex-1 mx-1 py-1.5 bg-peach-500 text-white rounded-full text-[9px] font-bold whitespace-nowrap shadow-sm text-center">全部</button>
                                 <button onclick="startStyleTest()" class="flex-1 mx-1 py-1.5 bg-white border border-flax-200 text-champagne-800 rounded-full text-[9px] font-medium whitespace-nowrap hover:border-peach-300 transition-all text-center">风格测试</button>
@@ -2837,12 +2837,12 @@
                             </div>
                         </div>
 
-                        <div class="px-4 flex-grow">
-                            <div class="space-y-3" id="inspiration-content">
+                        <div class="flex-grow overflow-y-auto px-4 pb-24 inspiration-grid">
+                            <div class="space-y-3">
                             </div>
                         </div>
 
-                        <div class="px-4 pb-4 pt-3 bg-[#FAF8F5] flex-shrink-0">
+                        <div class="px-4 pb-4 bg-[#FAF8F5]">
                             <button onclick="goToUploadPhoto()" class="w-full py-3 bg-gradient-to-r from-peach-400 to-[#C26B5D] hover:from-peach-500 hover:to-peach-600 text-white rounded-xl text-xs font-bold transition-all shadow-md flex items-center justify-center gap-2">
                                 <i class="fas fa-camera"></i>上传照片生成报告
                             </button>
@@ -2851,13 +2851,13 @@
                     </div>
 
                     <!-- === PAGE 6: AI变美顾问 === -->
-                    <div id="mob-page-ai-consultant" class="hidden w-full min-h-full flex flex-col bg-[#FAF8F5]">
-                        <div class="pt-6 pb-3 px-4 flex-shrink-0">
+                    <div id="mob-page-ai-consultant" class="hidden w-full min-h-full relative flex flex-col bg-[#FAF8F5]">
+                        <div class="pt-6 pb-3 px-4">
                             <h2 class="serif-title text-xl font-bold tracking-wider text-flax-900">AI变美顾问</h2>
                             <p class="text-[9px] text-[#A69989] font-medium tracking-wide mt-0.5">你的专属智能变美助手</p>
                         </div>
 
-                        <div class="px-4 mb-3 flex-shrink-0">
+                        <div class="px-4 mb-3">
                             <div class="bg-gradient-to-r from-peach-100/50 to-champagne-100/50 rounded-2xl p-3 border border-peach-200/50">
                                 <div class="flex items-start gap-2">
                                     <div class="w-5 h-5 rounded-full bg-peach-200 flex items-center justify-center text-peach-500 text-[8px] flex-shrink-0"><i class="fas fa-info"></i></div>
@@ -2866,7 +2866,7 @@
                             </div>
                         </div>
 
-                        <div class="px-4 flex-grow" id="mob-ai-chat-container">
+                        <div class="flex-grow overflow-y-auto no-scrollbar px-4 pb-4" id="mob-ai-chat-container">
                             <div class="space-y-4">
                                 <div class="flex gap-2">
                                     <div class="w-8 h-8 rounded-full bg-peach-100 flex items-center justify-center text-peach-500 text-sm flex-shrink-0"><i class="fas fa-robot"></i></div>
@@ -2891,7 +2891,7 @@
                             </div>
                         </div>
 
-                        <div class="px-4 py-3 bg-white/95 border-t border-flax-200 flex-shrink-0">
+                        <div class="px-4 py-3 bg-white/95 border-t border-flax-200">
                             <div class="flex gap-2">
                                 <input type="text" id="mob-ai-input" class="flex-grow bg-flax-50 border border-flax-200 rounded-full px-4 py-2.5 text-xs text-flax-900 focus:outline-none focus:border-peach-300 transition-all" placeholder="输入你的问题...">
                                 <button onclick="sendAiMessage()" class="w-10 h-10 bg-peach-500 hover:bg-peach-400 text-white rounded-full flex items-center justify-center transition-all shadow-sm">
@@ -7767,12 +7767,12 @@
         ];
 
         function filterInspiration(category) {
-            const container = document.getElementById('inspiration-content');
+            const container = document.querySelector('.inspiration-grid');
             if (!container) return;
 
             const filtered = category === 'all' ? inspirationData : inspirationData.filter(item => item.category === category);
 
-            container.innerHTML = `${filtered.map(item => `
+            container.innerHTML = `<div class="space-y-3">${filtered.map(item => `
                 <div onclick="openInspirationDetail('${item.id}')" class="bg-white rounded-2xl overflow-hidden border border-flax-200/80 shadow-sm">
                     <div class="relative w-full h-32 overflow-hidden">
                         <img src="${item.image}" class="w-full h-full object-cover" alt="${item.title}">

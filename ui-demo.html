@@ -2821,13 +2821,13 @@
                     </div>
 
                     <!-- === PAGE 6: 灵感探索 === -->
-                    <div id="mob-page-inspiration" class="hidden w-full min-h-full bg-[#FAF8F5]">
-                        <div class="sticky top-0 z-10 px-4 pt-1 pb-1 bg-[#FAF8F5]">
+                    <div id="mob-page-inspiration" class="hidden w-full min-h-full flex flex-col bg-[#FAF8F5]">
+                        <div class="px-4 pt-1 pb-1 flex-shrink-0">
                             <h2 class="serif-title text-xl font-bold tracking-wider text-flax-900">灵感广场</h2>
                             <p class="text-[9px] text-[#A69989] font-medium tracking-wide mt-0.5">发现你的专属风格灵感</p>
                         </div>
 
-                        <div class="px-4 mb-3">
+                        <div class="px-4 mb-3 flex-shrink-0">
                             <div class="flex justify-around w-full">
                                 <button onclick="filterInspiration('all')" class="flex-1 mx-1 py-1.5 bg-peach-500 text-white rounded-full text-[9px] font-bold whitespace-nowrap shadow-sm text-center">全部</button>
                                 <button onclick="startStyleTest()" class="flex-1 mx-1 py-1.5 bg-white border border-flax-200 text-champagne-800 rounded-full text-[9px] font-medium whitespace-nowrap hover:border-peach-300 transition-all text-center">风格测试</button>
@@ -2837,12 +2837,12 @@
                             </div>
                         </div>
 
-                        <div class="px-4 pb-32">
+                        <div class="px-4 flex-grow">
                             <div class="space-y-3" id="inspiration-content">
                             </div>
                         </div>
 
-                        <div class="sticky bottom-20 px-4 pb-4 bg-[#FAF8F5]">
+                        <div class="px-4 pb-4 pt-3 bg-[#FAF8F5] flex-shrink-0">
                             <button onclick="goToUploadPhoto()" class="w-full py-3 bg-gradient-to-r from-peach-400 to-[#C26B5D] hover:from-peach-500 hover:to-peach-600 text-white rounded-xl text-xs font-bold transition-all shadow-md flex items-center justify-center gap-2">
                                 <i class="fas fa-camera"></i>上传照片生成报告
                             </button>
@@ -2851,13 +2851,13 @@
                     </div>
 
                     <!-- === PAGE 6: AI变美顾问 === -->
-                    <div id="mob-page-ai-consultant" class="hidden w-full min-h-full relative bg-[#FAF8F5]">
-                        <div class="sticky top-0 z-10 pt-6 pb-3 px-4 bg-[#FAF8F5]">
+                    <div id="mob-page-ai-consultant" class="hidden w-full min-h-full flex flex-col bg-[#FAF8F5]">
+                        <div class="pt-6 pb-3 px-4 flex-shrink-0">
                             <h2 class="serif-title text-xl font-bold tracking-wider text-flax-900">AI变美顾问</h2>
                             <p class="text-[9px] text-[#A69989] font-medium tracking-wide mt-0.5">你的专属智能变美助手</p>
                         </div>
 
-                        <div class="px-4 mb-3">
+                        <div class="px-4 mb-3 flex-shrink-0">
                             <div class="bg-gradient-to-r from-peach-100/50 to-champagne-100/50 rounded-2xl p-3 border border-peach-200/50">
                                 <div class="flex items-start gap-2">
                                     <div class="w-5 h-5 rounded-full bg-peach-200 flex items-center justify-center text-peach-500 text-[8px] flex-shrink-0"><i class="fas fa-info"></i></div>
@@ -2866,7 +2866,7 @@
                             </div>
                         </div>
 
-                        <div class="px-4 pb-32" id="mob-ai-chat-container">
+                        <div class="px-4 flex-grow" id="mob-ai-chat-container">
                             <div class="space-y-4">
                                 <div class="flex gap-2">
                                     <div class="w-8 h-8 rounded-full bg-peach-100 flex items-center justify-center text-peach-500 text-sm flex-shrink-0"><i class="fas fa-robot"></i></div>
@@ -2891,7 +2891,7 @@
                             </div>
                         </div>
 
-                        <div class="sticky bottom-20 px-4 py-3 bg-white/95 border-t border-flax-200">
+                        <div class="px-4 py-3 bg-white/95 border-t border-flax-200 flex-shrink-0">
                             <div class="flex gap-2">
                                 <input type="text" id="mob-ai-input" class="flex-grow bg-flax-50 border border-flax-200 rounded-full px-4 py-2.5 text-xs text-flax-900 focus:outline-none focus:border-peach-300 transition-all" placeholder="输入你的问题...">
                                 <button onclick="sendAiMessage()" class="w-10 h-10 bg-peach-500 hover:bg-peach-400 text-white rounded-full flex items-center justify-center transition-all shadow-sm">

@@ -2450,6 +2450,19 @@
                                     <div id="makeup-report-selector" class="flex flex-wrap gap-1.5 mb-3 hidden">
                                     </div>
 
+                                    <div class="mb-4">
+                                        <div class="flex items-center gap-2 mb-2"><div class="w-5 h-5 rounded-full bg-peach-100 flex items-center justify-center text-peach-500 text-[9px]"><i class="fas fa-map-marker-alt"></i></div><h4 class="text-[10px] font-bold text-champagne-800">场景选择</h4></div>
+                                        <div class="grid grid-cols-3 gap-2">
+                                            <button onclick="selectMakeupScene('daily', this)" class="makeup-scene-btn py-2 text-[10px] border border-flax-200 rounded-lg text-champagne-800 bg-white hover:border-peach-300 transition-all">日常</button>
+                                            <button onclick="selectMakeupScene('commute', this)" class="makeup-scene-btn py-2 text-[10px] border border-flax-200 rounded-lg text-champagne-800 bg-white hover:border-peach-300 transition-all">通勤</button>
+                                            <button onclick="selectMakeupScene('class', this)" class="makeup-scene-btn py-2 text-[10px] border border-flax-200 rounded-lg text-champagne-800 bg-white hover:border-peach-300 transition-all">上课</button>
+                                            <button onclick="selectMakeupScene('date', this)" class="makeup-scene-btn py-2 text-[10px] border border-flax-200 rounded-lg text-champagne-800 bg-white hover:border-peach-300 transition-all">约会</button>
+                                            <button onclick="selectMakeupScene('party', this)" class="makeup-scene-btn py-2 text-[10px] border border-flax-200 rounded-lg text-champagne-800 bg-white hover:border-peach-300 transition-all">聚会</button>
+                                            <button onclick="selectMakeupScene('interview', this)" class="makeup-scene-btn py-2 text-[10px] border border-flax-200 rounded-lg text-champagne-800 bg-white hover:border-peach-300 transition-all">面试</button>
+                                            <button onclick="selectMakeupScene('travel', this)" class="makeup-scene-btn py-2 text-[10px] border border-2 border-peach-400 rounded-lg text-peach-500 bg-peach-50">旅行</button>
+                                        </div>
+                                    </div>
+
                                     <div id="makeup-effect-buttons" class="flex justify-center gap-2 mb-4">
                                         <button onclick="generateEffectImage('makeup', 1)" id="makeup-btn-1" class="px-4 py-1.5 bg-peach-500 text-white rounded-full text-[10px] font-bold shadow-sm">生成效果图 💎15积分</button>
                                         <button onclick="generateEffectImage('makeup', 2)" id="makeup-btn-2" class="px-4 py-1.5 bg-white border border-flax-200 text-champagne-800 rounded-full text-[10px] font-medium hover:border-peach-300 transition-all">生成效果图 💎15积分</button>
@@ -5141,6 +5154,13 @@
                 actionIcon: '👗',
                 systemBtnText: '从系统穿搭库选择'
             });
+        }
+
+        function selectMakeupScene(scene, btn) {
+            document.querySelectorAll('.makeup-scene-btn').forEach(b => {
+                b.className = 'makeup-scene-btn py-2 text-[10px] border border-flax-200 rounded-lg text-champagne-800 bg-white hover:border-peach-300 transition-all';
+            });
+            btn.className = 'makeup-scene-btn py-2 text-[10px] border border-2 border-peach-400 rounded-lg text-peach-500 bg-peach-50';
         }
 
         function triggerMakeup() {

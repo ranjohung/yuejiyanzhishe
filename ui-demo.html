@@ -2821,7 +2821,7 @@
                     </div>
 
                     <!-- === PAGE 6: 灵感探索 === -->
-                    <div id="mob-page-inspiration" class="hidden w-full min-h-full flex flex-col bg-[#FAF8F5]">
+                    <div id="mob-page-inspiration" class="hidden w-full min-h-full bg-[#FAF8F5]">
                         <div class="px-4 pt-1 pb-1">
                             <h2 class="serif-title text-xl font-bold tracking-wider text-flax-900">灵感广场</h2>
                             <p class="text-[9px] text-[#A69989] font-medium tracking-wide mt-0.5">发现你的专属风格灵感</p>
@@ -2837,7 +2837,7 @@
                             </div>
                         </div>
 
-                        <div class="flex-grow overflow-y-auto px-4 pb-24 inspiration-grid">
+                        <div class="px-4 pb-32" id="inspiration-content">
                             <div class="space-y-3">
                             </div>
                         </div>
@@ -2851,7 +2851,7 @@
                     </div>
 
                     <!-- === PAGE 6: AI变美顾问 === -->
-                    <div id="mob-page-ai-consultant" class="hidden w-full min-h-full relative flex flex-col bg-[#FAF8F5]">
+                    <div id="mob-page-ai-consultant" class="hidden w-full min-h-full bg-[#FAF8F5]">
                         <div class="pt-6 pb-3 px-4">
                             <h2 class="serif-title text-xl font-bold tracking-wider text-flax-900">AI变美顾问</h2>
                             <p class="text-[9px] text-[#A69989] font-medium tracking-wide mt-0.5">你的专属智能变美助手</p>
@@ -2866,7 +2866,7 @@
                             </div>
                         </div>
 
-                        <div class="flex-grow overflow-y-auto no-scrollbar px-4 pb-4" id="mob-ai-chat-container">
+                        <div class="px-4 pb-32" id="mob-ai-chat-container">
                             <div class="space-y-4">
                                 <div class="flex gap-2">
                                     <div class="w-8 h-8 rounded-full bg-peach-100 flex items-center justify-center text-peach-500 text-sm flex-shrink-0"><i class="fas fa-robot"></i></div>
@@ -7767,7 +7767,7 @@
         ];
 
         function filterInspiration(category) {
-            const container = document.querySelector('.inspiration-grid');
+            const container = document.getElementById('inspiration-content');
             if (!container) return;
 
             const filtered = category === 'all' ? inspirationData : inspirationData.filter(item => item.category === category);

@@ -1551,55 +1551,102 @@
     <div id="questionnaire-modal" class="fixed inset-0 bg-black/40 backdrop-blur-md z-[60] flex items-center justify-center hidden opacity-0 transition-all duration-500 p-4">
         <div class="bg-[#FAF8F5] rounded-[32px] w-11/12 max-w-md max-h-[85vh] flex flex-col shadow-2xl border border-flax-200 transform scale-95 transition-all duration-500 overflow-hidden" id="questionnaire-modal-card">
             <div class="px-6 py-5 border-b border-flax-200 flex justify-between items-center bg-white/50 flex-shrink-0">
-                <h3 class="serif-title text-lg font-bold text-champagne-800 flex items-center gap-2"><span class="w-7 h-7 rounded-full bg-peach-100 flex items-center justify-center text-peach-500 text-xs"><i class="fas fa-clipboard-list"></i></span>報告生成前小問卷</h3>
+                <h3 class="serif-title text-lg font-bold text-champagne-800 flex items-center gap-2"><span class="w-7 h-7 rounded-full bg-peach-100 flex items-center justify-center text-peach-500 text-xs"><i class="fas fa-clipboard-list"></i></span>完善你的信息</h3>
                 <button onclick="closeQuestionnaireModal()" class="text-flax-400 hover:text-peach-500 transition-colors"><i class="fas fa-times text-lg"></i></button>
             </div>
             <div class="p-6 overflow-y-auto no-scrollbar flex-grow min-h-0 space-y-5">
-                <p class="text-xs text-flax-400 text-center mb-2">為了讓報告更像「今天真的能用的方案」，請快速告訴我們你的場景、風格和狀態。</p>
+                <p class="text-xs text-flax-400 text-center mb-2">帮助 AI 更准确地为你生成方案</p>
 
-                <div class="space-y-3">
-                    <h4 class="text-[11px] font-bold text-champagne-800 flex items-center gap-1.5 border-b border-flax-200 pb-1"><i class="fas fa-location-dot text-peach-400"></i> 今天主要要去做什麼？</h4>
-                    <div>
-                        <p class="text-[10px] font-bold text-flax-900 mb-1.5">選擇最接近的一個場景</p>
-                        <div class="flex gap-2">
-                            <button onclick="selectQuestionnaireOption('purpose','通勤上班',this)" class="question-option flex-1 py-1.5 text-[10px] border border-flax-300 rounded-lg text-flax-400 bg-white hover:border-peach-300 transition-all">通勤</button>
-                            <button onclick="selectQuestionnaireOption('purpose','約會見面',this)" class="question-option flex-1 py-1.5 text-[10px] border border-flax-300 rounded-lg text-flax-400 bg-white hover:border-peach-300 transition-all">約會</button>
-                            <button onclick="selectQuestionnaireOption('purpose','面試簡報',this)" class="question-option flex-1 py-1.5 text-[10px] border border-flax-300 rounded-lg text-flax-400 bg-white hover:border-peach-300 transition-all">面試</button>
-                            <button onclick="selectQuestionnaireOption('purpose','出遊拍照',this)" class="question-option flex-1 py-1.5 text-[10px] border border-flax-300 rounded-lg text-flax-400 bg-white hover:border-peach-300 transition-all">出遊</button>
-                        </div>
+                <div class="bg-white rounded-xl p-4 border border-flax-200">
+                    <h4 class="text-[11px] font-bold text-champagne-800 mb-3 flex items-center gap-1"><span class="text-red-400 text-[9px]">*</span>今日使用场景</h4>
+                    <div class="grid grid-cols-3 gap-2">
+                        <button onclick="selectQuestionnaireOption('scene','daily',this)" class="question-option py-2 text-[10px] border border-flax-300 rounded-lg text-flax-400 bg-white hover:border-peach-300 transition-all">日常</button>
+                        <button onclick="selectQuestionnaireOption('scene','commute',this)" class="question-option py-2 text-[10px] border border-flax-300 rounded-lg text-flax-400 bg-white hover:border-peach-300 transition-all">通勤</button>
+                        <button onclick="selectQuestionnaireOption('scene','class',this)" class="question-option py-2 text-[10px] border border-flax-300 rounded-lg text-flax-400 bg-white hover:border-peach-300 transition-all">上课</button>
+                        <button onclick="selectQuestionnaireOption('scene','date',this)" class="question-option py-2 text-[10px] border border-flax-300 rounded-lg text-flax-400 bg-white hover:border-peach-300 transition-all">约会</button>
+                        <button onclick="selectQuestionnaireOption('scene','party',this)" class="question-option py-2 text-[10px] border border-flax-300 rounded-lg text-flax-400 bg-white hover:border-peach-300 transition-all">聚会</button>
+                        <button onclick="selectQuestionnaireOption('scene','interview',this)" class="question-option py-2 text-[10px] border border-flax-300 rounded-lg text-flax-400 bg-white hover:border-peach-300 transition-all">面试</button>
+                        <button onclick="selectQuestionnaireOption('scene','travel',this)" class="question-option py-2 text-[10px] border border-flax-300 rounded-lg text-flax-400 bg-white hover:border-peach-300 transition-all">旅行</button>
                     </div>
-                    <div>
-                        <p class="text-[10px] font-bold text-flax-900 mb-1.5">想要什麼穿搭風格？</p>
-                        <div class="flex gap-2">
-                            <button onclick="selectQuestionnaireOption('style','溫柔知性',this)" class="question-option flex-1 py-1.5 text-[10px] border border-flax-300 rounded-lg text-flax-400 bg-white hover:border-peach-300 transition-all">溫柔知性</button>
-                            <button onclick="selectQuestionnaireOption('style','鬆弛休閒',this)" class="question-option flex-1 py-1.5 text-[10px] border border-flax-300 rounded-lg text-flax-400 bg-white hover:border-peach-300 transition-all">鬆弛休閒</button>
-                            <button onclick="selectQuestionnaireOption('style','精緻輕熟',this)" class="question-option flex-1 py-1.5 text-[10px] border border-flax-300 rounded-lg text-flax-400 bg-white hover:border-peach-300 transition-all">精緻輕熟</button>
+                </div>
+
+                <div class="bg-white rounded-xl p-4 border border-flax-200">
+                    <h4 class="text-[11px] font-bold text-champagne-800 mb-3">基础资料</h4>
+                    <div class="grid grid-cols-3 gap-2">
+                        <div>
+                            <label class="block text-[9px] text-flax-400 mb-1">年龄段</label>
+                            <select onclick="selectQuestionnaireOption('age', this.value, this)" class="question-option w-full py-2 text-[10px] border border-flax-300 rounded-lg text-flax-400 bg-white hover:border-peach-300 transition-all appearance-none">
+                                <option value="">选择</option>
+                                <option value="18-25">18-25岁</option>
+                                <option value="26-30">26-30岁</option>
+                                <option value="31-35">31-35岁</option>
+                                <option value="36-40">36-40岁</option>
+                                <option value="40+">40岁以上</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-[9px] text-flax-400 mb-1">身高(cm)</label>
+                            <input type="number" value="165" onclick="selectQuestionnaireOption('height', this.value, this)" class="question-option w-full py-2 text-[10px] border border-flax-300 rounded-lg text-flax-400 bg-white hover:border-peach-300 transition-all">
+                        </div>
+                        <div>
+                            <label class="block text-[9px] text-flax-400 mb-1">体重(kg)</label>
+                            <input type="number" value="50" onclick="selectQuestionnaireOption('weight', this.value, this)" class="question-option w-full py-2 text-[10px] border border-flax-300 rounded-lg text-flax-400 bg-white hover:border-peach-300 transition-all">
                         </div>
                     </div>
                 </div>
 
-                <div class="space-y-3">
-                    <h4 class="text-[11px] font-bold text-champagne-800 flex items-center gap-1.5 border-b border-flax-200 pb-1 mt-2"><i class="fas fa-droplet text-peach-400"></i> 皮膚與身體狀態</h4>
-                    <div>
-                        <p class="text-[10px] font-bold text-flax-900 mb-1.5">今天皮膚狀態更像？</p>
-                        <div class="flex gap-2">
-                            <button onclick="selectQuestionnaireOption('skin','偏乾缺水',this)" class="question-option flex-1 py-1.5 text-[10px] border border-flax-300 rounded-lg text-flax-400 bg-white hover:border-peach-300 transition-all">偏乾缺水</button>
-                            <button onclick="selectQuestionnaireOption('skin','出油暗沉',this)" class="question-option flex-1 py-1.5 text-[10px] border border-flax-300 rounded-lg text-flax-400 bg-white hover:border-peach-300 transition-all">出油暗沉</button>
-                            <button onclick="selectQuestionnaireOption('skin','敏感泛紅',this)" class="question-option flex-1 py-1.5 text-[10px] border border-flax-300 rounded-lg text-flax-400 bg-white hover:border-peach-300 transition-all">敏感泛紅</button>
-                        </div>
+                <div class="bg-white rounded-xl p-4 border border-flax-200">
+                    <h4 class="text-[11px] font-bold text-champagne-800 mb-3">风格偏好</h4>
+                    <div class="grid grid-cols-4 gap-2">
+                        <button onclick="toggleQuestionnaireOption('style','gentle',this)" class="question-option-multi py-2 text-[10px] border border-flax-300 rounded-lg text-flax-400 bg-white hover:border-peach-300 transition-all">温柔</button>
+                        <button onclick="toggleQuestionnaireOption('style','sweet',this)" class="question-option-multi py-2 text-[10px] border border-flax-300 rounded-lg text-flax-400 bg-white hover:border-peach-300 transition-all">甜酷</button>
+                        <button onclick="toggleQuestionnaireOption('style','simple',this)" class="question-option-multi py-2 text-[10px] border border-flax-300 rounded-lg text-flax-400 bg-white hover:border-peach-300 transition-all">简约</button>
+                        <button onclick="toggleQuestionnaireOption('style','korean',this)" class="question-option-multi py-2 text-[10px] border border-flax-300 rounded-lg text-flax-400 bg-white hover:border-peach-300 transition-all">韩系</button>
+                        <button onclick="toggleQuestionnaireOption('style','commute_style',this)" class="question-option-multi py-2 text-[10px] border border-flax-300 rounded-lg text-flax-400 bg-white hover:border-peach-300 transition-all">通勤</button>
+                        <button onclick="toggleQuestionnaireOption('style','elegant',this)" class="question-option-multi py-2 text-[10px] border border-flax-300 rounded-lg text-flax-400 bg-white hover:border-peach-300 transition-all">轻熟</button>
+                        <button onclick="toggleQuestionnaireOption('style','academy',this)" class="question-option-multi py-2 text-[10px] border border-flax-300 rounded-lg text-flax-400 bg-white hover:border-peach-300 transition-all">学院</button>
+                        <button onclick="toggleQuestionnaireOption('style','ai_recommend',this)" class="question-option-multi py-2 text-[10px] border border-flax-300 rounded-lg text-flax-400 bg-white hover:border-peach-300 transition-all">让AI推荐</button>
                     </div>
-                    <div>
-                        <p class="text-[10px] font-bold text-flax-900 mb-1.5">接下來的身體目標？</p>
-                        <div class="flex gap-2">
-                            <button onclick="selectQuestionnaireOption('fitness','輕盈減脂',this)" class="question-option flex-1 py-1.5 text-[10px] border border-flax-300 rounded-lg text-flax-400 bg-white hover:border-peach-300 transition-all">輕盈減脂</button>
-                            <button onclick="selectQuestionnaireOption('fitness','體態塑形',this)" class="question-option flex-1 py-1.5 text-[10px] border border-flax-300 rounded-lg text-flax-400 bg-white hover:border-peach-300 transition-all">體態塑形</button>
-                            <button onclick="selectQuestionnaireOption('fitness','維持活力',this)" class="question-option flex-1 py-1.5 text-[10px] border border-flax-300 rounded-lg text-flax-400 bg-white hover:border-peach-300 transition-all">維持活力</button>
-                        </div>
+                </div>
+
+                <div class="bg-white rounded-xl p-4 border border-flax-200">
+                    <h4 class="text-[11px] font-bold text-champagne-800 mb-3">皮肤情况自评</h4>
+                    <div class="grid grid-cols-3 gap-2">
+                        <button onclick="toggleQuestionnaireOption('skin_type','dry',this)" class="question-option-multi py-2 text-[10px] border border-flax-300 rounded-lg text-flax-400 bg-white hover:border-peach-300 transition-all">干皮</button>
+                        <button onclick="toggleQuestionnaireOption('skin_type','oily',this)" class="question-option-multi py-2 text-[10px] border border-flax-300 rounded-lg text-flax-400 bg-white hover:border-peach-300 transition-all">油皮</button>
+                        <button onclick="toggleQuestionnaireOption('skin_type','mixed',this)" class="question-option-multi py-2 text-[10px] border border-flax-300 rounded-lg text-flax-400 bg-white hover:border-peach-300 transition-all">混合皮</button>
+                        <button onclick="toggleQuestionnaireOption('skin_type','sensitive',this)" class="question-option-multi py-2 text-[10px] border border-flax-300 rounded-lg text-flax-400 bg-white hover:border-peach-300 transition-all">敏感肌</button>
+                        <button onclick="toggleQuestionnaireOption('skin_type','acne',this)" class="question-option-multi py-2 text-[10px] border border-flax-300 rounded-lg text-flax-400 bg-white hover:border-peach-300 transition-all">痘痘肌</button>
+                        <button onclick="toggleQuestionnaireOption('skin_type','unknown',this)" class="question-option-multi py-2 text-[10px] border border-flax-300 rounded-lg text-flax-400 bg-white hover:border-peach-300 transition-all">不清楚</button>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl p-4 border border-flax-200">
+                    <h4 class="text-[11px] font-bold text-champagne-800 mb-3">发质自评</h4>
+                    <div class="grid grid-cols-3 gap-2">
+                        <button onclick="toggleQuestionnaireOption('hair_type','soft',this)" class="question-option-multi py-2 text-[10px] border border-flax-300 rounded-lg text-flax-400 bg-white hover:border-peach-300 transition-all">细软</button>
+                        <button onclick="toggleQuestionnaireOption('hair_type','hard',this)" class="question-option-multi py-2 text-[10px] border border-flax-300 rounded-lg text-flax-400 bg-white hover:border-peach-300 transition-all">粗硬</button>
+                        <button onclick="toggleQuestionnaireOption('hair_type','curly',this)" class="question-option-multi py-2 text-[10px] border border-flax-300 rounded-lg text-flax-400 bg-white hover:border-peach-300 transition-all">自然卷</button>
+                        <button onclick="toggleQuestionnaireOption('hair_type','thin',this)" class="question-option-multi py-2 text-[10px] border border-flax-300 rounded-lg text-flax-400 bg-white hover:border-peach-300 transition-all">发量少</button>
+                        <button onclick="toggleQuestionnaireOption('hair_type','thick',this)" class="question-option-multi py-2 text-[10px] border border-flax-300 rounded-lg text-flax-400 bg-white hover:border-peach-300 transition-all">发量多</button>
+                        <button onclick="toggleQuestionnaireOption('hair_type','hair_unknown',this)" class="question-option-multi py-2 text-[10px] border border-flax-300 rounded-lg text-flax-400 bg-white hover:border-peach-300 transition-all">不清楚</button>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl p-4 border border-flax-200">
+                    <h4 class="text-[11px] font-bold text-champagne-800 mb-3">变美目标</h4>
+                    <div class="grid grid-cols-3 gap-2">
+                        <button onclick="toggleQuestionnaireOption('goal','slimmer',this)" class="question-option-multi py-2 text-[10px] border border-peach-200 rounded-lg text-peach-400 bg-peach-50 transition-all">想更显瘦</button>
+                        <button onclick="toggleQuestionnaireOption('goal','elegant',this)" class="question-option-multi py-2 text-[10px] border border-peach-200 rounded-lg text-peach-400 bg-peach-50 transition-all">想更显气质</button>
+                        <button onclick="toggleQuestionnaireOption('goal','delicate',this)" class="question-option-multi py-2 text-[10px] border border-peach-200 rounded-lg text-peach-400 bg-peach-50 transition-all">想更精致</button>
+                        <button onclick="toggleQuestionnaireOption('goal','skin',this)" class="question-option-multi py-2 text-[10px] border border-peach-200 rounded-lg text-peach-400 bg-peach-50 transition-all">想改善皮肤</button>
+                        <button onclick="toggleQuestionnaireOption('goal','hair',this)" class="question-option-multi py-2 text-[10px] border border-peach-200 rounded-lg text-peach-400 bg-peach-50 transition-all">想换发型</button>
+                        <button onclick="toggleQuestionnaireOption('goal','makeup',this)" class="question-option-multi py-2 text-[10px] border border-peach-200 rounded-lg text-peach-400 bg-peach-50 transition-all">想学会化妆</button>
                     </div>
                 </div>
             </div>
             <div class="p-4 border-t border-flax-200 bg-white/50 flex-shrink-0">
-                <button onclick="submitQuestionnaire()" class="w-full py-3 bg-gradient-to-r from-peach-400 to-[#C26B5D] hover:scale-[1.02] active:scale-[0.99] text-white rounded-full text-xs font-bold transition-all shadow-md">生成我的專屬報告</button>
+                <button onclick="submitQuestionnaire()" class="w-full py-3 bg-gradient-to-r from-peach-400 to-[#C26B5D] hover:scale-[1.02] active:scale-[0.99] text-white rounded-full text-xs font-bold transition-all shadow-md">生成我的专属报告</button>
             </div>
         </div>
     </div>
@@ -3894,10 +3941,14 @@
         let hasCompletedBeautyQuestionnaire = false;
         let questionnaireFlowSource = 'test';
         let questionnaireAnswers = {
-            purpose: "通勤上班",
-            style: "溫柔知性",
-            skin: "偏乾缺水",
-            fitness: "輕盈減脂"
+            scene: "",
+            age: "",
+            height: "165",
+            weight: "50",
+            style: [],
+            skin_type: [],
+            hair_type: [],
+            goal: []
         };
         let targetSubTabAfterQuestionnaire = null;
         let targetBeautySectionAfterQuestionnaire = null;
@@ -4147,49 +4198,110 @@
 
         function selectQuestionnaireOption(key, value, button) {
             questionnaireAnswers[key] = value;
-            const group = button.closest('.flex');
+            const group = button.closest('.grid');
             if (group) {
                 group.querySelectorAll('.question-option').forEach(option => {
-                    option.className = "question-option flex-1 py-1.5 text-[10px] border border-flax-300 rounded-lg text-flax-400 bg-white hover:border-peach-300 transition-all";
+                    option.className = "question-option py-2 text-[10px] border border-flax-300 rounded-lg text-flax-400 bg-white hover:border-peach-300 transition-all";
                 });
             }
-            button.className = "question-option flex-1 py-1.5 text-[10px] border border-peach-400 rounded-lg text-peach-500 bg-peach-50 font-bold transition-all";
+            button.className = "question-option py-2 text-[10px] border border-peach-400 rounded-lg text-peach-500 bg-peach-50 font-bold transition-all";
+        }
+
+        function toggleQuestionnaireOption(key, value, button) {
+            if (!questionnaireAnswers[key]) {
+                questionnaireAnswers[key] = [];
+            }
+            const index = questionnaireAnswers[key].indexOf(value);
+            if (index > -1) {
+                questionnaireAnswers[key].splice(index, 1);
+                button.className = "question-option-multi py-2 text-[10px] border border-flax-300 rounded-lg text-flax-400 bg-white hover:border-peach-300 transition-all";
+            } else {
+                questionnaireAnswers[key].push(value);
+                button.className = "question-option-multi py-2 text-[10px] border border-peach-400 rounded-lg text-peach-500 bg-peach-50 font-bold transition-all";
+            }
         }
 
         function applyQuestionnaireToReport() {
-            const { purpose, style, skin, fitness } = questionnaireAnswers;
-            const scenarioMap = {
-                "通勤上班": "commute",
-                "約會見面": "date",
-                "面試簡報": "interview",
-                "出遊拍照": "travel"
+            const { scene, style, skin_type, goal, age, height, weight } = questionnaireAnswers;
+            const sceneMap = {
+                "daily": "日常",
+                "commute": "通勤",
+                "class": "上课",
+                "date": "约会",
+                "party": "聚会",
+                "interview": "面试",
+                "travel": "旅行"
             };
-            activeScenario = scenarioMap[purpose] || activeScenario;
+            const styleMap = {
+                "gentle": "温柔",
+                "sweet": "甜酷",
+                "simple": "简约",
+                "korean": "韩系",
+                "commute_style": "通勤",
+                "elegant": "轻熟",
+                "academy": "学院",
+                "ai_recommend": "让AI推荐"
+            };
+            const skinMap = {
+                "dry": "干皮",
+                "oily": "油皮",
+                "mixed": "混合皮",
+                "sensitive": "敏感肌",
+                "acne": "痘痘肌",
+                "unknown": "不清楚"
+            };
+            const goalMap = {
+                "slimmer": "想更显瘦",
+                "elegant": "想更显气质",
+                "delicate": "想更精致",
+                "skin": "想改善皮肤",
+                "hair": "想换发型",
+                "makeup": "想学会化妆"
+            };
+
+            const sceneText = sceneMap[scene] || "日常";
+            const styleText = Array.isArray(style) && style.length > 0 ? style.map(s => styleMap[s]).join('、') : "让AI推荐";
+            const skinText = Array.isArray(skin_type) && skin_type.length > 0 ? skin_type.map(s => skinMap[s]).join('、') : "不清楚";
+            const goalText = Array.isArray(goal) && goal.length > 0 ? goal.map(g => goalMap[g]).join('、') : "让AI推荐";
+
+            activeScenario = scene || activeScenario;
             localStorage.setItem('zz_activeScenario', activeScenario);
             setGlobalScenario(activeScenario);
 
-            safeSetText('mob-report-purpose', purpose);
-            safeSetText('desk-report-purpose', purpose);
-            safeSetText('mob-report-style', style);
-            safeSetText('desk-report-style', style);
-            safeSetText('mob-report-skin-state', skin);
-            safeSetText('desk-report-skin-state', skin);
-            safeSetText('mob-report-fitness-goal', fitness);
-            safeSetText('desk-report-fitness-goal', fitness);
+            safeSetText('mob-report-purpose', sceneText);
+            safeSetText('desk-report-purpose', sceneText);
+            safeSetText('mob-report-style', styleText);
+            safeSetText('desk-report-style', styleText);
+            safeSetText('mob-report-skin-state', skinText);
+            safeSetText('desk-report-skin-state', skinText);
+            safeSetText('mob-report-fitness-goal', goalText);
+            safeSetText('desk-report-fitness-goal', goalText);
 
-            const skinAdvice = skin === "偏乾缺水"
-                ? "晨間以胺基酸潔面、維C精華與保濕防曬為主；夜間加強神經醯胺與修護霜鎖水。"
-                : skin === "出油暗沉"
-                    ? "晨間控油但不過度清潔，妝前使用清爽保濕；夜間加入溫和酸類或煙醯胺提亮。"
-                    : "避開高刺激活性成分，先穩定屏障；底妝選低敏輕薄型，減少泛紅區域摩擦。";
+            let skinAdvice = "";
+            if (Array.isArray(skin_type)) {
+                if (skin_type.includes("dry")) {
+                    skinAdvice = "晨間以胺基酸潔面、維C精華與保濕防曬為主；夜間加強神經醯胺與修護霜鎖水。";
+                } else if (skin_type.includes("oily")) {
+                    skinAdvice = "晨間控油但不過度清潔，妝前使用清爽保濕；夜間加入溫和酸類或煙醯胺提亮。";
+                } else if (skin_type.includes("sensitive")) {
+                    skinAdvice = "避開高刺激活性成分，先穩定屏障；底妝選低敏輕薄型，減少泛紅區域摩擦。";
+                } else {
+                    skinAdvice = "根據你的膚質狀況，建議選擇適合的護膚產品，定期護理保持肌膚健康。";
+                }
+            }
             safeSetText('mob-custom-skin-advice', skinAdvice);
             safeSetText('desk-custom-skin-advice', skinAdvice);
 
-            const fitnessAdvice = fitness === "輕盈減脂"
-                ? "本週以低衝擊燃脂為主：快走、瑜伽與核心循環交替，每次 35-45 分鐘。"
-                : fitness === "體態塑形"
-                    ? "增加臀腿與肩背力量訓練，搭配拉伸改善體態線條，每週 3 次即可。"
-                    : "維持每週 2-3 次中等強度活動，重點放在睡眠、飲水與穩定飲食節奏。";
+            let fitnessAdvice = "";
+            if (Array.isArray(goal)) {
+                if (goal.includes("slimmer")) {
+                    fitnessAdvice = "本週以低衝擊燃脂為主：快走、瑜伽與核心循環交替，每次 35-45 分鐘。";
+                } else if (goal.includes("elegant")) {
+                    fitnessAdvice = "增加體態訓練，改善氣質線條，每週 3 次即可。";
+                } else {
+                    fitnessAdvice = "維持每週 2-3 次中等強度活動，重點放在睡眠、飲水與穩定飲食節奏。";
+                }
+            }
             safeSetText('mob-custom-fitness-advice', fitnessAdvice);
             safeSetText('desk-custom-fitness-advice', fitnessAdvice);
         }

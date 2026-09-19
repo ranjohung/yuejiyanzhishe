@@ -20,30 +20,20 @@ dist
 *.sln
 *.sw?
 
-# === 大素材库（AI 中间产物，12GB+，不进 git）===
-src/static/materials/
-src/static/*/          # src/static 下其他也都是素材
-
-# === 大媒体文件（默认排除，除非需要演示图）===
-*.mp4
-*.flv
-*.mov
-*.avi
-*.mkv
-*.webm
-
-# === 系统/临时文件 ===
-Thumbs.db
-ehthumbs.db
-Desktop.ini
-$RECYCLE.BIN/
-
-# === 本地配置 ===
-project.private.config.json
+# Secrets & local config
 .env
-.env.*
-secrets/
+.env.local
+.env.*.local
 
-# === Python 缓存 ===
-__pycache__/
-*.pyc
+# 12GB 素材包：不进 git
+src/static/materials/
+src/static/catalog/
+
+# 微信小程序私有配置（含 AppID）
+project.private.config.json
+
+# Next.js
+.next/
+out/
+prisma/*.db
+uploads/

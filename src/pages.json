@@ -1,6 +1,31 @@
 {
     "pages": [
         {
+            "path": "pages/index/index",
+            "style": {
+                "navigationStyle": "custom",
+                "navigationBarTitleText": "悦己颜值社"
+            }
+        },
+        {
+            "path": "pages/consultant/consultant",
+            "style": {
+                "navigationBarTitleText": "AI顾问",
+                "navigationStyle": "custom",
+                "navigationBarBackgroundColor": "#FFFFFF",
+                "navigationBarTextStyle": "black"
+            }
+        },
+        {
+            "path": "pages/mine/mine",
+            "style": {
+                "navigationBarTitleText": "我的",
+                "navigationStyle": "custom",
+                "navigationBarBackgroundColor": "#FFFFFF",
+                "navigationBarTextStyle": "black"
+            }
+        },
+        {
             "path": "pages/guide/guide",
             "style": {
                 "navigationStyle": "custom"
@@ -41,15 +66,6 @@
             }
         },
         {
-            "path": "pages/consultant/consultant",
-            "style": {
-                "navigationBarTitleText": "AI变美顾问",
-                "navigationStyle": "custom",
-                "navigationBarBackgroundColor": "#ffffff",
-                "navigationBarTextStyle": "black"
-            }
-        },
-        {
             "path": "pages/plan/plan",
             "style": {
                 "navigationBarTitleText": "美容减脂",
@@ -79,9 +95,29 @@
     ],
     "globalStyle": {
         "navigationBarTextStyle": "black",
-        "navigationBarTitleText": "约肌形象社",
+        "navigationBarTitleText": "悦己颜值社",
         "navigationBarBackgroundColor": "#FFFFFF",
         "backgroundColor": "#F8F8F8"
+    },
+    "tabBar": {
+        "color": "#999999",
+        "selectedColor": "#C26B5D",
+        "backgroundColor": "#FFFFFF",
+        "borderStyle": "white",
+        "list": [
+            {
+                "pagePath": "pages/index/index",
+                "text": "首页"
+            },
+            {
+                "pagePath": "pages/consultant/consultant",
+                "text": "AI顾问"
+            },
+            {
+                "pagePath": "pages/mine/mine",
+                "text": "我的"
+            }
+        ]
     },
     "easycom": {
         "autoscan": true,

@@ -409,3 +409,110 @@ model ReferralReward {
 
   @@map("referral_rewards")
 }
+
+// ===== V1 核心：变美分析 & 溶图 =====
+
+model Photo {
+  id          String   @id @default(cuid())
+  user_id     String
+  user        User     @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  photo_type  Int      // 1=face 2=body 3=other
+  url         String
+  thumb_url   String?
+  width       Int?
+  height      Int?
+  file_size   Int?
+  hash        String?  // pHash，用于去重
+  status      Int      @default(1)  // 1=正常 0=已清理
+  expires_at  DateTime  // 照片 7 天自动清理
+  created_at  DateTime @default(now())
+
+  @@index([user_id, photo_type])
+  @@map("photos")
+}
+
+model Report {
+  id               String   @id @default(cuid())
+  user_id          String
+  user             User     @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  front_photo_id   String?
+  body_photo_id    String?
+  scene            String?   // 日常/通勤/约会...
+  profile_data     Json?     // 身高/体重/肤质/发质/目标...
+  face_data        Json?     // 腾讯云人脸分析结果（服务端生成，前端不可篡改）
+  text_sections    Json?     // 通义千问生成的文字报告
+  recommendations  Json?     // 推荐（hair/outfit/makeup/beauty 四条）
+  images           Json?     // 报告配图
+  status           Int      @default(0)
+  // 状态机 0=pending 1=text_ready 2=image_generating 3=completed 4=failed
+  error_code       String?   // NO_FACE / MULTI_FACE / IMAGE_BLUR / AI_FAILED...
+  idempotency_key  String?
+  created_at       DateTime @default(now())
+  updated_at       DateTime @updatedAt
+  completed_at     DateTime?
+
+  @@index([user_id, status])
+  @@index([idempotency_key])
+  @@map("reports")
+}
+
+model Tryon {
+  id               String   @id @default(cuid())
+  user_id          String
+  user             User     @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  report_id        String?
+  tryon_type       Int      // 1=hair 2=outfit 3=makeup
+  source_photo_url String
+  material_id      String?
+  material_url     String?
+  result_image_url String?
+  status           Int      @default(0)
+  // 0=queued 1=generating 2=completed 3=failed 4=blocked
+  idempotency_key  String?
+  created_at       DateTime @default(now())
+  completed_at     DateTime?
+
+  @@index([user_id, tryon_type])
+  @@map("tryon_tasks")
+}
+
+// ===== V2 启用：订单 & 积分 =====
+
+model Order {
+  id               String   @id @default(cuid())
+  user_id          String
+  user             User     @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  order_no         String   @unique
+  order_type       Int      // 1=会员购买 2=积分充值 3=效果图购买
+  item_id          String?  // membership_id / point_pack_id / tryon_id
+  item_name        String
+  amount           Decimal
+  payment_method   Int?     // 1=wechat 2=alipay
+  payment_status   Int      @default(0)
+  // 0=pending 1=paid 2=failed 3=refunded
+  paid_at          DateTime?
+  wechat_transaction_id String?
+  created_at       DateTime @default(now())
+  updated_at       DateTime @updatedAt
+
+  @@index([user_id, payment_status])
+  @@map("orders")
+}
+
+model PointRecord {
+  id          String   @id @default(cuid())
+  user_id     String
+  user        User     @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  change_type Int      // 1=新人赠送 2=邀请奖励 3=充值 4=溶图消耗 5=重测消耗 6=过期清零
+  change_amount Int    // 正数增加，负数扣减
+  balance_before Int
+  balance_after  Int
+  ref_id      String?  // order_id / tryon_id / referral_id
+  note        String?
+  expires_at  DateTime?
+  created_at  DateTime @default(now())
+
+  @@index([user_id, change_type])
+  @@index([user_id, expires_at])
+  @@map("point_records")
+}

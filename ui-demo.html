@@ -7244,11 +7244,11 @@ let currentCourseId = null;
 
         function closeQuestionnaireModal() {
             const modal = document.getElementById('questionnaire-modal');
-            const card = document.getElementById('questionnaire-modal-card');
             if (!modal) return;
-            modal.classList.remove('opacity-100'); modal.classList.add('opacity-0');
-            if (card) { card.classList.remove('scale-100'); card.classList.add('scale-95'); }
-            setTimeout(() => modal.classList.add('hidden'), 500);
+            modal.classList.add('hidden');
+            modal.classList.remove('opacity-100', 'opacity-0');
+            const card = document.getElementById('questionnaire-modal-card');
+            if (card) card.classList.remove('scale-100', 'scale-95');
         }
 
         function submitQuestionnaire() {
@@ -7260,7 +7260,7 @@ let currentCourseId = null;
                 targetBeautySectionAfterQuestionnaire = null;
                 setTimeout(() => {
                     showBeautyDetail(section);
-                }, 450);
+                }, 80);
                 return;
             }
 
@@ -7269,7 +7269,7 @@ let currentCourseId = null;
             targetBeautySectionAfterQuestionnaire = null;
             setTimeout(() => {
                 runAnalysisAndProceed();
-            }, 450);
+            }, 80);
         }
 
         // ==================== 邀请好友系统 ====================

@@ -1,0 +1,7 @@
+﻿git : error: remote yueji already exists.
+At F:\开发软件项目文件\悦己颜值社\_push.ps1:11 char:1
++ git remote add yueji https://github.com/ranjohung/yuejiyanzhishe.git  ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (error: remote yueji already exists.:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 

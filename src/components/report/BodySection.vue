@@ -1,4 +1,4 @@
-<template>
+﻿<template>
   <view class="section">
     <view class="section-header">
       <text class="section-icon">🧍</text>
@@ -9,15 +9,31 @@
     <view class="section-tags">
       <text class="tag" v-for="tag in tags" :key="tag">{{ tag }}</text>
     </view>
+    <MaterialGrid
+      default-style='illustrated'
+      v-if="outfitRefs.length > 0"
+      :items="outfitRefs"
+      title="适合梨形身材的穿搭参考"
+      @select="onSelect"
+    />
   </view>
 </template>
 
 <script setup>
+import MaterialGrid from './MaterialGrid.vue'
+import { useMaterials } from '@/utils/useMaterials'
+
 defineProps({
-  subtitle: { type: String, default: 'TODO · 待接入身形分析接口' },
-  summary: { type: String, default: 'TODO · 待 AI 详情接入' },
-  tags: { type: Array, default: () => ['身高: TODO', '体型: TODO', 'BMI: TODO'] }
+  subtitle: { type: String, default: '匀称梨形身材' },
+  summary: { type: String, default: '上半身纤细下半身线条优美。建议A字裙、阔腿裤平衡比例。' },
+  tags: { type: Array, default: () => ['身高: 165cm', '体型: 梨形', 'BMI: 21.5'] }
 })
+
+const { items: outfitRefs } = useMaterials('outfit', { , kind: 'image', limit: 6 })
+
+function onSelect(item) {
+  console.log('BodySection selected:', item)
+}
 </script>
 
 <style scoped>
@@ -34,39 +50,12 @@ defineProps({
   gap: 12rpx;
   margin-bottom: 16rpx;
 }
-.section-icon {
-  font-size: 36rpx;
-}
-.section-title {
-  font-size: 32rpx;
-  font-weight: 600;
-  color: #222;
-}
-.section-subtitle {
-  font-size: 28rpx;
-  color: #1f883d;
-  font-weight: 500;
-  margin-bottom: 12rpx;
-  display: block;
-}
-.section-summary {
-  font-size: 26rpx;
-  color: #666;
-  line-height: 1.7;
-  display: block;
-  margin-bottom: 16rpx;
-}
-.section-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12rpx;
-  margin-top: 16rpx;
-}
-.tag {
-  font-size: 22rpx;
-  color: #1f883d;
-  background: #e8f5ed;
-  padding: 6rpx 16rpx;
-  border-radius: 20rpx;
-}
+.section-icon { font-size: 36rpx; }
+.section-title { font-size: 32rpx; font-weight: 600; color: #222; }
+.section-subtitle { font-size: 28rpx; color: #1f883d; font-weight: 500; margin-bottom: 12rpx; display: block; }
+.section-summary { font-size: 26rpx; color: #666; line-height: 1.7; display: block; margin-bottom: 16rpx; }
+.section-tags { display: flex; flex-wrap: wrap; gap: 12rpx; margin-top: 16rpx; }
+.tag { font-size: 22rpx; color: #1f883d; background: #e8f5ed; padding: 6rpx 16rpx; border-radius: 20rpx; }
 </style>
+
+

@@ -477,6 +477,10 @@
 .course-step-tab.active {
   background: #C26B5D; color: white;
 }
+.course-step-tab.completed {
+  background: #E8F5E9; color: #2E7D32;
+  border-color: #A5D6A7;
+}
 .course-step-tab-num {
   font-size: 10px; opacity: 0.8;
 }
@@ -538,6 +542,25 @@
   transition: all 0.15s;
 }
 .course-start-btn:hover { background: #4A3E3D; }
+/* ===== Course List Page ===== */
+.course-list-overlay { position: fixed; inset: 0; z-index: 100; background: #FAF8F5; display: flex; flex-direction: column; }
+.course-list-header { display: flex; align-items: center; padding: 16px; border-bottom: 1px solid #F4EFE6; background: white; position: relative; }
+.course-list-header .back-btn { width: 32px; height: 32px; border-radius: 50%; background: #FFF1EE; border: none; display: flex; align-items: center; justify-content: center; color: #C26B5D; font-size: 14px; cursor: pointer; }
+.course-list-header .title { flex: 1; text-align: center; font-size: 15px; font-weight: 700; color: #6E5D53; }
+.course-list-body { flex: 1; overflow-y: auto; padding: 16px; }
+.course-list-section-title { font-size: 12px; font-weight: 700; color: #8E7E70; margin: 16px 0 10px; text-transform: uppercase; letter-spacing: 1px; }
+.course-list-section-title:first-child { margin-top: 0; }
+.course-list-card { background: white; border-radius: 16px; overflow: hidden; margin-bottom: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.04); cursor: pointer; transition: transform 0.15s; }
+.course-list-card:active { transform: scale(0.98); }
+.course-list-card-img { width: 100%; height: 110px; object-fit: cover; background: linear-gradient(135deg, #FFF1EE 0%, #FCD7D0 100%); }
+.course-list-card-body { padding: 12px 14px; }
+.course-list-card-title { font-size: 14px; font-weight: 700; color: #6E5D53; margin-bottom: 4px; display: flex; align-items: center; gap: 6px; }
+.course-list-card-badge { font-size: 9px; padding: 2px 8px; border-radius: 8px; background: #FFF1EE; color: #C26B5D; font-weight: 600; }
+.course-list-card-badge.vip { background: linear-gradient(135deg, #C26B5D, #E59A8F); color: white; }
+.course-list-card-badge.locked { background: #F4EFE6; color: #A69989; }
+.course-list-card-meta { display: flex; justify-content: space-between; align-items: center; font-size: 11px; color: #A69989; }
+.course-list-card-progress { flex: 1; max-width: 120px; height: 6px; background: #F4EFE6; border-radius: 3px; overflow: hidden; }
+.course-list-card-progress-fill { height: 100%; background: #C26B5D; border-radius: 3px; transition: width 0.3s; }
 /* ===== VIP Unlock Modal Styles ===== */
 .vip-overlay {
   position: fixed; inset: 0; z-index: 110;
@@ -915,7 +938,7 @@
                                 </div>
                             </div>
                             <div class="w-8 h-8 rounded-full bg-white border-2 border-flax-200 flex items-center justify-center overflow-hidden">
-                                <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=100" class="w-full h-full object-cover" alt="头像">
+                                <img src="./static-demo/outfit/outfit_000.png" class="w-full h-full object-cover" alt="头像">
                             </div>
                         </div>
                         <div class="flex justify-around border-t border-flax-100 pt-3">
@@ -954,35 +977,35 @@
                         <div class="flex justify-between">
                             <div class="text-center flex-1">
                                 <div class="w-10 h-10 rounded-full bg-flax-100 flex items-center justify-center mx-auto mb-1 overflow-hidden">
-                                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=80" class="w-full h-full object-cover">
+                                    <img src="./static-demo/hairstyle/hair_003.png" class="w-full h-full object-cover">
                                 </div>
                                 <p class="text-[7px] text-flax-500">湯唯</p>
                                 <p class="text-[8px] font-bold text-[#4A90D9]">49%</p>
                             </div>
                             <div class="text-center flex-1">
                                 <div class="w-10 h-10 rounded-full bg-flax-100 flex items-center justify-center mx-auto mb-1 overflow-hidden">
-                                    <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80&w=80" class="w-full h-full object-cover">
+                                    <img src="./static-demo/outfit/outfit_002.png" class="w-full h-full object-cover">
                                 </div>
                                 <p class="text-[7px] text-flax-500">譚卓</p>
                                 <p class="text-[8px] font-bold text-[#4A90D9]">46%</p>
                             </div>
                             <div class="text-center flex-1">
                                 <div class="w-10 h-10 rounded-full bg-flax-100 flex items-center justify-center mx-auto mb-1 overflow-hidden">
-                                    <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=80" class="w-full h-full object-cover">
+                                    <img src="./static-demo/hairstyle/hair_003.png" class="w-full h-full object-cover">
                                 </div>
                                 <p class="text-[7px] text-flax-500">容祖兒</p>
                                 <p class="text-[8px] font-bold text-[#4A90D9]">45%</p>
                             </div>
                             <div class="text-center flex-1">
                                 <div class="w-10 h-10 rounded-full bg-flax-100 flex items-center justify-center mx-auto mb-1 overflow-hidden">
-                                    <img src="https://images.unsplash.com/photo-1541519876917-8f50515d13c1?auto=format&fit=crop&q=80&w=80" class="w-full h-full object-cover">
+                                    <img src="./static-demo/outfit/outfit_004.png" class="w-full h-full object-cover">
                                 </div>
                                 <p class="text-[7px] text-flax-500">姜妍</p>
                                 <p class="text-[8px] font-bold text-[#4A90D9]">42%</p>
                             </div>
                             <div class="text-center flex-1">
                                 <div class="w-10 h-10 rounded-full bg-flax-100 flex items-center justify-center mx-auto mb-1 overflow-hidden">
-                                    <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&q=80&w=80" class="w-full h-full object-cover">
+                                    <img src="./static-demo/outfit/outfit_005.png" class="w-full h-full object-cover">
                                 </div>
                                 <p class="text-[7px] text-flax-500">袁泉</p>
                                 <p class="text-[8px] font-bold text-[#4A90D9]">42%</p>
@@ -1053,7 +1076,7 @@
                     <div class="bg-white rounded-2xl p-4 border border-flax-200/80 shadow-sm">
                         <h4 class="text-xs font-bold text-champagne-800 mb-3 flex items-center gap-1.5"><i class="fas fa-ruler-combined text-[#4A90D9]"></i> 面部比例</h4>
                         <div class="relative rounded-xl overflow-hidden mb-3">
-                            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=400" class="w-full h-32 object-cover" alt="面部比例分析">
+                            <img src="./static-demo/outfit/outfit_006.png" class="w-full h-32 object-cover" alt="面部比例分析">
                             <div class="absolute inset-0 border-2 border-white/50 rounded-xl">
                                 <div class="absolute top-1/3 left-0 right-0 h-px bg-blue-400/60"></div>
                                 <div class="absolute top-2/3 left-0 right-0 h-px bg-blue-400/60"></div>
@@ -1212,7 +1235,7 @@
                     <div class="pb-8"></div>
                 </div>
 
-                <div id="report-tab-content-2" class="hidden space-y-3">
+                <div id="report-tab-content-2" class="space-y-3">
                     <div class="flex items-center gap-2"><div class="w-6 h-6 rounded-full bg-peach-100 flex items-center justify-center text-peach-500 text-[10px]"><i class="fas fa-palette"></i></div><h4 class="text-xs font-bold text-champagne-800">妆容推荐</h4></div>
                     <div class="space-y-2">
                         <div class="bg-white rounded-xl p-3 border border-flax-200">
@@ -1238,7 +1261,7 @@
                     </div>
                 </div>
 
-                <div id="report-tab-content-3" class="hidden space-y-3">
+                <div id="report-tab-content-3" class="space-y-3">
                     <div class="flex items-center gap-2"><div class="w-6 h-6 rounded-full bg-peach-100 flex items-center justify-center text-peach-500 text-[10px]"><i class="fas fa-shirt"></i></div><h4 class="text-xs font-bold text-champagne-800">穿搭推荐</h4></div>
                     <div class="space-y-2">
                         <div class="bg-white rounded-xl p-3 border border-flax-200">
@@ -1264,7 +1287,7 @@
                     </div>
                 </div>
 
-                <div id="report-tab-content-4" class="hidden space-y-3">
+                <div id="report-tab-content-4" class="space-y-3">
                     <div class="flex items-center gap-2"><div class="w-6 h-6 rounded-full bg-peach-100 flex items-center justify-center text-peach-500 text-[10px]"><i class="fas fa-wind"></i></div><h4 class="text-xs font-bold text-champagne-800">发型推荐</h4></div>
                     <div class="space-y-2">
                         <div class="bg-white rounded-xl p-3 border border-flax-200">
@@ -1302,7 +1325,7 @@
                     </div>
                 </div>
 
-                <div id="report-tab-content-5" class="hidden space-y-3">
+                <div id="report-tab-content-5" class="space-y-3">
                     <div class="flex items-center gap-2"><div class="w-6 h-6 rounded-full bg-peach-100 flex items-center justify-center text-peach-500 text-[10px]"><i class="fas fa-heartbeat"></i></div><h4 class="text-xs font-bold text-champagne-800">美容美体周期计划</h4></div>
                     <div class="bg-white rounded-xl p-4 border border-flax-200 space-y-3">
                         <div class="flex items-center gap-2 p-2 bg-peach-50 rounded-lg">
@@ -1353,7 +1376,7 @@
             </div>
             <div class="p-6 flex flex-col items-center gap-4 flex-grow overflow-y-auto">
                 <div class="relative w-full aspect-square max-w-[280px] rounded-2xl overflow-hidden border-2 border-flax-200 shadow-lg">
-                    <img id="effect-image-preview" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=600" class="w-full h-full object-cover" alt="效果图">
+                    <img id="effect-image-preview" src="./static-demo/hairstyle/hair_007.png" class="w-full h-full object-cover" alt="效果图">
                 </div>
                 <div class="flex gap-2">
                     <button onclick="changeEffectImage(1)" id="effect-btn-1" class="px-4 py-1.5 bg-peach-500 text-white rounded-full text-[10px] font-bold shadow-sm">效果图1</button>
@@ -1384,7 +1407,7 @@
                 <button onclick="closeFitnessPlanModal()" class="text-flax-400 hover:text-peach-500 transition-colors"><i class="fas fa-times text-lg"></i></button>
             </div>
             <div class="p-6 overflow-y-auto no-scrollbar space-y-6 flex-grow">
-                <div class="space-y-3">
+                <div class="mt-auto space-y-3">
                     <div class="flex items-center gap-2"><div class="w-6 h-6 rounded-full bg-peach-100 flex items-center justify-center text-peach-500 text-[10px]"><i class="fas fa-list-check"></i></div><h4 class="text-xs font-bold text-champagne-800">每日护肤步骤</h4></div>
                     <div class="bg-white rounded-xl p-4 border border-flax-200 space-y-2">
                         <div class="flex items-center gap-2"><span class="w-5 h-5 rounded-full bg-peach-500 text-white text-[8px] flex items-center justify-center">1</span><span class="text-[10px] text-flax-500">晨间洁面：温和氨基酸洁面乳</span></div>
@@ -1395,7 +1418,7 @@
                     </div>
                 </div>
 
-                <div class="space-y-3">
+                <div class="mt-auto space-y-3">
                     <div class="flex items-center gap-2"><div class="w-6 h-6 rounded-full bg-peach-100 flex items-center justify-center text-peach-500 text-[10px]"><i class="fas fa-utensils"></i></div><h4 class="text-xs font-bold text-champagne-800">营养餐搭配表</h4></div>
                     <div class="bg-white rounded-xl p-4 border border-flax-200 space-y-3">
                         <div class="bg-peach-50 rounded-lg p-3">
@@ -1417,7 +1440,7 @@
                     </div>
                 </div>
 
-                <div class="space-y-3">
+                <div class="mt-auto space-y-3">
                     <div class="flex items-center gap-2"><div class="w-6 h-6 rounded-full bg-peach-100 flex items-center justify-center text-peach-500 text-[10px]"><i class="fas fa-heart-pulse"></i></div><h4 class="text-xs font-bold text-champagne-800">运动项目推荐</h4></div>
                     <div class="bg-white rounded-xl p-4 border border-flax-200 space-y-2">
                         <div class="flex items-center gap-3 p-2 bg-flax-50 rounded-lg">
@@ -1514,7 +1537,7 @@
                     <p class="text-xs text-flax-400">開啟您的專屬姿造美学空間</p>
                 </div>
 
-                <div class="space-y-3">
+                <div class="mt-auto space-y-3">
                     <div>
                         <label class="block text-[10px] font-bold text-champagne-800 mb-1 pl-1">手機號碼 / 信箱</label>
                         <input type="text" id="auth-username" class="w-full bg-white border border-flax-200 rounded-xl px-4 py-2.5 text-xs text-flax-900 focus:outline-none focus:border-peach-300 focus:ring-1 focus:ring-peach-300 transition-all" placeholder="請輸入手機號碼或信箱">
@@ -1684,14 +1707,14 @@
                 <div class="mobile-scroll no-scrollbar relative">
 
                     <!-- === PAGE 1: 首頁 · 颜值分析 === -->
-                    <div id="mob-page-analysis" class="w-full min-h-full relative flex flex-col bg-[#FAF8F5] p-4 justify-between">
+                    <div id="mob-page-analysis" class="w-full relative flex flex-col bg-[#FAF8F5] p-4">
                         <div class="flex justify-between items-center w-full z-20 pt-2">
                             <span class="text-[10px] font-bold tracking-widest text-champagne-800 bg-white px-2.5 py-1 rounded-full border border-flax-200 shadow-sm">悦己颜值社</span>
                             <button onclick="openRegisterModal()" class="bg-white text-peach-500 rounded-full px-3.5 py-1 text-[10px] font-bold tracking-wider border border-peach-200 hover:bg-peach-50 transition-all shadow-sm">登入 / 註冊</button>
                         </div>
-                        <div class="relative w-full aspect-[4/3] mt-2 flex items-center justify-center overflow-hidden">
+                        <div class="relative w-full aspect-[4/3] mt-2 flex items-center justify-center overflow-hidden" style="max-height: 200px;">
                             <div class="absolute inset-x-12 top-0 bottom-0 rounded-[40px] overflow-hidden">
-                                <img id="mob-onboard-bg-img" class="w-full h-full object-cover" src="78c9d676-175e-4db9-a0c0-15220c8614e6.png" alt="姿造美学首頁形象圖" onerror="this.src='https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=600'">
+                                <img id="mob-onboard-bg-img" class="w-full h-full object-cover" src="78c9d676-175e-4db9-a0c0-15220c8614e6.png" alt="姿造美学首頁形象圖" onerror="this.src='./static-demo/hairstyle/hair_007.png'">
                                 <div class="absolute inset-0 bg-gradient-to-t from-black/15 via-transparent to-transparent"></div>
                                 <div class="absolute left-0 w-full h-0.5 bg-peach-300/80 laser-line shadow-[0_0_8px_rgba(255,255,255,0.8)] z-10"></div>
                             </div>
@@ -1714,12 +1737,12 @@
                                 <div class="text-left leading-tight"><p class="text-[8px] text-flax-400 font-bold uppercase tracking-wider">气质風格</p><p class="text-[11px] font-bold text-gray-800" id="mob-onboard-style-val">溫柔知性</p></div>
                             </div>
                         </div>
-                        <div class="hidden justify-center gap-2.5 mb-2.5 z-20">
+                        <div class="flex justify-center gap-2.5 mb-2.5 z-20">
                             <button onclick="navigateToSection('fitting')" class="flex-1 py-2 bg-white hover:bg-peach-50 border border-flax-200 hover:border-peach-300 rounded-full flex items-center justify-center gap-1.5 shadow-sm active:scale-95 transition-all"><i class="fas fa-shirt text-peach-500 text-xs"></i><span class="text-[10px] font-bold text-champagne-800">試衣間</span></button>
                             <button onclick="navigateToSection('hair')" class="flex-1 py-2 bg-white hover:bg-peach-50 border border-flax-200 hover:border-peach-300 rounded-full flex items-center justify-center gap-1.5 shadow-sm active:scale-95 transition-all"><i class="fas fa-wind text-peach-500 text-xs"></i><span class="text-[10px] font-bold text-champagne-800">試发型間</span></button>
                             <button onclick="navigateToSection('makeup')" class="flex-1 py-2 bg-white hover:bg-peach-50 border border-flax-200 hover:border-peach-300 rounded-full flex items-center justify-center gap-1.5 shadow-sm active:scale-95 transition-all"><i class="fas fa-wand-magic-sparkles text-peach-500 text-xs"></i><span class="text-[10px] font-bold text-champagne-800">化妝間</span></button>
                         </div>
-                        <div class="space-y-3">
+                        <div class="mt-auto space-y-3">
                             <div class="bg-white p-4 rounded-2xl border border-flax-200/80 shadow-sm space-y-2 text-center">
                                 <h2 class="serif-title text-base font-bold tracking-wider text-champagne-800">喜歡不喜歡，<span class="text-peach-500 italic relative inline-block">先試試看。<span class="text-xs inline-block text-peach-400 ml-0.5">❤️</span></span></h2>
                                 <p class="text-[10px] text-flax-400 leading-relaxed max-w-[285px] mx-auto">AI智能全方位分析你的膚色、臉型與整体風格，為你整理專屬的穿搭、发型、妝容建議。找到真正适合你的美，更懂得自己。</p>
@@ -1754,7 +1777,7 @@
                                     <button onclick="switchAuthMode('register', 'mob')" id="mob-auth-tab-register" class="flex-1 py-2 text-xs font-bold rounded-lg transition-all text-flax-400 hover:text-flax-600">註冊</button>
                                 </div>
 
-                                <div class="space-y-3">
+                                <div class="mt-auto space-y-3">
                                     <div>
                                         <label class="block text-[10px] font-bold text-champagne-800 mb-1 pl-1">手機號碼 / 信箱</label>
                                         <input type="text" id="mob-auth-username" class="w-full bg-white border border-flax-200 rounded-xl px-4 py-2.5 text-xs text-flax-900 focus:outline-none focus:border-peach-300 focus:ring-1 focus:ring-peach-300 transition-all" placeholder="請輸入手機號碼或信箱">
@@ -1900,7 +1923,7 @@
                                     <div><p class="text-[8px] text-flax-400 font-bold">身體目標</p><p id="mob-report-fitness-goal" class="text-[10px] font-bold text-champagne-800">輕盈減脂</p></div>
                                 </div>
                                 <div class="relative w-full aspect-[5/3] bg-flax-100 rounded-xl border border-flax-200 flex items-center justify-center overflow-hidden shadow-inner">
-                                    <img id="mob-analysis-img" class="absolute inset-0 w-full h-full object-cover opacity-85 transition-all duration-500" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=600" alt="Beautiful Face Portrait Reference" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=600'">
+                                    <img id="mob-analysis-img" class="absolute inset-0 w-full h-full object-cover opacity-85 transition-all duration-500" src="./static-demo/hairstyle/hair_007.png" alt="Beautiful Face Portrait Reference" onerror="this.onerror=null;this.src='./static-demo/hairstyle/hair_007.png'">
                                     <div class="absolute inset-0 bg-gradient-to-t from-white/30 via-transparent to-black/10"></div>
                                     <div class="absolute left-0 w-full h-0.5 bg-peach-400/60 laser-line shadow-[0_0_12px_rgba(245,181,165,0.9)] z-10"></div>
                                     <span class="absolute top-2 left-2 bg-white/95 border border-flax-300 rounded-full px-2 py-0.5 text-[8px] font-medium text-flax-900 shadow-sm z-10">👩‍🦰 臉型: <strong class="text-peach-500 font-bold" id="mob-face-label">鵝蛋臉</strong></span>
@@ -1934,23 +1957,23 @@
                                     </div>
                                     <div class="col-span-2 bg-[#FAF8F5] rounded-xl p-3 border border-flax-200/80 shadow-sm">
                                         <h4 class="text-[11px] font-bold text-flax-900 border-b border-flax-200 pb-1.5 mb-2.5 flex items-center gap-1.5"><i class="fas fa-dress text-flax-400"></i> 气质風格定位</h4>
-                                        <div class="w-full h-[88px] rounded-lg overflow-hidden mb-2 shadow-sm border border-white"><img src="https://images.unsplash.com/photo-1618331835717-801e976710b2?auto=format&fit=crop&q=80&w=400" class="w-full h-full object-cover" alt="Silk Texture"></div>
+                                        <div class="w-full h-[88px] rounded-lg overflow-hidden mb-2 shadow-sm border border-white"><img src="./static-demo/outfit/outfit_011.png" class="w-full h-full object-cover" alt="Silk Texture"></div>
                                         <h5 class="text-center font-bold text-xs text-flax-900 mb-1 tracking-wider">溫柔知性</h5>
                                         <p class="text-[9px] text-flax-900/80 leading-relaxed text-justify">天生自帶一股寧靜氣場，气质如蘭，給人溫暖、知禮的印象。言談舉止中透出從容智慧，低調而不失內涵，完美演繹東方女性的優雅魅力。</p>
                                     </div>
                                     <div class="col-span-2 bg-[#FAF8F5] rounded-xl p-3 border border-flax-200/80 shadow-sm">
                                         <h4 class="text-[11px] font-bold text-flax-900 border-b border-flax-200 pb-1.5 mb-2.5 flex items-center gap-1.5"><i class="fas fa-eye text-flax-400"></i> 五官精細度</h4>
-                                        <div class="space-y-3">
+                                        <div class="mt-auto space-y-3">
                                             <div class="flex gap-2.5 items-start">
-                                                <img src="https://images.unsplash.com/photo-1583344605953-2947d95d10d9?auto=format&fit=crop&q=80&w=150" class="w-10 h-10 rounded shadow-sm object-cover border border-white flex-shrink-0" alt="眼睛細節" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=600'">
+                                                <img src="./static-demo/outfit/outfit_012.png" class="w-10 h-10 rounded shadow-sm object-cover border border-white flex-shrink-0" alt="眼睛細節" onerror="this.onerror=null;this.src='./static-demo/hairstyle/hair_007.png'">
                                                 <div><p class="text-[10px] font-bold text-flax-900">眼睛</p><p class="text-[8.5px] text-flax-900/80 leading-tight mt-0.5">杏仁眼型，柔和自然。建議柔和眼線，增加親和力。</p></div>
                                             </div>
                                             <div class="flex gap-2.5 items-start">
-                                                <img src="https://images.unsplash.com/photo-1590159763121-7c9bf39cd716?auto=format&fit=crop&q=80&w=150" class="w-10 h-10 rounded shadow-sm object-cover border border-white flex-shrink-0" alt="嘴唇細節" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=600'">
+                                                <img src="./static-demo/outfit/outfit_014.png" class="w-10 h-10 rounded shadow-sm object-cover border border-white flex-shrink-0" alt="嘴唇細節" onerror="this.onerror=null;this.src='./static-demo/hairstyle/hair_007.png'">
                                                 <div><p class="text-[10px] font-bold text-flax-900">嘴唇</p><p class="text-[8.5px] text-flax-900/80 leading-tight mt-0.5">唇形饱满，宜選用亮面柔色口紅，凸顯瑩潤質感。</p></div>
                                             </div>
                                             <div class="flex gap-2.5 items-start">
-                                                <img src="https://images.unsplash.com/photo-1505028108391-5b5832a819b1?auto=format&fit=crop&q=80&w=150" class="w-10 h-10 rounded shadow-sm object-cover border border-white flex-shrink-0" alt="鼻子細節" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=600'">
+                                                <img src="./static-demo/outfit/outfit_016.png" class="w-10 h-10 rounded shadow-sm object-cover border border-white flex-shrink-0" alt="鼻子細節" onerror="this.onerror=null;this.src='./static-demo/hairstyle/hair_007.png'">
                                                 <div><p class="text-[10px] font-bold text-flax-900">鼻子</p><p class="text-[8.5px] text-flax-900/80 leading-tight mt-0.5">鼻型巧致，鼻樑立体。建議在鼻翼和鼻尖做柔和修飾，增加圓潤度。</p></div>
                                             </div>
                                         </div>
@@ -2042,10 +2065,10 @@
                                 </div>
                             </div>
 
-                            <div class="space-y-3">
+                            <div class="mt-auto space-y-3">
                                 <div class="bg-white rounded-2xl p-4 border border-flax-200/80 shadow-sm flex flex-col gap-3">
                                     <div class="relative w-full aspect-[4/3] rounded-xl overflow-hidden bg-flax-50 shadow-inner">
-                                        <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=600" class="w-full h-full object-cover transition-all duration-500" alt="发型推荐1">
+                                        <img src="./static-demo/hairstyle/hair_007.png" class="w-full h-full object-cover transition-all duration-500" alt="发型推荐1">
                                     </div>
                                     <div>
                                         <h4 class="text-[11px] font-bold text-champagne-800">高雅蓬鬆丸子頭</h4>
@@ -2064,7 +2087,7 @@
 
                                 <div class="bg-white rounded-2xl p-4 border border-flax-200/80 shadow-sm flex flex-col gap-3">
                                     <div class="relative w-full aspect-[4/3] rounded-xl overflow-hidden bg-flax-50 shadow-inner">
-                                        <img src="https://images.unsplash.com/photo-1523413651479-597eb2da0ad6?auto=format&fit=crop&q=80&w=600" class="w-full h-full object-cover transition-all duration-500" alt="发型推荐2">
+                                        <img src="./static-demo/hairstyle/hair_020.png" class="w-full h-full object-cover transition-all duration-500" alt="发型推荐2">
                                     </div>
                                     <div>
                                         <h4 class="text-[11px] font-bold text-champagne-800">温柔波浪卷</h4>
@@ -2083,7 +2106,7 @@
 
                                 <div class="bg-white rounded-2xl p-4 border border-flax-200/80 shadow-sm flex flex-col gap-3">
                                     <div class="relative w-full aspect-[4/3] rounded-xl overflow-hidden bg-flax-50 shadow-inner">
-                                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=600" class="w-full h-full object-cover transition-all duration-500" alt="发型推荐3">
+                                        <img src="./static-demo/hairstyle/hair_022.png" class="w-full h-full object-cover transition-all duration-500" alt="发型推荐3">
                                     </div>
                                     <div>
                                         <h4 class="text-[11px] font-bold text-champagne-800">利落齊肩短髮</h4>
@@ -2111,10 +2134,10 @@
                                 </div>
                             </div>
 
-                            <div class="space-y-3">
+                            <div class="mt-auto space-y-3">
                                 <div class="bg-white rounded-2xl p-4 border border-flax-200/80 shadow-sm flex flex-col gap-3">
                                     <div class="relative w-full aspect-[4/3] rounded-xl overflow-hidden bg-flax-50 shadow-inner">
-                                        <img src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?auto=format&fit=crop&q=80&w=600" class="w-full h-full object-cover transition-all duration-500" alt="穿搭推荐1">
+                                        <img src="./static-demo/outfit/outfit_021.png" class="w-full h-full object-cover transition-all duration-500" alt="穿搭推荐1">
                                     </div>
                                     <div>
                                         <h4 class="text-[11px] font-bold text-champagne-800">通勤 - 卡其收腰西裝</h4>
@@ -2129,7 +2152,7 @@
 
                                 <div class="bg-white rounded-2xl p-4 border border-flax-200/80 shadow-sm flex flex-col gap-3">
                                     <div class="relative w-full aspect-[4/3] rounded-xl overflow-hidden bg-flax-50 shadow-inner">
-                                        <img src="https://images.unsplash.com/photo-1595777457583-95e059d581b8?auto=format&fit=crop&q=80&w=600" class="w-full h-full object-cover transition-all duration-500" alt="穿搭推荐2">
+                                        <img src="./static-demo/outfit/outfit_023.png" class="w-full h-full object-cover transition-all duration-500" alt="穿搭推荐2">
                                     </div>
                                     <div>
                                         <h4 class="text-[11px] font-bold text-champagne-800">約會 - 法式珍珠排扣長洋裝</h4>
@@ -2144,7 +2167,7 @@
 
                                 <div class="bg-white rounded-2xl p-4 border border-flax-200/80 shadow-sm flex flex-col gap-3">
                                     <div class="relative w-full aspect-[4/3] rounded-xl overflow-hidden bg-flax-50 shadow-inner">
-                                        <img src="https://images.unsplash.com/photo-1485968579580-b6d095142e6e?auto=format&fit=crop&q=80&w=600" class="w-full h-full object-cover transition-all duration-500" alt="穿搭推荐3">
+                                        <img src="./static-demo/outfit/outfit_025.png" class="w-full h-full object-cover transition-all duration-500" alt="穿搭推荐3">
                                     </div>
                                     <div>
                                         <h4 class="text-[11px] font-bold text-champagne-800">面試 - 直挺藏青西裝套裝</h4>
@@ -2165,11 +2188,11 @@
                                 </div>
                                 <div class="grid grid-cols-2 gap-2">
                                     <div class="bg-[#FAF8F5] rounded-2xl p-2 flex flex-col gap-2 border border-flax-100/50">
-                                        <img src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&q=80&w=200" class="w-full h-[68px] rounded-xl object-cover shadow-sm" alt="項鍊">
+                                        <img src="./static-demo/outfit/outfit_024.png" class="w-full h-[68px] rounded-xl object-cover shadow-sm" alt="項鍊">
                                         <span class="text-[10px] font-bold text-champagne-800 text-center pb-1">精致疊戴項鍊</span>
                                     </div>
                                     <div class="bg-[#FAF8F5] rounded-2xl p-2 flex flex-col gap-2 border border-flax-100/50">
-                                        <img src="https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&q=80&w=200" class="w-full h-[68px] rounded-xl object-cover shadow-sm" alt="珠寶">
+                                        <img src="./static-demo/outfit/outfit_025.png" class="w-full h-[68px] rounded-xl object-cover shadow-sm" alt="珠寶">
                                         <span class="text-[10px] font-bold text-champagne-800 text-center pb-1">精致疊戴珠寶</span>
                                     </div>
                                 </div>
@@ -2205,10 +2228,10 @@
                                 </div>
                             </div>
 
-                            <div class="space-y-3">
+                            <div class="mt-auto space-y-3">
                                 <div class="bg-white rounded-2xl p-4 border border-flax-200/80 shadow-sm flex flex-col gap-3">
                                     <div class="relative w-full aspect-[4/3] rounded-xl overflow-hidden bg-flax-50 shadow-inner">
-                                        <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&q=80&w=600" class="w-full h-full object-cover transition-all duration-500" alt="妝容推荐1">
+                                        <img src="./static-demo/makeup/sd_makeup_date.png" class="w-full h-full object-cover transition-all duration-500" alt="妝容推荐1">
                                     </div>
                                     <div>
                                         <h4 class="text-[11px] font-bold text-champagne-800">蜜桃奶茶妝容</h4>
@@ -2219,7 +2242,7 @@
 
                                 <div class="bg-white rounded-2xl p-4 border border-flax-200/80 shadow-sm flex flex-col gap-3">
                                     <div class="relative w-full aspect-[4/3] rounded-xl overflow-hidden bg-flax-50 shadow-inner">
-                                        <img src="https://images.unsplash.com/photo-1512496115851-a508533d07c2?auto=format&fit=crop&q=80&w=600" class="w-full h-full object-cover transition-all duration-500" alt="妝容推荐2">
+                                        <img src="./static-demo/makeup/sd_makeup_evening.png" class="w-full h-full object-cover transition-all duration-500" alt="妝容推荐2">
                                     </div>
                                     <div>
                                         <h4 class="text-[11px] font-bold text-champagne-800">清透玻璃肌妝容</h4>
@@ -2230,7 +2253,7 @@
 
                                 <div class="bg-white rounded-2xl p-4 border border-flax-200/80 shadow-sm flex flex-col gap-3">
                                     <div class="relative w-full aspect-[4/3] rounded-xl overflow-hidden bg-flax-50 shadow-inner">
-                                        <img src="https://images.unsplash.com/photo-1586495777744-4413f21062fa?auto=format&fit=crop&q=80&w=600" class="w-full h-full object-cover transition-all duration-500" alt="妝容推荐3">
+                                        <img src="./static-demo/makeup/sd_makeup_professional.png" class="w-full h-full object-cover transition-all duration-500" alt="妝容推荐3">
                                     </div>
                                     <div>
                                         <h4 class="text-[11px] font-bold text-champagne-800">复古红唇妝容</h4>
@@ -2288,7 +2311,7 @@
                                     </div>
                                 </div>
                                 <div class="bg-flax-50 rounded-xl p-3 border border-flax-100 mt-1 flex items-center gap-3 cursor-pointer hover:border-peach-300 transition-all group">
-                                    <div class="w-10 h-10 rounded-lg overflow-hidden flex-shrink-0 shadow-sm border border-white"><img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&q=80&w=150" class="w-full h-full object-cover group-hover:scale-110 transition-transform" alt="Yoga"></div>
+                                    <div class="w-10 h-10 rounded-lg overflow-hidden flex-shrink-0 shadow-sm border border-white"><img src="./static-demo/outfit/outfit_029.png" class="w-full h-full object-cover group-hover:scale-110 transition-transform" alt="Yoga"></div>
                                     <div><h4 class="text-[11px] font-bold text-flax-900 group-hover:text-peach-500 transition-colors">晨間喚醒瑜伽</h4><p class="text-[9px] text-flax-400 mt-0.5 leading-tight">改善體態，提升气质與柔韌性</p></div>
                                     <div class="ml-auto text-peach-400 group-hover:text-peach-500 transition-colors"><i class="far fa-play-circle text-lg"></i></div>
                                 </div>
@@ -2303,7 +2326,7 @@
                                 </div>
                                 <div class="space-y-2.5 mt-1">
                                     <div class="flex items-start gap-2.5">
-                                        <div class="w-12 h-12 rounded-xl overflow-hidden border border-white shadow-sm flex-shrink-0 bg-flax-50"><img src="https://images.unsplash.com/photo-1494390248081-4e521a5940db?auto=format&fit=crop&q=80&w=150" class="w-full h-full object-cover mix-blend-multiply" alt="Breakfast"></div>
+                                        <div class="w-12 h-12 rounded-xl overflow-hidden border border-white shadow-sm flex-shrink-0 bg-flax-50"><img src="./static-demo/outfit/outfit_030.png" class="w-full h-full object-cover mix-blend-multiply" alt="Breakfast"></div>
                                         <div class="flex-grow py-0.5">
                                             <div class="flex justify-between items-center"><h4 class="text-[10px] font-bold text-champagne-800">朝食 · 輕盈抗氧</h4><span class="text-[8px] font-bold text-peach-400 bg-peach-50 px-1.5 py-0.5 rounded">320 kcal</span></div>
                                             <p class="text-[9px] text-flax-400/90 mt-1 leading-tight">燕麥奇亞籽缽 + 半顆酪梨 + 无糖豆漿</p>
@@ -2311,7 +2334,7 @@
                                     </div>
                                     <div class="h-px w-full bg-flax-100/50"></div>
                                     <div class="flex items-start gap-2.5">
-                                        <div class="w-12 h-12 rounded-xl overflow-hidden border border-white shadow-sm flex-shrink-0 bg-flax-50"><img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&q=80&w=150" class="w-full h-full object-cover mix-blend-multiply" alt="Lunch"></div>
+                                        <div class="w-12 h-12 rounded-xl overflow-hidden border border-white shadow-sm flex-shrink-0 bg-flax-50"><img src="./static-demo/outfit/outfit_031.png" class="w-full h-full object-cover mix-blend-multiply" alt="Lunch"></div>
                                         <div class="flex-grow py-0.5">
                                             <div class="flex justify-between items-center"><h4 class="text-[10px] font-bold text-champagne-800">午食 · 飽腹優蛋白</h4><span class="text-[8px] font-bold text-peach-400 bg-peach-50 px-1.5 py-0.5 rounded">450 kcal</span></div>
                                             <p class="text-[9px] text-flax-400/90 mt-1 leading-tight">藜麥糙米飯 + 香煎鮭魚 + 鮮蔬沙拉</p>
@@ -2356,27 +2379,83 @@
                     </div>
 
                     <!-- === PAGE 3: 姿造美学 Modules === -->
-                    <div id="mob-page-beauty" class="hidden w-full min-h-full relative flex flex-col bg-[#FAF8F5] p-4 gap-4">
+                    <div id="mob-page-beauty" class="hidden w-full flex flex-col bg-[#FAF8F5] p-3 gap-2.5 pb-24" style="height:auto;min-height:100vh">
                         <div class="pt-6 pb-1">
                             <h2 class="serif-title text-xl font-bold tracking-wider text-flax-900">姿造美学</h2>
                             <p class="text-[9px] text-[#A69989] font-medium tracking-wide mt-0.5">妆容 · 穿搭 · 发型 · 美容减脂</p>
                         </div>
                         <div id="mob-beauty-overview" class="grid grid-cols-2 gap-3">
-                            <button onclick="openBeautySection('makeup')" class="bg-white rounded-2xl border border-flax-200/80 shadow-sm text-left min-h-[176px] overflow-hidden active:scale-[0.98] transition-all"><img class="w-full h-20 object-cover" src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&q=80&w=400" alt="妆容模块"><div class="p-3 space-y-1"><span class="w-8 h-8 rounded-full bg-peach-100 flex items-center justify-center text-peach-500"><i class="fas fa-palette"></i></span><strong class="block text-sm text-champagne-800">妆容</strong><small class="block text-[9px] text-flax-400 leading-tight">专属妆容推荐与教程</small></div></button>
-                            <button onclick="openBeautySection('outfit')" class="bg-white rounded-2xl border border-flax-200/80 shadow-sm text-left min-h-[176px] overflow-hidden active:scale-[0.98] transition-all"><img class="w-full h-20 object-cover" src="https://images.unsplash.com/photo-1485968579580-b6d095142e6e?auto=format&fit=crop&q=80&w=400" alt="穿搭模块"><div class="p-3 space-y-1"><span class="w-8 h-8 rounded-full bg-peach-100 flex items-center justify-center text-peach-500"><i class="fas fa-shirt"></i></span><strong class="block text-sm text-champagne-800">穿搭</strong><small class="block text-[9px] text-flax-400 leading-tight">智能搭配与试穿体验</small></div></button>
-                            <button onclick="openBeautySection('hair')" class="bg-white rounded-2xl border border-flax-200/80 shadow-sm text-left min-h-[176px] overflow-hidden active:scale-[0.98] transition-all"><img class="w-full h-20 object-cover" src="https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&q=80&w=400" alt="发型模块"><div class="p-3 space-y-1"><span class="w-8 h-8 rounded-full bg-peach-100 flex items-center justify-center text-peach-500"><i class="fas fa-wind"></i></span><strong class="block text-sm text-champagne-800">发型</strong><small class="block text-[9px] text-flax-400 leading-tight">换发型看效果体验</small></div></button>
-                            <button onclick="openBeautySection('fitness')" class="bg-white rounded-2xl border border-flax-200/80 shadow-sm text-left min-h-[176px] overflow-hidden active:scale-[0.98] transition-all"><img class="w-full h-20 object-cover" src="https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&q=80&w=400" alt="美容减脂模块"><div class="p-3 space-y-1"><span class="w-8 h-8 rounded-full bg-peach-100 flex items-center justify-center text-peach-500"><i class="fas fa-heartbeat"></i></span><strong class="block text-sm text-champagne-800">美容减脂</strong><small class="block text-[9px] text-flax-400 leading-tight">专属运动与饮食计划</small></div></button>
-                            <div onclick="showComingSoon('灵感广场')" class="bg-[#E5E5E5] rounded-2xl p-4 cursor-pointer relative overflow-hidden">
-                                <div class="absolute top-2 right-2 px-2 py-0.5 bg-[#FFF3CD] text-[#856404] text-[8px] font-bold rounded-full z-10">即将上线</div>
-                                <div class="w-10 h-10 rounded-full bg-white/50 flex items-center justify-center mb-2"><i class="fas fa-star text-[#999999] text-lg"></i></div>
-                                <h3 class="text-[11px] font-bold text-[#999999]">灵感广场</h3>
-                                <p class="text-[9px] text-[#999999] mt-1">发现更多风格灵感</p>
+                            <!-- 妆容 -->
+                            <button onclick="openBeautySection('makeup')" class="group bg-white rounded-2xl border border-flax-200/80 shadow-sm hover:shadow-md hover:border-peach-200 active:scale-[0.97] transition-all text-left overflow-hidden">
+                                <div class="relative w-full h-14 overflow-hidden">
+                                    <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="./static-demo/makeup/sd_makeup_daily.png" alt="妆容">
+                                    <div class="absolute bottom-0 left-0 right-0 h-6 bg-gradient-to-t from-black/30 to-transparent"></div>
+                                </div>
+                                <div class="p-1.5 space-y-0.5">
+                                    <span class="inline-flex w-4 h-4 rounded-full bg-gradient-to-br from-peach-400 to-peach-300 items-center justify-center text-white text-[8px] shadow-sm"><i class="fas fa-palette"></i></span>
+                                    <strong class="block text-[11px] font-semibold text-champagne-800 tracking-wide">妆容</strong>
+                                    <small class="block text-[9px] text-flax-400 leading-snug">专属妆容推荐与教程</small>
+                                </div>
+                            </button>
+                            <!-- 穿搭 -->
+                            <button onclick="openBeautySection('outfit')" class="group bg-white rounded-2xl border border-flax-200/80 shadow-sm hover:shadow-md hover:border-peach-200 active:scale-[0.97] transition-all text-left overflow-hidden">
+                                <div class="relative w-full h-14 overflow-hidden">
+                                    <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="./static-demo/outfit/outfit_025.png" alt="穿搭">
+                                    <div class="absolute bottom-0 left-0 right-0 h-6 bg-gradient-to-t from-black/30 to-transparent"></div>
+                                </div>
+                                <div class="p-1.5 space-y-0.5">
+                                    <span class="inline-flex w-4 h-4 rounded-full bg-gradient-to-br from-peach-400 to-peach-300 items-center justify-center text-white text-[8px] shadow-sm"><i class="fas fa-shirt"></i></span>
+                                    <strong class="block text-[11px] font-semibold text-champagne-800 tracking-wide">穿搭</strong>
+                                    <small class="block text-[9px] text-flax-400 leading-snug">智能搭配与试穿体验</small>
+                                </div>
+                            </button>
+                            <!-- 发型 -->
+                            <button onclick="openBeautySection('hair')" class="group bg-white rounded-2xl border border-flax-200/80 shadow-sm hover:shadow-md hover:border-peach-200 active:scale-[0.97] transition-all text-left overflow-hidden">
+                                <div class="relative w-full h-14 overflow-hidden">
+                                    <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="./static-demo/hairstyle/tut_009.jpg" alt="发型">
+                                    <div class="absolute bottom-0 left-0 right-0 h-6 bg-gradient-to-t from-black/30 to-transparent"></div>
+                                </div>
+                                <div class="p-1.5 space-y-0.5">
+                                    <span class="inline-flex w-4 h-4 rounded-full bg-gradient-to-br from-peach-400 to-peach-300 items-center justify-center text-white text-[8px] shadow-sm"><i class="fas fa-wind"></i></span>
+                                    <strong class="block text-[11px] font-semibold text-champagne-800 tracking-wide">发型</strong>
+                                    <small class="block text-[9px] text-flax-400 leading-snug">换发型看效果体验</small>
+                                </div>
+                            </button>
+                            <!-- 美容减脂 -->
+                            <button onclick="openBeautySection('fitness')" class="group bg-white rounded-2xl border border-flax-200/80 shadow-sm hover:shadow-md hover:border-peach-200 active:scale-[0.97] transition-all text-left overflow-hidden">
+                                <div class="relative w-full h-14 overflow-hidden">
+                                    <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="./static-demo/fitness/sd_fitness_yoga.png" alt="美容减脂">
+                                    <div class="absolute bottom-0 left-0 right-0 h-6 bg-gradient-to-t from-black/30 to-transparent"></div>
+                                </div>
+                                <div class="p-1.5 space-y-0.5">
+                                    <span class="inline-flex w-4 h-4 rounded-full bg-gradient-to-br from-peach-400 to-peach-300 items-center justify-center text-white text-[8px] shadow-sm"><i class="fas fa-heartbeat"></i></span>
+                                    <strong class="block text-[11px] font-semibold text-champagne-800 tracking-wide">美容减脂</strong>
+                                    <small class="block text-[9px] text-flax-400 leading-snug">专属运动与饮食计划</small>
+                                </div>
+                            </button>
+                            <!-- 灵感广场 (即将上线) -->
+                            <div onclick="showComingSoon('灵感广场')" class="group bg-white rounded-2xl border border-flax-200/80 shadow-sm cursor-pointer relative overflow-hidden">
+                                <div class="relative w-full h-14 bg-gradient-to-br from-flax-50 to-flax-100 overflow-hidden flex items-center justify-center">
+                                    <i class="fas fa-star text-[#D4C5B0] text-3xl opacity-60 group-hover:opacity-80 transition-opacity"></i>
+                                    <div class="absolute top-1.5 right-1.5 px-1.5 py-0.5 bg-flax-900/60 text-white text-[7px] font-semibold rounded-full backdrop-blur-sm">即将上线</div>
+                                </div>
+                                <div class="p-1.5 space-y-0.5">
+                                    <span class="inline-flex w-4 h-4 rounded-full bg-flax-100 items-center justify-center text-flax-400 text-[8px]"><i class="fas fa-star"></i></span>
+                                    <strong class="block text-[11px] font-semibold text-champagne-800 tracking-wide">灵感广场</strong>
+                                    <small class="block text-[9px] text-flax-400 leading-snug">发现更多风格灵感</small>
+                                </div>
                             </div>
-                            <div onclick="showComingSoon('风格测试')" class="bg-[#E5E5E5] rounded-2xl p-4 cursor-pointer relative overflow-hidden">
-                                <div class="absolute top-2 right-2 px-2 py-0.5 bg-[#FFF3CD] text-[#856404] text-[8px] font-bold rounded-full z-10">即将上线</div>
-                                <div class="w-10 h-10 rounded-full bg-white/50 flex items-center justify-center mb-2"><i class="fas fa-palette text-[#999999] text-lg"></i></div>
-                                <h3 class="text-[11px] font-bold text-[#999999]">风格测试</h3>
-                                <p class="text-[9px] text-[#999999] mt-1">测测你的专属风格</p>
+                            <!-- 风格测试 (即将上线) -->
+                            <div onclick="showComingSoon('风格测试')" class="group bg-white rounded-2xl border border-flax-200/80 shadow-sm cursor-pointer relative overflow-hidden">
+                                <div class="relative w-full h-14 bg-gradient-to-br from-flax-50 to-flax-100 overflow-hidden flex items-center justify-center">
+                                    <i class="fas fa-palette text-[#D4C5B0] text-3xl opacity-60 group-hover:opacity-80 transition-opacity"></i>
+                                    <div class="absolute top-1.5 right-1.5 px-1.5 py-0.5 bg-flax-900/60 text-white text-[7px] font-semibold rounded-full backdrop-blur-sm">即将上线</div>
+                                </div>
+                                <div class="p-1.5 space-y-0.5">
+                                    <span class="inline-flex w-4 h-4 rounded-full bg-flax-100 items-center justify-center text-flax-400 text-[8px]"><i class="fas fa-palette"></i></span>
+                                    <strong class="block text-[11px] font-semibold text-champagne-800 tracking-wide">风格测试</strong>
+                                    <small class="block text-[9px] text-flax-400 leading-snug">测测你的专属风格</small>
+                                </div>
                             </div>
                         </div>
 
@@ -2395,7 +2474,7 @@
                                     </div>
 
                                     <div id="hair-has-report" class="w-full aspect-square bg-flax-100 rounded-xl overflow-hidden mb-3 relative">
-                                        <img id="hair-effect-img" src="https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&q=80&w=600" class="w-full h-full object-cover blur-md opacity-50" alt="发型效果图">
+                                        <img id="hair-effect-img" src="./static-demo/hairstyle/tut_009.jpg" class="w-full h-full object-cover blur-md opacity-50" alt="发型效果图">
                                         <div class="absolute inset-0 flex flex-col items-center justify-center bg-black/20 backdrop-blur-sm">
                                             <i class="fas fa-magic text-white text-2xl mb-2"></i>
                                             <span class="text-white text-[10px] font-bold">点击下方按钮生成效果图</span>
@@ -2431,7 +2510,7 @@
                                     </div>
 
                                     <div id="outfit-has-report" class="w-full aspect-square bg-flax-100 rounded-xl overflow-hidden mb-3 relative">
-                                        <img id="outfit-effect-img" src="https://images.unsplash.com/photo-1485968579580-b6d095142e6e?auto=format&fit=crop&q=80&w=600" class="w-full h-full object-cover blur-md opacity-50" alt="穿搭效果图">
+                                        <img id="outfit-effect-img" src="./static-demo/outfit/outfit_025.png" class="w-full h-full object-cover blur-md opacity-50" alt="穿搭效果图">
                                         <div class="absolute inset-0 flex flex-col items-center justify-center bg-black/20 backdrop-blur-sm">
                                             <i class="fas fa-magic text-white text-2xl mb-2"></i>
                                             <span class="text-white text-[10px] font-bold">点击下方按钮生成效果图</span>
@@ -2467,7 +2546,7 @@
                                     </div>
 
                                     <div id="makeup-has-report" class="w-full aspect-square bg-flax-100 rounded-xl overflow-hidden mb-3 relative">
-                                        <img id="makeup-effect-img" src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&q=80&w=600" class="w-full h-full object-cover blur-md opacity-50" alt="妆容效果图">
+                                        <img id="makeup-effect-img" src="./static-demo/makeup/sd_makeup_commute.png" class="w-full h-full object-cover blur-md opacity-50" alt="妆容效果图">
                                         <div class="absolute inset-0 flex flex-col items-center justify-center bg-black/20 backdrop-blur-sm">
                                             <i class="fas fa-magic text-white text-2xl mb-2"></i>
                                             <span class="text-white text-[10px] font-bold">点击下方按钮生成效果图</span>
@@ -2547,15 +2626,15 @@
                                         <div class="flex items-center gap-2 mb-3"><div class="w-6 h-6 rounded-full bg-peach-100 flex items-center justify-center text-peach-500 text-[10px]"><i class="fas fa-utensils"></i></div><h3 class="text-xs font-bold text-champagne-800 tracking-wider">周一 · 饮食建议</h3></div>
                                         <div class="space-y-2">
                                             <div class="flex items-start gap-2.5">
-                                                <div class="w-10 h-10 rounded-lg overflow-hidden border border-white shadow-sm flex-shrink-0 bg-flax-50"><img src="https://images.unsplash.com/photo-1494390248081-4e521a5940db?auto=format&fit=crop&q=80&w=150" class="w-full h-full object-cover" alt="Breakfast"></div>
+                                                <div class="w-10 h-10 rounded-lg overflow-hidden border border-white shadow-sm flex-shrink-0 bg-flax-50"><img src="./static-demo/outfit/outfit_030.png" class="w-full h-full object-cover" alt="Breakfast"></div>
                                                 <div class="flex-grow"><h4 class="text-[10px] font-bold text-champagne-800">早餐</h4><p class="text-[9px] text-flax-400">燕麦粥 + 水煮蛋 + 无糖豆浆</p><span class="text-[8px] text-peach-400">280 kcal</span></div>
                                             </div>
                                             <div class="flex items-start gap-2.5">
-                                                <div class="w-10 h-10 rounded-lg overflow-hidden border border-white shadow-sm flex-shrink-0 bg-flax-50"><img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&q=80&w=150" class="w-full h-full object-cover" alt="Lunch"></div>
+                                                <div class="w-10 h-10 rounded-lg overflow-hidden border border-white shadow-sm flex-shrink-0 bg-flax-50"><img src="./static-demo/outfit/outfit_031.png" class="w-full h-full object-cover" alt="Lunch"></div>
                                                 <div class="flex-grow"><h4 class="text-[10px] font-bold text-champagne-800">午餐</h4><p class="text-[9px] text-flax-400">糙米饭100g + 清蒸鸡胸肉 + 清炒西兰花</p><span class="text-[8px] text-peach-400">420 kcal</span></div>
                                             </div>
                                             <div class="flex items-start gap-2.5">
-                                                <div class="w-10 h-10 rounded-lg overflow-hidden border border-white shadow-sm flex-shrink-0 bg-flax-50"><img src="https://images.unsplash.com/photo-1467003909585-2f8a7270028d?auto=format&fit=crop&q=80&w=150" class="w-full h-full object-cover" alt="Dinner"></div>
+                                                <div class="w-10 h-10 rounded-lg overflow-hidden border border-white shadow-sm flex-shrink-0 bg-flax-50"><img src="./static-demo/outfit/outfit_041.png" class="w-full h-full object-cover" alt="Dinner"></div>
                                                 <div class="flex-grow"><h4 class="text-[10px] font-bold text-champagne-800">晚餐</h4><p class="text-[9px] text-flax-400">小米粥 + 凉拌黄瓜 + 豆腐</p><span class="text-[8px] text-peach-400">350 kcal</span></div>
                                             </div>
                                         </div>
@@ -2572,7 +2651,7 @@
                             <div class="flex items-start justify-between w-full">
                                 <div class="flex gap-3">
                                     <div class="relative w-[76px] h-[92px] rounded-2xl overflow-hidden shadow-md border border-white">
-                                        <img id="mob-profile-avatar" src="image_79f3a0.png" class="w-full h-full object-cover" alt="User Profile Image" onerror="this.src='https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=600'">
+                                        <img id="mob-profile-avatar" src="image_79f3a0.png" class="w-full h-full object-cover" alt="User Profile Image" onerror="this.src='./static-demo/hairstyle/hair_007.png'">
                                     </div>
                                     <div class="flex flex-col justify-between py-1 h-[92px]">
                                         <div class="space-y-0.5">
@@ -2747,7 +2826,7 @@
                                         <span class="text-[8px] text-peach-500 font-bold">已分享 3 次</span>
                                     </div>
 
-                                    <div class="space-y-3">
+                                    <div class="mt-auto space-y-3">
                                         <label class="flex items-center gap-2 cursor-pointer">
                                             <input type="radio" name="share-mode" value="full" checked class="w-4 h-4 text-peach-500 border-flax-200">
                                             <span class="text-[10px] text-flax-600">完整分享</span>
@@ -2782,25 +2861,25 @@
 
                                     <div class="grid grid-cols-2 gap-2">
                                         <div onclick="selectPosterStyle('1')" class="poster-style-option relative aspect-[3/4] bg-flax-100 rounded-xl border border-flax-200 overflow-hidden cursor-pointer">
-                                            <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=300" class="w-full h-full object-cover">
+                                            <img src="./static-demo/hairstyle/tut_013.jpg" class="w-full h-full object-cover">
                                             <div class="absolute inset-0 bg-black/20 flex items-center justify-center">
                                                 <span class="text-white text-xs font-bold">风格一</span>
                                             </div>
                                         </div>
                                         <div onclick="selectPosterStyle('2')" class="poster-style-option relative aspect-[3/4] bg-flax-100 rounded-xl border border-flax-200 overflow-hidden cursor-pointer">
-                                            <img src="https://images.unsplash.com/photo-1583344605953-2947d95d10d9?auto=format&fit=crop&q=80&w=300" class="w-full h-full object-cover">
+                                            <img src="./static-demo/outfit/outfit_044.png" class="w-full h-full object-cover">
                                             <div class="absolute inset-0 bg-black/20 flex items-center justify-center">
                                                 <span class="text-white text-xs font-bold">风格二</span>
                                             </div>
                                         </div>
                                         <div onclick="selectPosterStyle('3')" class="poster-style-option relative aspect-[3/4] bg-flax-100 rounded-xl border border-flax-200 overflow-hidden cursor-pointer">
-                                            <img src="https://images.unsplash.com/photo-1590159763121-7c9bf39cd716?auto=format&fit=crop&q=80&w=300" class="w-full h-full object-cover">
+                                            <img src="./static-demo/outfit/outfit_045.png" class="w-full h-full object-cover">
                                             <div class="absolute inset-0 bg-black/20 flex items-center justify-center">
                                                 <span class="text-white text-xs font-bold">风格三</span>
                                             </div>
                                         </div>
                                         <div onclick="selectPosterStyle('4')" class="poster-style-option relative aspect-[3/4] bg-flax-100 rounded-xl border border-flax-200 overflow-hidden cursor-pointer">
-                                            <img src="https://images.unsplash.com/photo-1505028108391-5b5832a819b1?auto=format&fit=crop&q=80&w=300" class="w-full h-full object-cover">
+                                            <img src="./static-demo/outfit/outfit_046.png" class="w-full h-full object-cover">
                                             <div class="absolute inset-0 bg-black/20 flex items-center justify-center">
                                                 <span class="text-white text-xs font-bold">风格四</span>
                                             </div>
@@ -2833,7 +2912,7 @@
                         </div>
 
                         <div class="flex-grow overflow-y-auto px-4 pb-24 inspiration-grid">
-                            <div class="space-y-3">
+                            <div class="mt-auto space-y-3">
                             </div>
                         </div>
 
@@ -3207,7 +3286,7 @@
         <div id="desktop-grid" class="animate-fadeIn transition-layout">
             <div class="bg-white rounded-3xl p-6 border border-flax-200 shadow-sm flex flex-col md:flex-row justify-between items-center gap-4">
                 <div class="flex items-center gap-4">
-                    <div class="w-16 h-16 rounded-full border-2 border-peach-200 bg-peach-50 flex items-center justify-center text-peach-500 text-2xl font-bold overflow-hidden"><img id="desk-avatar-img" class="w-full h-full object-cover" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=600" alt="Active User Avatar" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=600'"></div>
+                    <div class="w-16 h-16 rounded-full border-2 border-peach-200 bg-peach-50 flex items-center justify-center text-peach-500 text-2xl font-bold overflow-hidden"><img id="desk-avatar-img" class="w-full h-full object-cover" src="./static-demo/hairstyle/hair_007.png" alt="Active User Avatar" onerror="this.onerror=null;this.src='./static-demo/hairstyle/hair_007.png'"></div>
                     <div><div class="flex items-center gap-2"><h2 class="serif-title text-xl font-bold text-flax-900" id="desk-user-name">客座體驗学員</h2></div><p class="text-xs text-flax-400 mt-1">「姿態、骨相與膚色的和谐共生，由內而外散發最舒適的自我光芒。」</p></div>
                 </div>
                 <div class="flex items-center gap-8 text-center border-l border-flax-200 pl-8">
@@ -3233,7 +3312,7 @@
                     </div>
 
                     <div class="relative w-full aspect-[3/4] max-w-[280px] mx-auto mt-3 flex items-center justify-center overflow-hidden rounded-[36px] border border-flax-200/50 shadow-[0_8px_30px_rgba(74,62,61,0.12)]">
-                        <img id="desk-onboard-img-src" class="w-full h-full object-cover" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=600" alt="東方气质美学首頁" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=600'">
+                        <img id="desk-onboard-img-src" class="w-full h-full object-cover" src="./static-demo/hairstyle/hair_007.png" alt="東方气质美学首頁" onerror="this.onerror=null;this.src='./static-demo/hairstyle/hair_007.png'">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent pointer-events-none"></div>
                     </div>
 
@@ -3355,10 +3434,10 @@
                         <div class="bg-white rounded-3xl p-6 border border-flax-200 shadow-sm flex flex-col h-full">
                             <div class="grid grid-cols-2 gap-4 items-center bg-flax-50 rounded-2xl p-4 border border-flax-200 h-full">
                                 <div class="relative w-full aspect-[3/4] bg-[#FAF8F5] rounded-xl flex items-center justify-center border border-flax-200 overflow-hidden shadow-inner">
-                                    <img id="desk-analysis-img" class="absolute inset-0 w-full h-full object-cover opacity-90 transition-all duration-500" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=600" alt="Beautiful Face Reference Desktop" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=600'">
+                                    <img id="desk-analysis-img" class="absolute inset-0 w-full h-full object-cover opacity-90 transition-all duration-500" src="./static-demo/hairstyle/hair_007.png" alt="Beautiful Face Reference Desktop" onerror="this.onerror=null;this.src='./static-demo/hairstyle/hair_007.png'">
                                     <div class="absolute inset-0 bg-gradient-to-t from-white/10 via-transparent to-black/10"></div>
                                 </div>
-                                <div class="space-y-3">
+                                <div class="mt-auto space-y-3">
                                     <div><h4 class="text-xs font-bold text-champagne-800">特徵檢索</h4><p class="text-[11px] text-peach-500 font-bold mt-0.5" id="desk-face-type">古典鵝蛋臉 · 暖白皮</p></div>
                                     <div class="space-y-1"><h4 class="text-xs font-bold text-champagne-800">骨骼與气质描寫</h4><p class="text-[10px] text-flax-400 leading-relaxed" id="desk-face-desc">眉眼結構大氣自然，額頭與下頜線銜接如行雲流水，自帶沉靜與古典書卷气质。</p></div>
                                 </div>
@@ -3387,17 +3466,17 @@
                             </div>
                             <div class="bg-[#FAF8F5] rounded-xl p-4 border border-flax-200/80 shadow-sm">
                                 <h4 class="text-xs font-bold text-flax-900 border-b border-flax-200 pb-2 mb-3 flex items-center gap-1.5"><i class="fas fa-eye text-flax-400"></i> 五官精細度</h4>
-                                <div class="space-y-3">
+                                <div class="mt-auto space-y-3">
                                     <div class="flex gap-3 items-center">
-                                        <img src="https://images.unsplash.com/photo-1583344605953-2947d95d10d9?auto=format&fit=crop&q=80&w=150" class="w-12 h-12 rounded shadow-sm object-cover border border-white flex-shrink-0" alt="眼睛細節" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=600'">
+                                        <img src="./static-demo/outfit/outfit_012.png" class="w-12 h-12 rounded shadow-sm object-cover border border-white flex-shrink-0" alt="眼睛細節" onerror="this.onerror=null;this.src='./static-demo/hairstyle/hair_007.png'">
                                         <div><p class="text-xs font-bold text-flax-900">眼睛</p><p class="text-[10px] text-flax-900/80 leading-tight mt-0.5">杏仁眼型，柔和自然。建議柔和眼線，增加親和力。</p></div>
                                     </div>
                                     <div class="flex gap-3 items-center">
-                                        <img src="https://images.unsplash.com/photo-1590159763121-7c9bf39cd716?auto=format&fit=crop&q=80&w=150" class="w-12 h-12 rounded shadow-sm object-cover border border-white flex-shrink-0" alt="嘴唇細節" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=600'">
+                                        <img src="./static-demo/outfit/outfit_014.png" class="w-12 h-12 rounded shadow-sm object-cover border border-white flex-shrink-0" alt="嘴唇細節" onerror="this.onerror=null;this.src='./static-demo/hairstyle/hair_007.png'">
                                         <div><p class="text-xs font-bold text-flax-900">嘴唇</p><p class="text-[10px] text-flax-900/80 leading-tight mt-0.5">唇形饱满，宜選用亮面柔色口紅，凸顯瑩潤質感。</p></div>
                                     </div>
                                     <div class="flex gap-3 items-center">
-                                        <img src="https://images.unsplash.com/photo-1505028108391-5b5832a819b1?auto=format&fit=crop&q=80&w=150" class="w-12 h-12 rounded shadow-sm object-cover border border-white flex-shrink-0" alt="鼻子細節" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=600'">
+                                        <img src="./static-demo/outfit/outfit_016.png" class="w-12 h-12 rounded shadow-sm object-cover border border-white flex-shrink-0" alt="鼻子細節" onerror="this.onerror=null;this.src='./static-demo/hairstyle/hair_007.png'">
                                         <div><p class="text-xs font-bold text-flax-900">鼻子</p><p class="text-[10px] text-flax-900/80 leading-tight mt-0.5">鼻型巧致，鼻樑立体。建議在鼻翼 and 鼻尖做柔和修飾，增加圓潤度。</p></div>
                                     </div>
                                 </div>
@@ -3412,7 +3491,7 @@
                             <div class="flex items-center gap-2 pb-2"><span class="text-base">💇‍♀️</span><h4 class="text-xs font-bold text-champagne-800">发型推荐</h4></div>
                             <div class="grid grid-cols-2 gap-4 items-center">
                                 <div class="relative aspect-[4/3] rounded-xl overflow-hidden bg-flax-50 shadow border">
-                                    <img id="desk-panel-hair-img" class="w-full h-full object-cover transition-all duration-500" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=600" alt="发型" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=600'">
+                                    <img id="desk-panel-hair-img" class="w-full h-full object-cover transition-all duration-500" src="./static-demo/hairstyle/hair_007.png" alt="发型" onerror="this.onerror=null;this.src='./static-demo/hairstyle/hair_007.png'">
                                 </div>
                                 <div class="space-y-2">
                                     <div class="flex flex-wrap gap-1">
@@ -3430,7 +3509,7 @@
                             <div class="space-y-2.5 flex-grow" id="desk-outfits-list-container">
                                 <div onclick="setGlobalScenario('commute')" id="desk-outfit-card-commute" class="flex items-center gap-3 p-2 rounded-2xl border border-peach-300 bg-white cursor-pointer transition-all">
                                     <div class="w-14 h-14 rounded-xl overflow-hidden bg-flax-50 flex-shrink-0 border border-flax-100/50">
-                                        <img class="w-full h-full object-cover mix-blend-multiply" src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?auto=format&fit=crop&q=80&w=150" alt="西裝">
+                                        <img class="w-full h-full object-cover mix-blend-multiply" src="./static-demo/outfit/outfit_061.png" alt="西裝">
                                     </div>
                                     <div class="text-left flex-grow py-1">
                                         <p class="text-[11px] font-bold text-peach-500 mb-0.5">通勤 - 西裝</p>
@@ -3440,7 +3519,7 @@
                                 </div>
                                 <div onclick="setGlobalScenario('date')" id="desk-outfit-card-date" class="flex items-center gap-3 p-2 rounded-2xl border border-flax-200 bg-white hover:border-peach-300 cursor-pointer transition-all">
                                     <div class="w-14 h-14 rounded-xl overflow-hidden bg-flax-50 flex-shrink-0 border border-flax-100/50">
-                                        <img class="w-full h-full object-cover mix-blend-multiply" src="https://images.unsplash.com/photo-1595777457583-95e059d581b8?auto=format&fit=crop&q=80&w=150" alt="裙裝">
+                                        <img class="w-full h-full object-cover mix-blend-multiply" src="./static-demo/outfit/outfit_063.png" alt="裙裝">
                                     </div>
                                     <div class="text-left flex-grow py-1">
                                         <p class="text-[11px] font-bold text-flax-400 mb-0.5">約會 - 裙裝</p>
@@ -3450,7 +3529,7 @@
                                 </div>
                                 <div onclick="setGlobalScenario('interview')" id="desk-outfit-card-interview" class="flex items-center gap-3 p-2 rounded-2xl border border-flax-200 bg-white hover:border-peach-300 cursor-pointer transition-all">
                                     <div class="w-14 h-14 rounded-xl overflow-hidden bg-flax-50 flex-shrink-0 border border-flax-100/50">
-                                        <img class="w-full h-full object-cover mix-blend-multiply" src="https://images.unsplash.com/photo-1485968579580-b6d095142e6e?auto=format&fit=crop&q=80&w=150" alt="正裝">
+                                        <img class="w-full h-full object-cover mix-blend-multiply" src="./static-demo/outfit/outfit_000.png" alt="正裝">
                                     </div>
                                     <div class="text-left flex-grow py-1">
                                         <p class="text-[11px] font-bold text-flax-400 mb-0.5">面試 - 正裝</p>
@@ -3465,11 +3544,11 @@
                             </div>
                             <div class="grid grid-cols-2 gap-2 mt-1 mb-1">
                                 <div class="bg-[#FAF8F5] rounded-2xl p-2 flex flex-col gap-2 border border-flax-100/50">
-                                    <img src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&q=80&w=200" class="w-full h-[68px] rounded-xl object-cover shadow-sm" alt="項鍊">
+                                    <img src="./static-demo/outfit/outfit_024.png" class="w-full h-[68px] rounded-xl object-cover shadow-sm" alt="項鍊">
                                     <span class="text-[10px] font-bold text-champagne-800 text-center pb-1">精致疊戴項鍊</span>
                                 </div>
                                 <div class="bg-[#FAF8F5] rounded-2xl p-2 flex flex-col gap-2 border border-flax-100/50">
-                                    <img src="https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&q=80&w=200" class="w-full h-[68px] rounded-xl object-cover shadow-sm" alt="珠寶">
+                                    <img src="./static-demo/outfit/outfit_025.png" class="w-full h-[68px] rounded-xl object-cover shadow-sm" alt="珠寶">
                                     <span class="text-[10px] font-bold text-champagne-800 text-center pb-1">精致疊戴珠寶</span>
                                 </div>
                             </div>
@@ -3511,15 +3590,15 @@
                                 </div>
                                 <div class="grid grid-cols-3 gap-3">
                                     <div class="bg-peach-50/40 rounded-2xl p-3 border border-peach-100 flex flex-col items-center text-center gap-2">
-                                        <div class="w-12 h-12 rounded-full overflow-hidden border-2 border-white shadow-sm"><img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&q=80&w=150" class="w-full h-full object-cover" alt="底妝"></div>
+                                        <div class="w-12 h-12 rounded-full overflow-hidden border-2 border-white shadow-sm"><img src="./static-demo/outfit/outfit_000.png" class="w-full h-full object-cover" alt="底妝"></div>
                                         <span class="text-[10px] font-bold text-champagne-800">清透微光底妝</span>
                                     </div>
                                     <div class="bg-peach-50/40 rounded-2xl p-3 border border-peach-100 flex flex-col items-center text-center gap-2">
-                                        <div class="w-12 h-12 rounded-full overflow-hidden border-2 border-white shadow-sm"><img src="https://images.unsplash.com/photo-1512496115851-a508533d07c2?auto=format&fit=crop&q=80&w=150" class="w-full h-full object-cover" alt="眼影"></div>
+                                        <div class="w-12 h-12 rounded-full overflow-hidden border-2 border-white shadow-sm"><img src="./static-demo/outfit/outfit_006.jpg" class="w-full h-full object-cover" alt="眼影"></div>
                                         <span class="text-[10px] font-bold text-champagne-800">蜜桃大地眼影</span>
                                     </div>
                                     <div class="bg-peach-50/40 rounded-2xl p-3 border border-peach-100 flex flex-col items-center text-center gap-2">
-                                        <div class="w-12 h-12 rounded-full overflow-hidden border-2 border-white shadow-sm"><img src="https://images.unsplash.com/photo-1586495777744-4413f21062fa?auto=format&fit=crop&q=80&w=150" class="w-full h-full object-cover" alt="唇彩"></div>
+                                        <div class="w-12 h-12 rounded-full overflow-hidden border-2 border-white shadow-sm"><img src="./static-demo/outfit/outfit_007.jpg" class="w-full h-full object-cover" alt="唇彩"></div>
                                         <span class="text-[10px] font-bold text-champagne-800 line-clamp-1" id="desk-makeup-rec-text">精致彩妝</span>
                                     </div>
                                 </div>
@@ -3571,7 +3650,7 @@
                                 </div>
                             </div>
                             <div class="bg-flax-50 rounded-2xl p-4 border border-flax-100 flex items-center gap-4 hover:border-peach-300 transition-all cursor-pointer group mt-1">
-                                <div class="w-16 h-16 rounded-xl overflow-hidden flex-shrink-0 shadow-sm border border-white"><img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&q=80&w=150" class="w-full h-full object-cover group-hover:scale-110 transition-transform" alt="Yoga"></div>
+                                <div class="w-16 h-16 rounded-xl overflow-hidden flex-shrink-0 shadow-sm border border-white"><img src="./static-demo/outfit/outfit_029.png" class="w-full h-full object-cover group-hover:scale-110 transition-transform" alt="Yoga"></div>
                                 <div class="flex-grow"><h5 class="text-xs font-bold text-flax-900 group-hover:text-peach-500 transition-colors">晨間喚醒瑜伽 (基礎)</h5><p class="text-[10px] text-flax-400 mt-1.5 leading-relaxed">有效改善體態，提升气质與身體柔韌性，喚醒一日活力。</p></div>
                                 <div class="w-8 h-8 rounded-full bg-white flex items-center justify-center text-peach-500 shadow-sm border border-flax-200 group-hover:bg-peach-500 group-hover:text-white group-hover:border-peach-500 transition-all"><i class="fas fa-play text-xs ml-0.5"></i></div>
                             </div>
@@ -3612,21 +3691,21 @@
                             </div>
                             <div class="flex-grow space-y-3.5 overflow-y-auto no-scrollbar pr-1 mt-1">
                                 <div class="flex items-center gap-4 bg-[#FAF8F5] p-3.5 rounded-2xl border border-flax-100 hover:border-peach-300 transition-colors cursor-pointer group">
-                                    <div class="w-16 h-16 rounded-xl overflow-hidden border border-white shadow-sm flex-shrink-0 bg-flax-50"><img src="https://images.unsplash.com/photo-1494390248081-4e521a5940db?auto=format&fit=crop&q=80&w=200" class="w-full h-full object-cover group-hover:scale-110 transition-transform mix-blend-multiply" alt="Breakfast"></div>
+                                    <div class="w-16 h-16 rounded-xl overflow-hidden border border-white shadow-sm flex-shrink-0 bg-flax-50"><img src="./static-demo/outfit/outfit_005.png" class="w-full h-full object-cover group-hover:scale-110 transition-transform mix-blend-multiply" alt="Breakfast"></div>
                                     <div class="flex-grow">
                                         <div class="flex justify-between items-center mb-1.5"><h5 class="text-xs font-bold text-champagne-800 group-hover:text-peach-500 transition-colors">朝食 · 輕盈抗氧</h5><span class="text-[10px] font-bold text-peach-500 bg-peach-50 px-2 py-0.5 rounded-full border border-peach-200/50">320 kcal</span></div>
                                         <p class="text-[10px] text-flax-400 leading-relaxed">燕麥奇亞籽缽 + 半顆酪梨 + 无糖豆漿，喚醒腸胃動力。</p>
                                     </div>
                                 </div>
                                 <div class="flex items-center gap-4 bg-[#FAF8F5] p-3.5 rounded-2xl border border-flax-100 hover:border-peach-300 transition-colors cursor-pointer group">
-                                    <div class="w-16 h-16 rounded-xl overflow-hidden border border-white shadow-sm flex-shrink-0 bg-flax-50"><img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&q=80&w=200" class="w-full h-full object-cover group-hover:scale-110 transition-transform mix-blend-multiply" alt="Lunch"></div>
+                                    <div class="w-16 h-16 rounded-xl overflow-hidden border border-white shadow-sm flex-shrink-0 bg-flax-50"><img src="./static-demo/outfit/outfit_006.png" class="w-full h-full object-cover group-hover:scale-110 transition-transform mix-blend-multiply" alt="Lunch"></div>
                                     <div class="flex-grow">
                                         <div class="flex justify-between items-center mb-1.5"><h5 class="text-xs font-bold text-champagne-800 group-hover:text-peach-500 transition-colors">午食 · 飽腹優蛋白</h5><span class="text-[10px] font-bold text-peach-500 bg-peach-50 px-2 py-0.5 rounded-full border border-peach-200/50">450 kcal</span></div>
                                         <p class="text-[10px] text-flax-400 leading-relaxed">藜麥糙米飯 + 香煎鮭魚 + 鮮蔬沙拉，提供長效能量與優質脂肪。</p>
                                     </div>
                                 </div>
                                 <div class="flex items-center gap-4 bg-[#FAF8F5] p-3.5 rounded-2xl border border-flax-100 hover:border-peach-300 transition-colors cursor-pointer group">
-                                    <div class="w-16 h-16 rounded-xl overflow-hidden border border-white shadow-sm flex-shrink-0 bg-flax-50"><img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&q=80&w=200" class="w-full h-full object-cover group-hover:scale-110 transition-transform mix-blend-multiply" alt="Dinner"></div>
+                                    <div class="w-16 h-16 rounded-xl overflow-hidden border border-white shadow-sm flex-shrink-0 bg-flax-50"><img src="./static-demo/outfit/outfit_007.png" class="w-full h-full object-cover group-hover:scale-110 transition-transform mix-blend-multiply" alt="Dinner"></div>
                                     <div class="flex-grow">
                                         <div class="flex justify-between items-center mb-1.5"><h5 class="text-xs font-bold text-champagne-800 group-hover:text-peach-500 transition-colors">夕食 · 舒緩低碳</h5><span class="text-[10px] font-bold text-peach-500 bg-peach-50 px-2 py-0.5 rounded-full border border-peach-200/50">300 kcal</span></div>
                                         <p class="text-[10px] text-flax-400 leading-relaxed">鮮蝦番茄魔芋麵 + 海帶結湯，減輕夜間腸胃負擔與水腫。</p>
@@ -3652,22 +3731,90 @@
                     </div>
                 </div>
 
-                <div id="desk-beauty-overview" class="grid grid-cols-1 md:grid-cols-4 gap-4">
-                    <button onclick="openBeautySection('outfit')" class="bg-white rounded-3xl border border-flax-200 shadow-sm text-left min-h-[260px] overflow-hidden hover:border-peach-300 hover:-translate-y-0.5 transition-all"><img class="w-full h-32 object-cover" src="https://images.unsplash.com/photo-1485968579580-b6d095142e6e?auto=format&fit=crop&q=80&w=600" alt="穿搭模块"><div class="p-5 space-y-3"><span class="w-11 h-11 rounded-full bg-peach-100 flex items-center justify-center text-peach-500 text-base"><i class="fas fa-shirt"></i></span><div><strong class="block text-lg text-champagne-800 serif-title">穿搭</strong><small class="block text-xs text-flax-400 leading-relaxed mt-1">上传上衣、裤子、鞋子与配件，多选后生成试衣方案。</small></div></div></button>
-                    <button onclick="openBeautySection('hair')" class="bg-white rounded-3xl border border-flax-200 shadow-sm text-left min-h-[260px] overflow-hidden hover:border-peach-300 hover:-translate-y-0.5 transition-all"><img class="w-full h-32 object-cover" src="https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&q=80&w=600" alt="发型模块"><div class="p-5 space-y-3"><span class="w-11 h-11 rounded-full bg-peach-100 flex items-center justify-center text-peach-500 text-base"><i class="fas fa-wind"></i></span><div><strong class="block text-lg text-champagne-800 serif-title">发型</strong><small class="block text-xs text-flax-400 leading-relaxed mt-1">根据脸型、气质和当日场景生成适配发型。</small></div></div></button>
-                    <button onclick="openBeautySection('makeup')" class="bg-white rounded-3xl border border-flax-200 shadow-sm text-left min-h-[260px] overflow-hidden hover:border-peach-300 hover:-translate-y-0.5 transition-all"><img class="w-full h-32 object-cover" src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&q=80&w=600" alt="妆容护肤模块"><div class="p-5 space-y-3"><span class="w-11 h-11 rounded-full bg-peach-100 flex items-center justify-center text-peach-500 text-base"><i class="fas fa-wand-magic-sparkles"></i></span><div><strong class="block text-lg text-champagne-800 serif-title">妆容护肤</strong><small class="block text-xs text-flax-400 leading-relaxed mt-1">妆容推荐与护肤建议一站查看。</small></div></div></button>
-                    <button onclick="openBeautySection('fitness')" class="bg-white rounded-3xl border border-flax-200 shadow-sm text-left min-h-[260px] overflow-hidden hover:border-peach-300 hover:-translate-y-0.5 transition-all"><img class="w-full h-32 object-cover" src="https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&q=80&w=600" alt="美容美体模块"><div class="p-5 space-y-3"><span class="w-11 h-11 rounded-full bg-peach-100 flex items-center justify-center text-peach-500 text-base"><i class="fas fa-heartbeat"></i></span><div><strong class="block text-lg text-champagne-800 serif-title">美容美体</strong><small class="block text-xs text-flax-400 leading-relaxed mt-1">问卷后查看燃脂目标、训练安排和饮食计划。</small></div></div></button>
-                    <div onclick="showComingSoon('灵感广场')" class="bg-[#E5E5E5] rounded-3xl p-6 cursor-pointer relative overflow-hidden hover:opacity-90 transition-opacity">
-                        <div class="absolute top-3 right-3 px-3 py-1 bg-[#FFF3CD] text-[#856404] text-[9px] font-bold rounded-full z-10">即将上线</div>
-                        <div class="w-14 h-14 rounded-full bg-white/50 flex items-center justify-center mb-4"><i class="fas fa-star text-[#999999] text-xl"></i></div>
-                        <h3 class="text-sm font-bold text-[#999999] serif-title">灵感广场</h3>
-                        <p class="text-xs text-[#999999] mt-2">发现更多风格灵感</p>
+                <div id="desk-beauty-overview" class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <!-- 妆容护肤 -->
+                    <button onclick="openBeautySection('makeup')" class="group bg-white rounded-3xl border border-flax-200 shadow-sm text-left overflow-hidden hover:shadow-lg hover:border-peach-200 hover:-translate-y-0.5 transition-all duration-300">
+                        <div class="relative w-full h-36 overflow-hidden">
+                            <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="./static-demo/makeup/sd_makeup_daily.png" alt="妆容护肤">
+                            <div class="absolute bottom-0 left-0 right-0 h-14 bg-gradient-to-t from-black/40 to-transparent"></div>
+                        </div>
+                        <div class="p-5 space-y-3">
+                            <span class="inline-flex w-10 h-10 rounded-full bg-gradient-to-br from-peach-400 to-peach-300 items-center justify-center text-white text-sm shadow-sm"><i class="fas fa-wand-magic-sparkles"></i></span>
+                            <div>
+                                <strong class="block text-base text-champagne-800 serif-title tracking-wide">妆容护肤</strong>
+                                <small class="block text-xs text-flax-400 leading-relaxed mt-1">妆容推荐与护肤建议一站查看。</small>
+                            </div>
+                        </div>
+                    </button>
+                    <!-- 穿搭 -->
+                    <button onclick="openBeautySection('outfit')" class="group bg-white rounded-3xl border border-flax-200 shadow-sm text-left overflow-hidden hover:shadow-lg hover:border-peach-200 hover:-translate-y-0.5 transition-all duration-300">
+                        <div class="relative w-full h-36 overflow-hidden">
+                            <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="./static-demo/outfit/outfit_025.png" alt="穿搭">
+                            <div class="absolute bottom-0 left-0 right-0 h-14 bg-gradient-to-t from-black/40 to-transparent"></div>
+                        </div>
+                        <div class="p-5 space-y-3">
+                            <span class="inline-flex w-10 h-10 rounded-full bg-gradient-to-br from-peach-400 to-peach-300 items-center justify-center text-white text-sm shadow-sm"><i class="fas fa-shirt"></i></span>
+                            <div>
+                                <strong class="block text-base text-champagne-800 serif-title tracking-wide">穿搭</strong>
+                                <small class="block text-xs text-flax-400 leading-relaxed mt-1">上传上衣、裤子、鞋子与配件，多选后生成试衣方案。</small>
+                            </div>
+                        </div>
+                    </button>
+                    <!-- 发型 -->
+                    <button onclick="openBeautySection('hair')" class="group bg-white rounded-3xl border border-flax-200 shadow-sm text-left overflow-hidden hover:shadow-lg hover:border-peach-200 hover:-translate-y-0.5 transition-all duration-300">
+                        <div class="relative w-full h-36 overflow-hidden">
+                            <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="./static-demo/hairstyle/tut_009.jpg" alt="发型">
+                            <div class="absolute bottom-0 left-0 right-0 h-14 bg-gradient-to-t from-black/40 to-transparent"></div>
+                        </div>
+                        <div class="p-5 space-y-3">
+                            <span class="inline-flex w-10 h-10 rounded-full bg-gradient-to-br from-peach-400 to-peach-300 items-center justify-center text-white text-sm shadow-sm"><i class="fas fa-wind"></i></span>
+                            <div>
+                                <strong class="block text-base text-champagne-800 serif-title tracking-wide">发型</strong>
+                                <small class="block text-xs text-flax-400 leading-relaxed mt-1">根据脸型、气质和当日场景生成适配发型。</small>
+                            </div>
+                        </div>
+                    </button>
+                    <!-- 美容美体 -->
+                    <button onclick="openBeautySection('fitness')" class="group bg-white rounded-3xl border border-flax-200 shadow-sm text-left overflow-hidden hover:shadow-lg hover:border-peach-200 hover:-translate-y-0.5 transition-all duration-300">
+                        <div class="relative w-full h-36 overflow-hidden">
+                            <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="./static-demo/fitness/sd_fitness_yoga.png" alt="美容美体">
+                            <div class="absolute bottom-0 left-0 right-0 h-14 bg-gradient-to-t from-black/40 to-transparent"></div>
+                        </div>
+                        <div class="p-5 space-y-3">
+                            <span class="inline-flex w-10 h-10 rounded-full bg-gradient-to-br from-peach-400 to-peach-300 items-center justify-center text-white text-sm shadow-sm"><i class="fas fa-heartbeat"></i></span>
+                            <div>
+                                <strong class="block text-base text-champagne-800 serif-title tracking-wide">美容美体</strong>
+                                <small class="block text-xs text-flax-400 leading-relaxed mt-1">问卷后查看燃脂目标、训练安排和饮食计划。</small>
+                            </div>
+                        </div>
+                    </button>
+                    <!-- 灵感广场 (即将上线) -->
+                    <div onclick="showComingSoon('灵感广场')" class="group bg-white rounded-3xl border border-flax-200 shadow-sm text-left overflow-hidden cursor-pointer hover:shadow-lg transition-all duration-300">
+                        <div class="relative w-full h-36 bg-gradient-to-br from-flax-50 to-flax-100 flex items-center justify-center">
+                            <i class="fas fa-star text-[#D4C5B0] text-5xl opacity-60 group-hover:opacity-80 group-hover:scale-110 transition-all duration-500"></i>
+                            <div class="absolute top-3 right-3 px-3 py-1 bg-flax-900/60 text-white text-[9px] font-semibold rounded-full backdrop-blur-sm">即将上线</div>
+                        </div>
+                        <div class="p-5 space-y-3">
+                            <span class="inline-flex w-10 h-10 rounded-full bg-flax-100 items-center justify-center text-flax-400 text-sm"><i class="fas fa-star"></i></span>
+                            <div>
+                                <strong class="block text-base text-champagne-800 serif-title tracking-wide">灵感广场</strong>
+                                <small class="block text-xs text-flax-400 leading-relaxed mt-1">发现更多风格灵感</small>
+                            </div>
+                        </div>
                     </div>
-                    <div onclick="showComingSoon('风格测试')" class="bg-[#E5E5E5] rounded-3xl p-6 cursor-pointer relative overflow-hidden hover:opacity-90 transition-opacity">
-                        <div class="absolute top-3 right-3 px-3 py-1 bg-[#FFF3CD] text-[#856404] text-[9px] font-bold rounded-full z-10">即将上线</div>
-                        <div class="w-14 h-14 rounded-full bg-white/50 flex items-center justify-center mb-4"><i class="fas fa-palette text-[#999999] text-xl"></i></div>
-                        <h3 class="text-sm font-bold text-[#999999] serif-title">风格测试</h3>
-                        <p class="text-xs text-[#999999] mt-2">测测你的专属风格</p>
+                    <!-- 风格测试 (即将上线) -->
+                    <div onclick="showComingSoon('风格测试')" class="group bg-white rounded-3xl border border-flax-200 shadow-sm text-left overflow-hidden cursor-pointer hover:shadow-lg transition-all duration-300">
+                        <div class="relative w-full h-36 bg-gradient-to-br from-flax-50 to-flax-100 flex items-center justify-center">
+                            <i class="fas fa-palette text-[#D4C5B0] text-5xl opacity-60 group-hover:opacity-80 group-hover:scale-110 transition-all duration-500"></i>
+                            <div class="absolute top-3 right-3 px-3 py-1 bg-flax-900/60 text-white text-[9px] font-semibold rounded-full backdrop-blur-sm">即将上线</div>
+                        </div>
+                        <div class="p-5 space-y-3">
+                            <span class="inline-flex w-10 h-10 rounded-full bg-flax-100 items-center justify-center text-flax-400 text-sm"><i class="fas fa-palette"></i></span>
+                            <div>
+                                <strong class="block text-base text-champagne-800 serif-title tracking-wide">风格测试</strong>
+                                <small class="block text-xs text-flax-400 leading-relaxed mt-1">测测你的专属风格</small>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -3693,7 +3840,7 @@
                     <div class="space-y-3 flex-grow overflow-y-auto no-scrollbar">
                         <div onclick="openInspirationDetail('1')" class="bg-[#FAF8F5] rounded-2xl overflow-hidden border border-flax-100 cursor-pointer hover:border-peach-200 transition-all">
                             <div class="relative w-full h-36 overflow-hidden">
-                                <img src="https://images.unsplash.com/photo-1595777457583-95e059d581b8?auto=format&fit=crop&q=80&w=600" class="w-full h-full object-cover" alt="穿搭灵感">
+                                <img src="./static-demo/outfit/outfit_023.png" class="w-full h-full object-cover" alt="穿搭灵感">
                                 <div class="absolute top-2 left-2 px-2 py-0.5 bg-white/90 backdrop-blur-sm rounded-full text-[9px] font-bold text-peach-500">一键套用</div>
                             </div>
                             <div class="p-3">
@@ -3703,7 +3850,7 @@
                         </div>
                         <div onclick="openInspirationDetail('2')" class="bg-[#FAF8F5] rounded-2xl overflow-hidden border border-flax-100 cursor-pointer hover:border-peach-200 transition-all">
                             <div class="relative w-full h-36 overflow-hidden">
-                                <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&q=80&w=600" class="w-full h-full object-cover" alt="妆容教程">
+                                <img src="./static-demo/outfit/outfit_000.png" class="w-full h-full object-cover" alt="妆容教程">
                             </div>
                             <div class="p-3">
                                 <h3 class="text-xs font-bold text-champagne-800">职场通勤妆容快速上手</h3>
@@ -3726,7 +3873,7 @@
                         <div class="space-y-2">
                             <div class="flex items-center gap-2">
                                 <div class="w-10 h-10 rounded-lg overflow-hidden bg-flax-50 flex-shrink-0">
-                                    <img src="https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&q=80&w=100" class="w-full h-full object-cover" alt="收藏">
+                                    <img src="./static-demo/hairstyle/hair_022.png" class="w-full h-full object-cover" alt="收藏">
                                 </div>
                                 <div class="flex-grow">
                                     <p class="text-[9px] font-bold text-champagne-800">适合圆脸的短发造型</p>
@@ -3837,7 +3984,7 @@
                     <div class="space-y-6 text-center">
                         <span class="px-2.5 py-1 bg-peach-100 text-peach-500 text-[10px] rounded-full font-bold tracking-wider block mx-auto w-max">個人美学 DNA</span>
                         <div class="relative w-28 h-32 mx-auto mt-2 rounded-[24px] overflow-hidden shadow-lg border border-flax-200">
-                            <img id="desk-profile-avatar" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=600" class="w-full h-full object-cover" alt="Profile avatar" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=600'">
+                            <img id="desk-profile-avatar" src="./static-demo/hairstyle/hair_007.png" class="w-full h-full object-cover" alt="Profile avatar" onerror="this.onerror=null;this.src='./static-demo/hairstyle/hair_007.png'">
                         </div>
                         <div>
                             <h3 class="serif-title text-xl font-bold text-flax-900" id="desk-profile-username">陳知微</h3>
@@ -3900,9 +4047,9 @@
         ];
 
         const presets = {
-            'oval-warm': { face: "古典優雅鵝蛋臉", faceDesc: "額頭饱满，側顏线条極其温婉圓滑。", skin: "温润暖杏皮", matchScore: "99% 姿造高雅風", userName: "陳知微", skinPill1: "暖白皮", skinPill2: "嫩白", styleTag: "溫柔知性風", reports: 5, invitePoints: 0, coupons: 2, ratioVal: "三庭五眼协调", styleVal: "溫柔知性", portraitUrl: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=600", tryonBeforeUrl: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=600", tryonAfterUrl: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=600", commute: { outfit: "卡其收腰西裝 + 亞麻長褲", hair: "蓬鬆高雅丸子頭", makeup: "杏仁肉桂色腮紅與唇釉" }, date: { outfit: "法式珍珠排扣長洋裝", hair: "慵懶微捲栗色長髮", makeup: "亮面草莓粉潤唇膏" }, interview: { outfit: "直挺藏青西裝套裝", hair: "乾淨俐落低馬尾", makeup: "低調霧面肉粉色唇膏" }, travel: { outfit: "極簡棉麻防曬衫 + 寬邊草帽", hair: "隨性溫柔編髮", makeup: "西柚果凍水光唇" } },
-            'round-fair': { face: "甜美幼態圓臉", faceDesc: "下巴短小精致，面部饱满通透。", skin: "櫻粉通透冷白皮", matchScore: "95% 活力元氣風", userName: "林小夏", skinPill1: "冷白皮", skinPill2: "櫻粉", styleTag: "活力元氣風", reports: 3, invitePoints: 50, coupons: 1, ratioVal: "膠原蛋白饱满", styleVal: "活力元氣", portraitUrl: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=400", tryonBeforeUrl: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400", tryonAfterUrl: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400", commute: { outfit: "米白休閒襯衫 + 牛仔褲", hair: "清新空氣瀏海短髮", makeup: "蜜橘腮紅與水光唇釉" }, date: { outfit: "櫻粉泡泡袖針織衫 + 碎花裙", hair: "甜美雙側麻花辮", makeup: "櫻桃果凍咬唇妝" }, interview: { outfit: "淺杏色收腰連身洋裝", hair: "微蓬側分半公主頭", makeup: "溫柔蜜桃奶茶唇膏" }, travel: { outfit: "防曬開衫 + 寬鬆百褶短裙", hair: "元氣雙高馬尾", makeup: "蜜桃果汁糖唇釉" } },
-            'square-olive': { face: "高冷超模稜角方臉", faceDesc: "下頜線極其硬朗分明，下巴微寬。", skin: "健康陽光小麥色", matchScore: "97% 雅酷前衛風", userName: "宋晴川", skinPill1: "小麥色", skinPill2: "健康", styleTag: "雅酷前衛風", reports: 4, invitePoints: 80, coupons: 3, ratioVal: "高折疊度骨相", styleVal: "雅酷前衛", portraitUrl: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=400", tryonBeforeUrl: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=400", tryonAfterUrl: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=400", commute: { outfit: "冷灰西裝外套 + 灰色闊腿褲", hair: "俐落側分中性鮑伯頭", makeup: "大地色眼影與裸色粉橘唇膏" }, date: { outfit: "墨綠緞面露肩禮服", hair: "單側大波浪捲髮", makeup: "冷調野莓复古红唇" }, interview: { outfit: "高領黑色打底 + 米白經典西裝", hair: "俐落高盤馬尾", makeup: "霧面紅棕色復古唇釉" }, travel: { outfit: "黑色工裝連身褲 + 太陽眼鏡", hair: "隨性帥氣抓夾盤髮", makeup: "高級土色煙燻裸唇" } }
+            'oval-warm': { face: "古典優雅鵝蛋臉", faceDesc: "額頭饱满，側顏线条極其温婉圓滑。", skin: "温润暖杏皮", matchScore: "99% 姿造高雅風", userName: "陳知微", skinPill1: "暖白皮", skinPill2: "嫩白", styleTag: "溫柔知性風", reports: 5, invitePoints: 0, coupons: 2, ratioVal: "三庭五眼协调", styleVal: "溫柔知性", portraitUrl: "./static-demo/hairstyle/hair_007.png", tryonBeforeUrl: "./static-demo/hairstyle/hair_007.png", tryonAfterUrl: "./static-demo/hairstyle/hair_007.png", commute: { outfit: "卡其收腰西裝 + 亞麻長褲", hair: "蓬鬆高雅丸子頭", makeup: "杏仁肉桂色腮紅與唇釉" }, date: { outfit: "法式珍珠排扣長洋裝", hair: "慵懶微捲栗色長髮", makeup: "亮面草莓粉潤唇膏" }, interview: { outfit: "直挺藏青西裝套裝", hair: "乾淨俐落低馬尾", makeup: "低調霧面肉粉色唇膏" }, travel: { outfit: "極簡棉麻防曬衫 + 寬邊草帽", hair: "隨性溫柔編髮", makeup: "西柚果凍水光唇" } },
+            'round-fair': { face: "甜美幼態圓臉", faceDesc: "下巴短小精致，面部饱满通透。", skin: "櫻粉通透冷白皮", matchScore: "95% 活力元氣風", userName: "林小夏", skinPill1: "冷白皮", skinPill2: "櫻粉", styleTag: "活力元氣風", reports: 3, invitePoints: 50, coupons: 1, ratioVal: "膠原蛋白饱满", styleVal: "活力元氣", portraitUrl: "./static-demo/hairstyle/hair_027.png", tryonBeforeUrl: "./static-demo/hairstyle/hair_028.png", tryonAfterUrl: "./static-demo/hairstyle/hair_028.png", commute: { outfit: "米白休閒襯衫 + 牛仔褲", hair: "清新空氣瀏海短髮", makeup: "蜜橘腮紅與水光唇釉" }, date: { outfit: "櫻粉泡泡袖針織衫 + 碎花裙", hair: "甜美雙側麻花辮", makeup: "櫻桃果凍咬唇妝" }, interview: { outfit: "淺杏色收腰連身洋裝", hair: "微蓬側分半公主頭", makeup: "溫柔蜜桃奶茶唇膏" }, travel: { outfit: "防曬開衫 + 寬鬆百褶短裙", hair: "元氣雙高馬尾", makeup: "蜜桃果汁糖唇釉" } },
+            'square-olive': { face: "高冷超模稜角方臉", faceDesc: "下頜線極其硬朗分明，下巴微寬。", skin: "健康陽光小麥色", matchScore: "97% 雅酷前衛風", userName: "宋晴川", skinPill1: "小麥色", skinPill2: "健康", styleTag: "雅酷前衛風", reports: 4, invitePoints: 80, coupons: 3, ratioVal: "高折疊度骨相", styleVal: "雅酷前衛", portraitUrl: "./static-demo/outfit/outfit_023.png", tryonBeforeUrl: "./static-demo/outfit/outfit_023.png", tryonAfterUrl: "./static-demo/outfit/outfit_023.png", commute: { outfit: "冷灰西裝外套 + 灰色闊腿褲", hair: "俐落側分中性鮑伯頭", makeup: "大地色眼影與裸色粉橘唇膏" }, date: { outfit: "墨綠緞面露肩禮服", hair: "單側大波浪捲髮", makeup: "冷調野莓复古红唇" }, interview: { outfit: "高領黑色打底 + 米白經典西裝", hair: "俐落高盤馬尾", makeup: "霧面紅棕色復古唇釉" }, travel: { outfit: "黑色工裝連身褲 + 太陽眼鏡", hair: "隨性帥氣抓夾盤髮", makeup: "高級土色煙燻裸唇" } }
         };
 
         const rechargePlans = [
@@ -4633,19 +4780,19 @@
 
             const effectImages = {
                 makeup: [
-                    'https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&q=80&w=600',
-                    'https://images.unsplash.com/photo-1595777457583-95e059d581b8?auto=format&fit=crop&q=80&w=600',
-                    'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80&w=600'
+                    './static-demo/outfit/outfit_000.png',
+                    './static-demo/outfit/outfit_023.png',
+                    './static-demo/outfit/outfit_028.png'
                 ],
                 outfit: [
-                    'https://images.unsplash.com/photo-1485968579580-b6d095142e6e?auto=format&fit=crop&q=80&w=600',
-                    'https://images.unsplash.com/photo-1551462572-3d1629364f06?auto=format&fit=crop&q=80&w=600',
-                    'https://images.unsplash.com/photo-1558642452-9d2a7deb7f62?auto=format&fit=crop&q=80&w=600'
+                    './static-demo/outfit/outfit_025.png',
+                    './static-demo/outfit/outfit_030.png',
+                    './static-demo/outfit/outfit_031.png'
                 ],
                 hair: [
-                    'https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&q=80&w=600',
-                    'https://images.unsplash.com/photo-1523413651479-597eb2da0ad6?auto=format&fit=crop&q=80&w=600',
-                    'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=600'
+                    './static-demo/hairstyle/tut_009.jpg',
+                    './static-demo/hairstyle/hair_020.png',
+                    './static-demo/hairstyle/hair_022.png'
                 ]
             };
 
@@ -4676,19 +4823,19 @@
 
             const effectImages = {
                 makeup: [
-                    'https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&q=80&w=600',
-                    'https://images.unsplash.com/photo-1595777457583-95e059d581b8?auto=format&fit=crop&q=80&w=600',
-                    'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80&w=600'
+                    './static-demo/outfit/outfit_000.png',
+                    './static-demo/outfit/outfit_023.png',
+                    './static-demo/outfit/outfit_028.png'
                 ],
                 outfit: [
-                    'https://images.unsplash.com/photo-1485968579580-b6d095142e6e?auto=format&fit=crop&q=80&w=600',
-                    'https://images.unsplash.com/photo-1551462572-3d1629364f06?auto=format&fit=crop&q=80&w=600',
-                    'https://images.unsplash.com/photo-1558642452-9d2a7deb7f62?auto=format&fit=crop&q=80&w=600'
+                    './static-demo/outfit/outfit_025.png',
+                    './static-demo/outfit/outfit_030.png',
+                    './static-demo/outfit/outfit_031.png'
                 ],
                 hair: [
-                    'https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&q=80&w=600',
-                    'https://images.unsplash.com/photo-1523413651479-597eb2da0ad6?auto=format&fit=crop&q=80&w=600',
-                    'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=600'
+                    './static-demo/hairstyle/tut_009.jpg',
+                    './static-demo/hairstyle/hair_020.png',
+                    './static-demo/hairstyle/hair_022.png'
                 ]
             };
 
@@ -4741,9 +4888,9 @@
 
         function changeHairEffect(index) {
             const hairImages = [
-                'https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&q=80&w=600',
-                'https://images.unsplash.com/photo-1523413651479-597eb2da0ad6?auto=format&fit=crop&q=80&w=600',
-                'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=600'
+                './static-demo/hairstyle/tut_009.jpg',
+                './static-demo/hairstyle/hair_020.png',
+                './static-demo/hairstyle/hair_022.png'
             ];
             const img = document.getElementById('hair-effect-img');
             if (img) img.src = hairImages[index - 1];
@@ -4761,9 +4908,9 @@
 
         function changeOutfitEffect(index) {
             const outfitImages = [
-                'https://images.unsplash.com/photo-1485968579580-b6d095142e6e?auto=format&fit=crop&q=80&w=600',
-                'https://images.unsplash.com/photo-1551462572-3d1629364f06?auto=format&fit=crop&q=80&w=600',
-                'https://images.unsplash.com/photo-1558642452-9d2a7deb7f62?auto=format&fit=crop&q=80&w=600'
+                './static-demo/outfit/outfit_025.png',
+                './static-demo/outfit/outfit_030.png',
+                './static-demo/outfit/outfit_031.png'
             ];
             const img = document.getElementById('outfit-effect-img');
             if (img) img.src = outfitImages[index - 1];
@@ -4781,9 +4928,9 @@
 
         function changeMakeupEffect(index) {
             const makeupImages = [
-                'https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&q=80&w=600',
-                'https://images.unsplash.com/photo-1595777457583-95e059d581b8?auto=format&fit=crop&q=80&w=600',
-                'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80&w=600'
+                './static-demo/outfit/outfit_000.png',
+                './static-demo/outfit/outfit_023.png',
+                './static-demo/outfit/outfit_028.png'
             ];
             const img = document.getElementById('makeup-effect-img');
             if (img) img.src = makeupImages[index - 1];
@@ -5454,63 +5601,63 @@
                         name: '日常妆容',
                         icon: '💄',
                         items: [
-                            { name: '裸妆', img: 'https://picsum.photos/seed/make1/200/250', id: 'make1' },
-                            { name: '通勤妆', img: 'https://picsum.photos/seed/make2/200/250', id: 'make2' },
-                            { name: '元气妆', img: 'https://picsum.photos/seed/make3/200/250', id: 'make3' }
+                            { name: '裸妆', img: './src/static/materials/makeup/daily/01_nude.png', id: 'make1' },
+                            { name: '通勤妆', img: './src/static/materials/makeup/daily/02_commute.png', id: 'make2' },
+                            { name: '元气妆', img: './src/static/materials/makeup/daily/03_energetic.png', id: 'make3' }
                         ]
                     },
                     {
                         name: '约会妆容',
                         icon: '🌹',
                         items: [
-                            { name: '约会妆', img: 'https://picsum.photos/seed/make4/200/250', id: 'make4' },
-                            { name: '晚宴妆', img: 'https://picsum.photos/seed/make5/200/250', id: 'make5' },
-                            { name: '甜美妆', img: 'https://picsum.photos/seed/make6/200/250', id: 'make6' }
+                            { name: '约会妆', img: './src/static/materials/makeup/date/04_romantic.png', id: 'make4' },
+                            { name: '晚宴妆', img: './src/static/materials/makeup/date/05_evening.png', id: 'make5' },
+                            { name: '甜美妆', img: './src/static/materials/makeup/date/06_sweetgirl.png', id: 'make6' }
                         ]
                     },
                     {
                         name: '通勤妆容',
                         icon: '👩‍💼',
                         items: [
-                            { name: '职业妆', img: 'https://picsum.photos/seed/make7/200/250', id: 'make7' },
-                            { name: '淡雅妆', img: 'https://picsum.photos/seed/make8/200/250', id: 'make8' },
-                            { name: '精致妆', img: 'https://picsum.photos/seed/make9/200/250', id: 'make9' }
+                            { name: '职业妆', img: './src/static/materials/makeup/work/07_career.png', id: 'make7' },
+                            { name: '淡雅妆', img: './src/static/materials/makeup/work/08_elegant.png', id: 'make8' },
+                            { name: '精致妆', img: './src/static/materials/makeup/work/09_refined.png', id: 'make9' }
                         ]
                     },
                     {
                         name: '上课妆容',
                         icon: '🎒',
                         items: [
-                            { name: '学生妆', img: 'https://picsum.photos/seed/make10/200/250', id: 'make10' },
-                            { name: '清纯妆', img: 'https://picsum.photos/seed/make11/200/250', id: 'make11' },
-                            { name: '素颜妆', img: 'https://picsum.photos/seed/make12/200/250', id: 'make12' }
+                            { name: '学生妆', img: './src/static/materials/makeup/school/10_student.png', id: 'make10' },
+                            { name: '清纯妆', img: './src/static/materials/makeup/school/11_pure.png', id: 'make11' },
+                            { name: '素颜妆', img: './src/static/materials/makeup/school/12_nomakeup.png', id: 'make12' }
                         ]
                     },
                     {
                         name: '聚会妆容',
                         icon: '🎉',
                         items: [
-                            { name: '派对妆', img: 'https://picsum.photos/seed/make13/200/250', id: 'make13' },
-                            { name: '闪亮妆', img: 'https://picsum.photos/seed/make14/200/250', id: 'make14' },
-                            { name: '烟熏妆', img: 'https://picsum.photos/seed/make15/200/250', id: 'make15' }
+                            { name: '派对妆', img: './src/static/materials/makeup/party/13_festival.png', id: 'make13' },
+                            { name: '闪亮妆', img: './src/static/materials/makeup/party/14_glam.png', id: 'make14' },
+                            { name: '烟熏妆', img: './src/static/materials/makeup/party/15_smokey.png', id: 'make15' }
                         ]
                     },
                     {
                         name: '面试妆容',
                         icon: '💼',
                         items: [
-                            { name: '正式妆', img: 'https://picsum.photos/seed/make16/200/250', id: 'make16' },
-                            { name: '干练妆', img: 'https://picsum.photos/seed/make17/200/250', id: 'make17' },
-                            { name: '自信妆', img: 'https://picsum.photos/seed/make18/200/250', id: 'make18' }
+                            { name: '正式妆', img: './src/static/materials/makeup/interview/16_formal.png', id: 'make16' },
+                            { name: '干练妆', img: './src/static/materials/makeup/interview/17_sharp.png', id: 'make17' },
+                            { name: '自信妆', img: './src/static/materials/makeup/interview/18_poised.png', id: 'make18' }
                         ]
                     },
                     {
                         name: '旅行妆容',
                         icon: '✈️',
                         items: [
-                            { name: '轻薄妆', img: 'https://picsum.photos/seed/make19/200/250', id: 'make19' },
-                            { name: '防晒妆', img: 'https://picsum.photos/seed/make20/200/250', id: 'make20' },
-                            { name: '自然妆', img: 'https://picsum.photos/seed/make21/200/250', id: 'make21' }
+                            { name: '轻薄妆', img: './src/static/materials/makeup/travel/19_light.png', id: 'make19' },
+                            { name: '防晒妆', img: './src/static/materials/makeup/travel/20_sunprotect.png', id: 'make20' },
+                            { name: '自然妆', img: './src/static/materials/makeup/travel/21_natural.png', id: 'make21' }
                         ]
                     }
                 ],
@@ -5520,76 +5667,238 @@
             });
         }
 
-        function openMyCourses() {
-            const existing = document.getElementById('course-overlay');
-            if (existing) existing.remove();
 
-            const overlay = document.createElement('div');
-            overlay.className = 'course-overlay';
-            overlay.id = 'course-overlay';
+        // ======== Course Data ========
+        const COURSES = [
+            {id:'daily-makeup', title:'日常通勤妆容', subtitle:'新手友好 · 每日15分钟', headerImg:'./static-demo/makeup/sd_makeup_daily.png', badge:'新手', steps:14, duration:43, desc:'如果你化妆零基础或者水平忽高忽低，那么这套妆教将会完美契合你。这是一套偏日常系的妆容，为你个人特征量身定制。', difficulty:'难度：新手', style:'风格：日常通勤', keywords:['日常','通勤','提升气色','不夸张','快速上手'], locked:false, cost:0},
+            {id:'date-makeup', title:'约会心动妆容', subtitle:'氛围感拉满 · 温柔斩男', headerImg:'./static-demo/makeup/sd_makeup_date.png', badge:'进阶', badgeVip:true, steps:18, duration:58, desc:'柔玫瑰色眼影+水光腮红，打造楚楚可怜又精致的心动感。适合约会、情人节、纪念日等重要场合。', difficulty:'难度：进阶', style:'风格：温柔心动', keywords:['约会','玫瑰色','氛围感','水光肌','斩男'], locked:true, cost:50},
+            {id:'professional-makeup', title:'职场通勤妆容', subtitle:'专业干练 · 面试加分', headerImg:'./static-demo/makeup/sd_makeup_professional.png', badge:'进阶', steps:16, duration:52, desc:'干净利落的底妆、低调大地色系眼影、恰到好处的修容，打造专业、可信的职场形象。', difficulty:'难度：进阶', style:'风格：专业干练', keywords:['职场','面试','专业','大地色','干净'], locked:false, cost:0},
+            {id:'evening-makeup', title:'晚宴红毯妆容', subtitle:'华丽震撼 · C位出道', headerImg:'./static-demo/makeup/sd_makeup_evening.png', badge:'高级', badgeVip:true, steps:22, duration:80, desc:'大胆配色+精致细节+立体光影，让你成为任何场合的焦点。适合派对、晚宴、婚礼等大型场合。', difficulty:'难度：高级', style:'风格：华丽震撼', keywords:['晚宴','红毯','派对','闪亮','C位'], locked:true, cost:80},
+            {id:'vitality-makeup', title:'元气活力妆容', subtitle:'少女感爆棚 · 清透自然', headerImg:'./static-demo/makeup/sd_makeup_vitality.png', badge:'入门', steps:12, duration:35, desc:'清透底妆+亮色调+少女感腮红，洋溢青春活力。适合日常上学、逛街、运动等休闲场合。', difficulty:'难度：入门', style:'风格：元气少女', keywords:['元气','少女感','清透','自然','上学'], locked:false, cost:0}
+        ];
+        
+        const PRODUCT_CATALOG = {
+            '美妆产品': [
+                { name: 'Colorkey珂拉琪 小金筷眉笔', tags: ['细致笔触','柔和自然'], price: 50, original: 89.9, img: './static-demo/makeup/sd_makeup_daily.png' },
+                { name: '3CE 四色眼影盘 哑光大地色', tags: ['百搭神盘','粉质细腻'], price: 89, original: 160, img: './static-demo/makeup/sd_makeup_professional.png' },
+                { name: 'TIMAGE彩棠 双拼高光膏', tags: ['填平泪沟','拔高山根'], price: 134, original: 229, img: './static-demo/makeup/sd_makeup_evening.png' },
+            ],
+            '底妆产品': [
+                { name: '雅诗兰黛 DW 持妆粉底液', tags: ['遮瑕力强','持妆24h'], price: 430, original: 520, img: './static-demo/makeup/sd_makeup_daily.png' },
+                { name: 'NARS 超方瓶流光美肌粉底', tags: ['滋润服帖','自然光泽'], price: 420, original: 480, img: './static-demo/makeup/sd_makeup_date.png' },
+                { name: '兰蔻菁纯臻颜精华粉底', tags: ['养肤','高级光泽'], price: 980, original: 1100, img: './static-demo/makeup/sd_makeup_vitality.png' },
+            ],
+            '护肤产品': [
+                { name: '薇诺娜舒敏保湿特护霜', tags: ['修护敏感','保湿'], price: 68, original: 88, img: './static-demo/makeup/sd_makeup_professional.png' },
+                { name: '修丽可 CE 精华', tags: ['抗氧化','提亮'], price: 1490, original: 1680, img: './static-demo/makeup/sd_makeup_evening.png' },
+                { name: '欧莱雅复颜玻尿酸精华', tags: ['补水','淡化细纹'], price: 199, original: 299, img: './static-demo/makeup/sd_makeup_vitality.png' },
+            ],
+            '洁面产品': [
+                { name: '氨基酸洁面乳 温和清洁', tags: ['温和不刺激','氨基酸配方'], price: 79, original: 119, img: './static-demo/makeup/sd_makeup_daily.png' },
+                { name: '兰蔻清滢柔肤洁面乳', tags: ['卸妆二合一','保湿'], price: 380, original: 450, img: './static-demo/makeup/sd_makeup_date.png' },
+                { name: '黛珂洁面膏 深层清洁', tags: ['泡沫绵密','不紧绷'], price: 240, original: 290, img: './static-demo/makeup/sd_makeup_professional.png' },
+            ],
+            '底妆工具': [
+                { name: '尔木萄 100分粉扑气垫棉花糖', tags: ['细密微孔','硬核省粉'], price: 29.9, original: 89, img: './static-demo/makeup/face_01.png' },
+                { name: '古迪 散粉刷大号蓬松腮红刷', tags: ['轻松抓粉','细腻触感'], price: 13, original: 29.6, img: './static-demo/makeup/face_02.png' },
+                { name: 'ENERGY艾诺琪 螺旋刷纤维毛', tags: ['丰富纤毛','不易掉毛'], price: 16.2, original: 18, img: './static-demo/makeup/face_03.png' },
+            ],
+            '美妆工具': [
+                { name: '斜角眉刷 + 眉梳套装', tags: ['双头设计','多功能'], price: 9.9, original: 25, img: './static-demo/makeup/face_01.png' },
+                { name: '眼影刷套装 7支装', tags: ['纤维毛','不扎眼'], price: 39, original: 99, img: './static-demo/makeup/face_02.png' },
+                { name: '睫毛夹 自然卷翘', tags: ['广角设计','不夹眼皮'], price: 19, original: 49, img: './static-demo/makeup/face_03.png' },
+            ],
+            '辅助工具': [
+                { name: '双眼皮贴 自然隐形 120贴', tags: ['隐形','粘性好'], price: 15, original: 39, img: './static-demo/makeup/face_01.png' },
+                { name: '吸油面纸 100片', tags: ['天然纸浆','吸油不吸水'], price: 12, original: 29, img: './static-demo/makeup/face_02.png' },
+                { name: '卸妆棉 500片', tags: ['亲肤','不掉屑'], price: 25, original: 59, img: './static-demo/makeup/face_03.png' },
+            ],
+            '清洁工具': [
+                { name: '洗刷皂 专业化妆刷清洁', tags: ['温和去油','不伤毛'], price: 19, original: 45, img: './static-demo/makeup/face_01.png' },
+                { name: '洗刷垫 硅胶防滑', tags: ['纹理防滑','易清洗'], price: 15, original: 39, img: './static-demo/makeup/face_02.png' },
+                { name: '化妆海绵清洗剂', tags: ['快速溶解','无残留'], price: 18, original: 45, img: './static-demo/makeup/face_03.png' },
+            ]
+        };
+let currentCourseId = null;
+        function loadCourseProgress() { try { return JSON.parse(localStorage.getItem('zz_course_progress') || '{}'); } catch(e) { return {}; } }
+        function saveCourseProgress(data) { localStorage.setItem('zz_course_progress', JSON.stringify(data)); }
 
-            overlay.innerHTML = `
-                <div class="course-header">
-                    <img src="https://picsum.photos/seed/course-header/400/300" class="course-header-img">
-                    <button class="course-back-btn" onclick="closeCourse()">←</button>
-                    <div class="course-vip-badge">徒手捏脸 ✓</div>
-                </div>
-                <div class="course-tabs">
-                    <div class="course-tab active" onclick="switchCourseTab('intro')">课程介绍</div>
-                    <div class="course-tab" onclick="switchCourseTab('prep')">课前准备</div>
-                    <div class="course-tab" onclick="switchCourseTab('progress')">学习进度</div>
-                </div>
-                <div class="course-body" id="course-body">
-                    ${generateCourseIntro()}
-                </div>
-                <div class="course-bottom-bar">
-                    <button class="course-start-btn" onclick="startCourse()">马上开学</button>
-                </div>
-            `;
+        // ======== Course List (P0) ========
+        function openMyCourses() { openCourseList(); }
 
+        function openCourseList() {
+            var existing = document.getElementById('course-overlay'); if (existing) existing.remove();
+            var progress = loadCourseProgress();
+            var overlay = document.createElement('div');
+            overlay.className = 'course-list-overlay'; overlay.id = 'course-overlay';
+            var unlocked = COURSES.filter(function(c){return !c.locked;});
+            var locked = COURSES.filter(function(c){return c.locked;});
+            var cards = '', lockedHtml = '';
+            unlocked.forEach(function(course){
+                var prog = progress[course.id] || 0;
+                var badge = prog===course.steps ? '<span class="course-list-card-badge">✓ 已完成</span>' : prog>0 ? '<span class="course-list-card-badge">继续</span>' : '<span class="course-list-card-badge">免费</span>';
+                cards += '<div class="course-list-card" onclick="openCourseDetails(\'' + course.id + '\')">' +
+                    '<img class="course-list-card-img" src="' + course.headerImg + '" onerror="this.style.background=\'#FCD7D0\'">' +
+                    '<div class="course-list-card-body"><div class="course-list-card-title">' + course.title + ' ' + badge + '</div>' +
+                    '<div class="course-list-card-meta"><span>' + course.steps + '步 · ' + course.duration + '分钟</span>' +
+                    '<div class="course-list-card-progress"><div class="course-list-card-progress-fill" style="width:' + (prog/course.steps*100) + '%"></div></div></div></div></div>';
+            });
+            locked.forEach(function(course){
+                var badge = course.badgeVip ? '<span class="course-list-card-badge vip">VIP</span>' : '<span class="course-list-card-badge locked">🔒 ' + course.cost + '积分</span>';
+                lockedHtml += '<div class="course-list-card" onclick="openCourseDetails(\'' + course.id + '\')">' +
+                    '<img class="course-list-card-img" src="' + course.headerImg + '" onerror="this.style.background=\'#E5D5D0\'">' +
+                    '<div class="course-list-card-body"><div class="course-list-card-title">' + course.title + ' ' + badge + '</div>' +
+                    '<div class="course-list-card-meta"><span>' + course.steps + '步 · ' + course.duration + '分钟</span><span style="font-size:10px">点击解锁 →</span></div></div></div>';
+            });
+            overlay.innerHTML = '<div class="course-list-header"><button class="back-btn" onclick="closeCourse()">←</button><div class="title">我的课程</div><div style="width:32px"></div></div>' +
+                '<div class="course-list-body"><div class="course-list-section-title">已解锁 (' + unlocked.length + ')</div>' +
+                (cards || '<div style="text-align:center;color:#A69989;padding:32px;font-size:12px">暂无已解锁课程</div>') +
+                (lockedHtml ? '<div class="course-list-section-title">待解锁 (' + locked.length + ')</div>' + lockedHtml : '') + '</div>';
             document.body.appendChild(overlay);
         }
 
-        function closeCourse() {
-            const overlay = document.getElementById('course-overlay');
-            if (overlay) overlay.remove();
+        function openCourseDetails(courseId) {
+            var course = COURSES.find(function(c){return c.id===courseId;}); if(!course) return;
+            currentCourseId = courseId;
+            var progress = loadCourseProgress();
+            var current = progress[courseId] || 0;
+            var isLocked = course.locked && current === 0;
+            var badgeHtml = course.badgeVip ? '<div class="course-vip-badge">' + course.badge + ' ✓</div>' : course.locked ? '<div class="course-vip-badge">🔒 ' + course.cost + '积分</div>' : '';
+            var existing = document.getElementById('course-overlay'); if (existing) existing.remove();
+            var overlay = document.createElement('div');
+            overlay.className = 'course-overlay'; overlay.id = 'course-overlay';
+            var btn = isLocked ? '<button class="course-start-btn" onclick="startCourse(\'' + courseId + '\')">🔒 解锁 (' + course.cost + '积分)</button>' :
+                '<button class="course-start-btn" onclick="startCourse(\'' + courseId + '\')">' + (current>0?'继续学习':'马上开学') + '</button>';
+            overlay.innerHTML = '<div class="course-header">' +
+                '<img src="' + course.headerImg + '" class="course-header-img" onerror="this.style.background=\'linear-gradient(135deg,#FFF1EE,#FCD7D0)\'">' +
+                '<button class="course-back-btn" onclick="openCourseList()">←</button>' + badgeHtml + '</div>' +
+                '<div class="course-tabs">' +
+                '<div class="course-tab active" data-tab="intro" onclick="switchCourseTab(event)">课程介绍</div>' +
+                '<div class="course-tab" data-tab="prep" onclick="switchCourseTab(event)">课前准备</div>' +
+                '<div class="course-tab" data-tab="progress" onclick="switchCourseTab(event)">学习进度</div></div>' +
+                '<div class="course-body" id="course-body">' + generateCourseIntro() + '</div>' +
+                '<div class="course-bottom-bar">' + btn + '</div>';
+            document.body.appendChild(overlay); currentCourseTab = 'intro';
         }
 
-        let currentCourseTab = 'intro';
+        function closeCourse() { var e = document.getElementById('course-overlay'); if(e) e.remove(); }
 
-        function switchCourseTab(tab) {
-            currentCourseTab = tab;
-            document.querySelectorAll('.course-tab').forEach(el => el.classList.remove('active'));
-            event.target.classList.add('active');
+        var currentCourseTab = 'intro';
 
-            const body = document.getElementById('course-body');
-            switch (tab) {
-                case 'intro': body.innerHTML = generateCourseIntro(); break;
-                case 'prep': body.innerHTML = generateCoursePrep(); break;
-                case 'progress': body.innerHTML = generateCourseProgress(); break;
+        function switchCourseTab(e) {
+            var tab = e.currentTarget.dataset.tab; currentCourseTab = tab;
+            document.querySelectorAll('.course-tab').forEach(function(el){ el.classList.remove('active'); });
+            e.currentTarget.classList.add('active');
+            var body = document.getElementById('course-body');
+            if(tab==='intro') body.innerHTML = generateCourseIntro();
+            else if(tab==='prep') body.innerHTML = generateCoursePrep();
+            else if(tab==='progress') {
+                body.innerHTML = generateCourseProgress();
+                var p = loadCourseProgress()[currentCourseId] || 0;
+                var tabs = document.querySelectorAll('.course-step-tab');
+                if (p > 0 && tabs[p]) {
+                    setTimeout(function(){ tabs[p].scrollIntoView({behavior:'smooth', block:'start'}); tabs[p].click(); }, 200);
+                } else if (tabs[0]) {
+                    setTimeout(function(){ tabs[0].scrollIntoView({block:'start'}); }, 100);
+                }
             }
         }
 
-        function startCourse() {
-            const hasVip = localStorage.getItem('zz_vip') === 'true';
-            const points = parseInt(localStorage.getItem('zz_points') || '0');
-            const courseCost = 50;
-
-            if (hasVip) {
-                showZenModal('会员特权已解锁！\n\n课程开始学习\n\n当前进度：0/14', '课程提示', '确定', () => {
-                    switchCourseTab('progress');
+        // ======== P1: Product Tab Switch ========
+        function switchCourseProductTab(e, category) {
+            var tabBar = e.currentTarget.parentElement;
+            tabBar.querySelectorAll('.course-product-tab').forEach(function(el){ el.classList.remove('active'); });
+            e.currentTarget.classList.add('active');
+            var tabName = category || e.currentTarget.textContent.trim();
+            var products = PRODUCT_CATALOG[tabName] || PRODUCT_CATALOG[Object.keys(PRODUCT_CATALOG)[0]];
+            var parentList = tabBar.nextElementSibling;
+            if (parentList && parentList.classList && parentList.classList.contains('course-product-list')) {
+                var html = '';
+                products.forEach(function(p){
+                    html += '<div class="course-product-item">' +
+                        '<img src="' + p.img + '" class="course-product-img" onerror="this.style.background=\'#FFF1EE\'" alt="">' +
+                        '<div class="course-product-info">' +
+                        '<div class="course-product-name">' + p.name + '</div>' +
+                        '<div class="course-product-tags">' +
+                        p.tags.map(function(t){ return '<span class="course-product-tag">' + t + '</span>'; }).join('') +
+                        '</div>' +
+                        '<div class="course-product-price-row">' +
+                        '<div><span class="course-product-price">¥' + p.price + '</span><span class="course-product-original-price">¥' + p.original + '</span></div>' +
+                        '<button class="course-product-buy-btn">去购买</button>' +
+                        '</div></div></div>';
                 });
-            } else if (points >= courseCost) {
-                showZenModal(`确认消耗积分学习课程？\n\n消耗：${courseCost}积分\n余额：${points}积分\n扣除后：${points - courseCost}积分`, '确认学习', '确定', () => {
-                    localStorage.setItem('zz_points', String(points - courseCost));
-                    updateProfileDisplay();
-                    switchCourseTab('progress');
-                });
-            } else {
-                openVipUnlock();
+                parentList.innerHTML = html;
             }
         }
 
+        // ======== P2: Step Click with Progress Save ========
+        function showCourseStep(index) {
+            var course = COURSES.find(function(c){return c.id===currentCourseId;}) || COURSES[0];
+            var progress = loadCourseProgress();
+            var current = progress[currentCourseId] || 0;
+            progress[currentCourseId] = Math.max(current, index + 1);
+            saveCourseProgress(progress);
+            var progAfter = progress[currentCourseId];
+            var justCompleted = progAfter === course.steps && progAfter > current;
+
+            document.querySelectorAll('.course-step-tab').forEach(function(el, i){
+                el.classList.remove('active');
+                if (i < progAfter) { el.classList.add('completed'); }
+                else { el.classList.remove('completed'); }
+            });
+            var tabs = document.querySelectorAll('.course-step-tab');
+            if(tabs[index]) { tabs[index].classList.add('active'); }
+            document.querySelectorAll('.course-step-card').forEach(function(el, i){
+                el.style.borderLeft = i <= index ? '3px solid #C26B5D' : '3px solid transparent';
+            });
+            var card = document.getElementById('step-card-' + index);
+            if(card) card.scrollIntoView({behavior:'smooth', block:'start'});
+            var fill = document.querySelector('.course-progress-fill');
+            if(fill) fill.style.width = (progAfter / course.steps * 100) + '%';
+            var pctLabel = document.querySelector('.course-progress-header div[style*="color"]');
+            if(pctLabel) pctLabel.textContent = Math.round(progAfter / course.steps * 100) + '%';
+
+            if (justCompleted) {
+                var points = parseInt(localStorage.getItem('zz_points') || '0');
+                var reward = course.steps * 5;
+                localStorage.setItem('zz_points', String(points + reward));
+                var completedRaw = localStorage.getItem('zz_completed_courses') || '';
+                if (!completedRaw.split(',').includes(currentCourseId)) {
+                    localStorage.setItem('zz_completed_courses', completedRaw + ',' + currentCourseId);
+                }
+                if (typeof updatePointsDisplays === 'function') updatePointsDisplays();
+                if (typeof updateProfileDisplay === 'function') updateProfileDisplay();
+                setTimeout(function(){
+                    showZenModal('🎉 恭喜完成课程！\n\n《' + course.title + '》已全部学完\n\n奖励：+' + reward + ' 积分（' + course.steps + '步 × 5积分/步）', '课程完成', '太棒了');
+                }, 300);
+            }
+        }
+
+        function startCourse(courseId) {
+            var course = COURSES.find(function(c){return c.id===courseId;}) || COURSES[0];
+            var hasVip = localStorage.getItem('zz_vip') === 'true';
+            var points = parseInt(localStorage.getItem('zz_points') || '0');
+            var courseCost = course.cost || 50;
+            var progress = loadCourseProgress();
+            if(hasVip || !course.locked) {
+                var prog = progress[courseId] || 0; if(prog===0) progress[courseId]=0;
+                saveCourseProgress(progress);
+                showZenModal('课程开始学习！\n\n当前进度：' + prog + '/' + course.steps, '课程提示', '确定', function(){
+                    var pTab = document.querySelector('.course-tab[data-tab="progress"]');
+                    if(pTab) { document.querySelectorAll('.course-tab').forEach(function(el){el.classList.remove('active');}); pTab.classList.add('active');
+                        currentCourseTab='progress'; document.getElementById('course-body').innerHTML = generateCourseProgress(); }
+                });
+            } else if(points >= courseCost) {
+                showZenModal('确认消耗积分解锁课程？\n\n消耗：' + courseCost + '积分\n余额：' + points + '积分\n扣除后：' + (points-courseCost) + '积分', '确认学习', '确定', function(){
+                    localStorage.setItem('zz_points', String(points-courseCost)); updateProfileDisplay();
+                    progress[courseId]=0; saveCourseProgress(progress);
+                    var c = COURSES.find(function(x){return x.id===courseId;}); if(c) c.locked=false;
+                    var pTab = document.querySelector('.course-tab[data-tab="progress"]');
+                    if(pTab) { document.querySelectorAll('.course-tab').forEach(function(el){el.classList.remove('active');}); pTab.classList.add('active');
+                        currentCourseTab='progress'; document.getElementById('course-body').innerHTML = generateCourseProgress(); }
+                });
+            } else { openVipUnlock(); }
+        }
         let selectedVipPlan = 'permanent';
         let selectedPayment = 'wechat';
 
@@ -5729,19 +6038,21 @@
             });
         }
 
+
+        function getCurrentCourse() { return COURSES.find(function(x){return x.id===currentCourseId;}) || COURSES[0]; }
         function generateCourseIntro() {
             return `
                 <div class="course-card">
                     <div class="course-card-title">
                         <span class="title-icon">🎨</span>
-                        <span>专属课程-1阶段</span>
+                        <span>${getCurrentCourse().title}</span>
                     </div>
                     <div class="course-stat-row">
-                        <div class="course-stat">步骤 共 <span>14</span> 步</div>
-                        <div class="course-stat">总时长 <span>43</span> 分钟</div>
+                        <div class="course-stat">步骤 共 <span>${getCurrentCourse().steps}</span> 步</div>
+                        <div class="course-stat">总时长 <span>${getCurrentCourse().duration}</span> 分钟</div>
                     </div>
                     <div class="course-desc">
-                        如果你化妆零基础或者水平忽高忽低，那么这套妆教将会完美契合你。这是一套偏日常系的妆容，为你个人特征量...
+                        ${getCurrentCourse().desc}
                     </div>
                     <div class="course-tag-grid">
                         <div class="course-tag"><span class="course-tag-icon">⚡</span><span class="course-tag-text">难度：新手</span></div>
@@ -5753,7 +6064,7 @@
                         <div class="course-target-title">针对性教学</div>
                         <div class="course-target-subtitle">个人关键词</div>
                         <div class="course-keywords">
-                            <span class="course-keyword">#冷红-白</span>
+                            <span class="course-keyword" v-for="k in getCurrentCourse().keywords">${getCurrentCourse().keywords[0]}</span>
                             <span class="course-keyword">干性皮肤</span>
                             <span class="course-keyword">椭圆形脸</span>
                             <span class="course-keyword">双眼皮</span>
@@ -5817,8 +6128,8 @@
                         <div class="course-compare-item after"><span class="course-compare-item up">妆造能力 ↑</span></div>
                     </div>
                     <div class="course-before-after-images">
-                        <img src="https://picsum.photos/seed/before/200/250" alt="之前">
-                        <img src="https://picsum.photos/seed/after/200/250" alt="之后">
+                        <img src="./static-demo/makeup/face_01.png" alt="之前">
+                        <img src="./static-demo/makeup/face_02.png" alt="之后">
                     </div>
                 </div>
             `;
@@ -5836,14 +6147,14 @@
                         <span style="font-size:10px;color:#A69989;margin-left:auto">本课要用到的所有化妆品</span>
                     </div>
                     <div class="course-product-tabs">
-                        <div class="course-product-tab active">美妆产品</div>
-                        <div class="course-product-tab">底妆产品</div>
-                        <div class="course-product-tab">护肤产品</div>
-                        <div class="course-product-tab">洁面产品</div>
+                        <div class="course-product-tab active" onclick="switchCourseProductTab(event)">美妆产品</div>
+                        <div class="course-product-tab" onclick="switchCourseProductTab(event)">底妆产品</div>
+                        <div class="course-product-tab" onclick="switchCourseProductTab(event)">护肤产品</div>
+                        <div class="course-product-tab" onclick="switchCourseProductTab(event)">洁面产品</div>
                     </div>
                     <div class="course-product-list">
                         <div class="course-product-item">
-                            <img src="https://picsum.photos/seed/cos1/100/100" class="course-product-img">
+                            <img src="./static-demo/makeup/sd_makeup_daily.png" class="course-product-img">
                             <div class="course-product-info">
                                 <div class="course-product-name">Colorkey珂拉琪 小金筷眉笔防水不易脱色</div>
                                 <div class="course-product-tags">
@@ -5858,7 +6169,7 @@
                             </div>
                         </div>
                         <div class="course-product-item">
-                            <img src="https://picsum.photos/seed/cos2/100/100" class="course-product-img">
+                            <img src="./static-demo/makeup/sd_makeup_date.png" class="course-product-img">
                             <div class="course-product-info">
                                 <div class="course-product-name">3CE 四色眼影盘 哑光大地色修容新手适用</div>
                                 <div class="course-product-tags">
@@ -5873,7 +6184,7 @@
                             </div>
                         </div>
                         <div class="course-product-item">
-                            <img src="https://picsum.photos/seed/cos3/100/100" class="course-product-img">
+                            <img src="./static-demo/makeup/sd_makeup_professional.png" class="course-product-img">
                             <div class="course-product-info">
                                 <div class="course-product-name">TIMAGE彩棠 双拼高光膏粉一体哑光提亮立体</div>
                                 <div class="course-product-tags">
@@ -5898,14 +6209,14 @@
                         <span style="font-size:10px;color:#A69989;margin-left:auto">本课要用到的所有化妆工具</span>
                     </div>
                     <div class="course-product-tabs">
-                        <div class="course-product-tab active">底妆工具</div>
-                        <div class="course-product-tab">美妆工具</div>
-                        <div class="course-product-tab">辅助工具</div>
-                        <div class="course-product-tab">清洁工具</div>
+                        <div class="course-product-tab active" onclick="switchCourseProductTab(event)">底妆工具</div>
+                        <div class="course-product-tab" onclick="switchCourseProductTab(event)">美妆工具</div>
+                        <div class="course-product-tab" onclick="switchCourseProductTab(event)">辅助工具</div>
+                        <div class="course-product-tab" onclick="switchCourseProductTab(event)">清洁工具</div>
                     </div>
                     <div class="course-product-list">
                         <div class="course-product-item">
-                            <img src="https://picsum.photos/seed/tool1/100/100" class="course-product-img">
+                            <img src="./static-demo/makeup/face_01.png" class="course-product-img">
                             <div class="course-product-info">
                                 <div class="course-product-name">尔木萄 100分粉扑气垫棉花糖粉扑不吃粉</div>
                                 <div class="course-product-tags">
@@ -5920,7 +6231,7 @@
                             </div>
                         </div>
                         <div class="course-product-item">
-                            <img src="https://picsum.photos/seed/tool2/100/100" class="course-product-img">
+                            <img src="./static-demo/makeup/face_02.png" class="course-product-img">
                             <div class="course-product-info">
                                 <div class="course-product-name">古迪 散粉刷大号超大蓬松腮红刷一支装</div>
                                 <div class="course-product-tags">
@@ -5935,7 +6246,7 @@
                             </div>
                         </div>
                         <div class="course-product-item">
-                            <img src="https://picsum.photos/seed/tool3/100/100" class="course-product-img">
+                            <img src="./static-demo/makeup/face_03.png" class="course-product-img">
                             <div class="course-product-info">
                                 <div class="course-product-name">ENERGY艾诺琪 螺旋刷纤维毛螺旋</div>
                                 <div class="course-product-tags">
@@ -6032,26 +6343,18 @@
 
             return `
                 <div class="course-progress-header">
-                    <h3>专属课程-1阶段</h3>
+                    <h3>${getCurrentCourse().title}</h3>
                     <div class="course-progress-bar">
-                        <div class="course-progress-fill" style="width:0%"></div>
+                        <div class="course-progress-fill" style="width:${(loadCourseProgress()[currentCourseId] || 0) / getCurrentCourse().steps * 100}%"></div>
                     </div>
-                    <div style="font-size:10px;color:#A69989">0%</div>
+                    <div style="font-size:10px;color:#A69989">${Math.round((loadCourseProgress()[currentCourseId] || 0) / getCurrentCourse().steps * 100)}%</div>
                 </div>
                 <div class="course-step-tabs">${tabsHtml}</div>
                 ${cardsHtml}
             `;
         }
 
-        function showCourseStep(index) {
-            document.querySelectorAll('.course-step-tab').forEach(el => el.classList.remove('active'));
-            document.querySelectorAll('.course-step-tab')[index].classList.add('active');
 
-            const card = document.getElementById(`step-card-${index}`);
-            if (card) {
-                card.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
-        }
 
         function goToUploadPhoto() {
             switchPage('analysis');
@@ -6137,15 +6440,15 @@
                         <div class="flex items-center gap-2 mb-3"><div class="w-6 h-6 rounded-full bg-peach-100 flex items-center justify-center text-peach-500 text-[10px]"><i class="fas fa-utensils"></i></div><h3 class="text-xs font-bold text-champagne-800 tracking-wider">${plan.day} · 饮食计划</h3></div>
                         <div class="space-y-2">
                             <div class="flex items-start gap-2.5">
-                                <div class="w-10 h-10 rounded-lg overflow-hidden border border-white shadow-sm flex-shrink-0 bg-flax-50"><img src="https://images.unsplash.com/photo-1494390248081-4e521a5940db?auto=format&fit=crop&q=80&w=150" class="w-full h-full object-cover" alt="Breakfast"></div>
+                                <div class="w-10 h-10 rounded-lg overflow-hidden border border-white shadow-sm flex-shrink-0 bg-flax-50"><img src="./static-demo/outfit/outfit_030.png" class="w-full h-full object-cover" alt="Breakfast"></div>
                                 <div class="flex-grow"><h4 class="text-[10px] font-bold text-champagne-800">早餐</h4><p class="text-[9px] text-flax-400">${plan.diet.breakfast.split('(')[0].trim()}</p><span class="text-[8px] text-peach-400">${plan.diet.breakfast.match(/\(([^)]+)\)/)?.[1] || ''}</span></div>
                             </div>
                             <div class="flex items-start gap-2.5">
-                                <div class="w-10 h-10 rounded-lg overflow-hidden border border-white shadow-sm flex-shrink-0 bg-flax-50"><img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&q=80&w=150" class="w-full h-full object-cover" alt="Lunch"></div>
+                                <div class="w-10 h-10 rounded-lg overflow-hidden border border-white shadow-sm flex-shrink-0 bg-flax-50"><img src="./static-demo/outfit/outfit_031.png" class="w-full h-full object-cover" alt="Lunch"></div>
                                 <div class="flex-grow"><h4 class="text-[10px] font-bold text-champagne-800">午餐</h4><p class="text-[9px] text-flax-400">${plan.diet.lunch.split('(')[0].trim()}</p><span class="text-[8px] text-peach-400">${plan.diet.lunch.match(/\(([^)]+)\)/)?.[1] || ''}</span></div>
                             </div>
                             <div class="flex items-start gap-2.5">
-                                <div class="w-10 h-10 rounded-lg overflow-hidden border border-white shadow-sm flex-shrink-0 bg-flax-50"><img src="https://images.unsplash.com/photo-1467003909585-2f8a7270028d?auto=format&fit=crop&q=80&w=150" class="w-full h-full object-cover" alt="Dinner"></div>
+                                <div class="w-10 h-10 rounded-lg overflow-hidden border border-white shadow-sm flex-shrink-0 bg-flax-50"><img src="./static-demo/outfit/outfit_041.png" class="w-full h-full object-cover" alt="Dinner"></div>
                                 <div class="flex-grow"><h4 class="text-[10px] font-bold text-champagne-800">晚餐</h4><p class="text-[9px] text-flax-400">${plan.diet.dinner.split('(')[0].trim()}</p><span class="text-[8px] text-peach-400">${plan.diet.dinner.match(/\(([^)]+)\)/)?.[1] || ''}</span></div>
                             </div>
                         </div>
@@ -6405,8 +6708,8 @@
             safeSetText('desk-skin-step-1', data.skinPill1);
 
             // Keep onboarding page image strictly fixed to reference image
-            safeSetSrc('mob-onboard-bg-img', 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=600');
-            safeSetSrc('desk-onboard-img-src', 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=600');
+            safeSetSrc('mob-onboard-bg-img', './static-demo/hairstyle/hair_007.png');
+            safeSetSrc('desk-onboard-img-src', './static-demo/hairstyle/hair_007.png');
 
             // Other analyses references remain dynamic
             safeSetSrc('mob-analysis-img', data.portraitUrl);
@@ -6864,7 +7167,16 @@
             }
             isLoggedIn = true;
             localStorage.setItem('zz_isLoggedIn', 'true');
+            // 开发测试账号：17351455944 自动开 VIP + 全权限
+            var devPhone = username || localStorage.getItem('zz_userName') || '';
+            if (devPhone === '17351455944') {
+                localStorage.setItem('zz_vip', 'true');
+                localStorage.setItem('zz_points', '9999');
+                localStorage.setItem('zz_userPhone', devPhone);
+            }
             updateAuthVisibility();
+            if (typeof updatePointsDisplays === 'function') updatePointsDisplays();
+            if (typeof updateProfileDisplay === 'function') updateProfileDisplay();
             const nextPage = pendingPostLoginPage || 'aesthetic';
             const nextSection = pendingBeautySection;
             pendingPostLoginPage = null;
@@ -7648,7 +7960,7 @@
                             <h3 class="text-xs font-bold text-champagne-800 tracking-wider">发型推荐 · 一套</h3>
                         </div>
                         <div class="relative w-full aspect-[4/3] rounded-xl overflow-hidden bg-flax-50 shadow-inner">
-                            <img id="mob-panel-hair-img" class="w-full h-full object-cover transition-all duration-500" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=600" alt="发型参考" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=600'">
+                            <img id="mob-panel-hair-img" class="w-full h-full object-cover transition-all duration-500" src="./static-demo/hairstyle/hair_007.png" alt="发型参考" onerror="this.onerror=null;this.src='./static-demo/hairstyle/hair_007.png'">
                         </div>
                         <div class="bg-[#FAF8F5] rounded-xl p-3 border border-flax-100">
                             <p class="text-[9px] text-flax-400 font-bold tracking-wider mb-1">今日适配发型</p>
@@ -7665,7 +7977,7 @@
                         <div class="space-y-2.5">
                             <div class="flex items-center gap-3 p-2 rounded-2xl border border-peach-200 bg-peach-50/40">
                                 <div class="w-16 h-16 rounded-xl overflow-hidden bg-flax-50 flex-shrink-0 border border-white shadow-sm">
-                                    <img class="w-full h-full object-cover" src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?auto=format&fit=crop&q=80&w=220" alt="通勤穿搭">
+                                    <img class="w-full h-full object-cover" src="./static-demo/outfit/outfit_060.png" alt="通勤穿搭">
                                 </div>
                                 <div class="text-left flex-grow py-1">
                                     <p class="text-[11px] font-bold text-peach-500 mb-0.5">Look 01 · 通勤提气</p>
@@ -7674,7 +7986,7 @@
                             </div>
                             <div class="flex items-center gap-3 p-2 rounded-2xl border border-flax-200 bg-white">
                                 <div class="w-16 h-16 rounded-xl overflow-hidden bg-flax-50 flex-shrink-0 border border-white shadow-sm">
-                                    <img class="w-full h-full object-cover" src="https://images.unsplash.com/photo-1595777457583-95e059d581b8?auto=format&fit=crop&q=80&w=220" alt="约会穿搭">
+                                    <img class="w-full h-full object-cover" src="./static-demo/outfit/outfit_062.png" alt="约会穿搭">
                                 </div>
                                 <div class="text-left flex-grow py-1">
                                     <p class="text-[11px] font-bold text-champagne-800 mb-0.5">Look 02 · 轻熟约会</p>
@@ -7683,7 +7995,7 @@
                             </div>
                             <div class="flex items-center gap-3 p-2 rounded-2xl border border-flax-200 bg-white">
                                 <div class="w-16 h-16 rounded-xl overflow-hidden bg-flax-50 flex-shrink-0 border border-white shadow-sm">
-                                    <img class="w-full h-full object-cover" src="https://images.unsplash.com/photo-1485968579580-b6d095142e6e?auto=format&fit=crop&q=80&w=220" alt="出行穿搭">
+                                    <img class="w-full h-full object-cover" src="./static-demo/outfit/outfit_064.png" alt="出行穿搭">
                                 </div>
                                 <div class="text-left flex-grow py-1">
                                     <p class="text-[11px] font-bold text-champagne-800 mb-0.5">Look 03 · 出游拍照</p>
@@ -7704,7 +8016,7 @@
                             <span class="text-[10px] font-bold text-peach-500 bg-peach-50 px-2 py-0.5 rounded-full border border-peach-200" id="mob-skin-flow-tone-label">暖白皮</span>
                         </div>
                         <div class="w-full h-[118px] rounded-xl overflow-hidden border border-white shadow-sm">
-                            <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&q=80&w=600" class="w-full h-full object-cover" alt="妆容质感">
+                            <img src="./static-demo/outfit/outfit_000.png" class="w-full h-full object-cover" alt="妆容质感">
                         </div>
                         <div class="bg-[#FAF8F5] rounded-xl p-3 border border-flax-100 space-y-2.5">
                             <div class="bg-white rounded-lg p-2 border border-peach-100"><p id="mob-custom-skin-advice" class="text-[9px] text-flax-500 leading-relaxed">妆前先用保湿精华压住干纹，底妆选择半哑光奶油肌，避开过强高光，让妆面看起来干净、细腻。</p></div>
@@ -7751,7 +8063,7 @@
                         <div class="lg:col-span-2 bg-white border border-flax-200 rounded-3xl p-6 flex flex-col gap-4 shadow-sm">
                             <div class="flex items-center gap-2 pb-2 border-b border-flax-100"><div class="w-7 h-7 rounded-full bg-peach-50 flex items-center justify-center text-peach-500 text-xs"><i class="fas fa-wind"></i></div><h4 class="text-xs font-bold text-champagne-800 tracking-wider">发型推荐 · 一套</h4></div>
                             <div class="relative aspect-[4/3] rounded-2xl overflow-hidden bg-flax-50 shadow border border-white">
-                                <img id="desk-panel-hair-img" class="w-full h-full object-cover transition-all duration-500" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=600" alt="发型" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=600'">
+                                <img id="desk-panel-hair-img" class="w-full h-full object-cover transition-all duration-500" src="./static-demo/hairstyle/hair_007.png" alt="发型" onerror="this.onerror=null;this.src='./static-demo/hairstyle/hair_007.png'">
                             </div>
                             <div class="bg-[#FAF8F5] p-4 rounded-2xl border border-flax-100">
                                 <p class="text-[10px] font-bold text-flax-400 tracking-wider mb-1">今日适配发型</p>
@@ -7763,17 +8075,17 @@
                             <div class="flex items-center gap-2 pb-2 border-b border-flax-100"><div class="w-7 h-7 rounded-full bg-peach-50 flex items-center justify-center text-peach-500 text-xs"><i class="fas fa-tshirt"></i></div><h4 class="text-xs font-bold text-champagne-800 tracking-wider">三套穿搭方案</h4></div>
                             <div class="grid grid-cols-3 gap-3">
                                 <div class="bg-peach-50/50 rounded-2xl p-3 border border-peach-100 flex flex-col gap-2">
-                                    <img src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?auto=format&fit=crop&q=80&w=320" class="w-full h-28 rounded-xl object-cover shadow-sm" alt="通勤穿搭">
+                                    <img src="./static-demo/outfit/outfit_001.png" class="w-full h-28 rounded-xl object-cover shadow-sm" alt="通勤穿搭">
                                     <p class="text-[11px] font-bold text-peach-500">Look 01 · 通勤提气</p>
                                     <p id="desk-rec-outfit-commute-text" class="text-[10px] text-flax-500 leading-relaxed">奶油白垂感衬衫 + 卡其收腰西装 + 烟灰直筒裤</p>
                                 </div>
                                 <div class="bg-[#FAF8F5] rounded-2xl p-3 border border-flax-100 flex flex-col gap-2">
-                                    <img src="https://images.unsplash.com/photo-1595777457583-95e059d581b8?auto=format&fit=crop&q=80&w=320" class="w-full h-28 rounded-xl object-cover shadow-sm" alt="约会穿搭">
+                                    <img src="./static-demo/outfit/outfit_003.png" class="w-full h-28 rounded-xl object-cover shadow-sm" alt="约会穿搭">
                                     <p class="text-[11px] font-bold text-champagne-800">Look 02 · 轻熟约会</p>
                                     <p id="desk-rec-outfit-date-text" class="text-[10px] text-flax-500 leading-relaxed">珍珠针织开衫 + 烟粉缎面半裙 + 细跟浅口鞋</p>
                                 </div>
                                 <div class="bg-[#FAF8F5] rounded-2xl p-3 border border-flax-100 flex flex-col gap-2">
-                                    <img src="https://images.unsplash.com/photo-1485968579580-b6d095142e6e?auto=format&fit=crop&q=80&w=320" class="w-full h-28 rounded-xl object-cover shadow-sm" alt="出游穿搭">
+                                    <img src="./static-demo/outfit/outfit_005.png" class="w-full h-28 rounded-xl object-cover shadow-sm" alt="出游穿搭">
                                     <p class="text-[11px] font-bold text-champagne-800">Look 03 · 出游拍照</p>
                                     <p id="desk-rec-outfit-interview-text" class="text-[10px] text-flax-500 leading-relaxed">亚麻短外套 + 高腰阔腿裤 + 低饱和丝巾</p>
                                 </div>
@@ -7792,7 +8104,7 @@
                             <span class="text-[10px] font-bold text-peach-500 bg-peach-50 px-2.5 py-1 rounded-full border border-peach-200" id="desk-skin-flow-tone-label">暖白皮</span>
                         </div>
                         <div class="grid grid-cols-2 gap-5">
-                            <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&q=80&w=700" class="w-full h-52 rounded-2xl object-cover shadow-sm border border-white" alt="妆容质感">
+                            <img src="./static-demo/outfit/outfit_000.png" class="w-full h-52 rounded-2xl object-cover shadow-sm border border-white" alt="妆容质感">
                             <div class="flex flex-col gap-3">
                                 <div class="bg-[#FAF8F5] p-4 rounded-2xl border border-peach-100"><p id="desk-custom-skin-advice" class="text-[10px] text-flax-500 leading-relaxed">妆前先用保湿精华压住干纹，底妆选择半哑光奶油肌，避开过强高光，让妆面看起来干净、细腻。</p></div>
                                 <div class="grid grid-cols-3 gap-3">
@@ -7867,7 +8179,7 @@
                 <div data-tryon-mirror data-compare-state="before" class="bg-white rounded-2xl md:rounded-3xl p-4 border border-flax-200/80 shadow-sm flex flex-col gap-3">
                     <div class="text-center"><h3 class="serif-title text-sm md:text-base font-bold text-champagne-800">线上虚拟试衣镜</h3></div>
                     <div class="relative w-full aspect-[4/5] ${imageHeight} bg-[#FAF8F5] rounded-[24px] border border-flax-200 overflow-hidden shadow-md">
-                        <img data-tryon-before class="absolute inset-0 w-full h-full object-cover transition-all duration-500" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=600" alt="试衣镜原样" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=600'">
+                        <img data-tryon-before class="absolute inset-0 w-full h-full object-cover transition-all duration-500" src="./static-demo/hairstyle/hair_007.png" alt="试衣镜原样" onerror="this.onerror=null;this.src='./static-demo/hairstyle/hair_007.png'">
                         <div data-tryon-after-layer class="absolute inset-0 z-10 pointer-events-none opacity-0 transition-opacity duration-500">
                             <div class="absolute inset-0 bg-peach-500/10 backdrop-blur-[1px]"></div>
                             <div class="absolute left-3 right-3 bottom-3 bg-white/90 backdrop-blur-sm rounded-2xl border border-peach-100 p-3 shadow-sm">
@@ -7889,24 +8201,24 @@
 
         function renderBeautyOutfitBuilder() {
             const topItems = [
-                { label: '白色短衬衫', img: 'https://images.unsplash.com/photo-1591047139829-d91aecb6caea?auto=format&fit=crop&q=80&w=220' },
-                { label: '针织开衫', img: 'https://images.unsplash.com/photo-1618244972963-dbee1a7edc95?auto=format&fit=crop&q=80&w=220' },
-                { label: '亚麻背心', img: 'https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&q=80&w=220' }
+                { label: '白色短衬衫', img: './static-demo/outfit/outfit_060.png' },
+                { label: '针织开衫', img: './static-demo/outfit/outfit_008.png' },
+                { label: '亚麻背心', img: './static-demo/outfit/outfit_009.png' }
             ];
             const pantsItems = [
-                { label: '烟灰直筒裤', img: 'https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&q=80&w=220' },
-                { label: '高腰阔腿裤', img: 'https://images.unsplash.com/photo-1584370848010-d7fe6bc767ec?auto=format&fit=crop&q=80&w=220' },
-                { label: '米白休闲裤', img: 'https://images.unsplash.com/photo-1506629905607-d9f297d3f5f5?auto=format&fit=crop&q=80&w=220' }
+                { label: '烟灰直筒裤', img: './static-demo/outfit/outfit_010.png' },
+                { label: '高腰阔腿裤', img: './static-demo/outfit/outfit_011.png' },
+                { label: '米白休闲裤', img: './static-demo/outfit/outfit_012.png' }
             ];
             const shoeItems = [
-                { label: '浅口单鞋', img: 'https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&q=80&w=220' },
-                { label: '低跟乐福鞋', img: 'https://images.unsplash.com/photo-1562183241-b937e95585b6?auto=format&fit=crop&q=80&w=220' },
-                { label: '奶白运动鞋', img: 'https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&q=80&w=220' }
+                { label: '浅口单鞋', img: './static-demo/outfit/outfit_013.png' },
+                { label: '低跟乐福鞋', img: './static-demo/outfit/outfit_014.png' },
+                { label: '奶白运动鞋', img: './static-demo/outfit/outfit_015.png' }
             ];
             const accessoryItems = [
-                { label: '珍珠耳饰', img: 'https://images.unsplash.com/photo-1535632787350-4e68ef0ac584?auto=format&fit=crop&q=80&w=220' },
-                { label: '细链项链', img: 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&q=80&w=220' },
-                { label: '小号通勤包', img: 'https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&q=80&w=220' }
+                { label: '珍珠耳饰', img: './static-demo/outfit/outfit_016.png' },
+                { label: '细链项链', img: './static-demo/outfit/outfit_017.png' },
+                { label: '小号通勤包', img: './static-demo/outfit/outfit_018.png' }
             ];
 
             const closet = `
@@ -8022,7 +8334,7 @@
                 title: '法式浪漫约会穿搭指南',
                 subtitle: '从配色到版型，打造优雅浪漫的约会造型',
                 tags: ['穿搭', '约会'],
-                image: 'https://images.unsplash.com/photo-1595777457583-95e059d581b8?auto=format&fit=crop&q=80&w=400',
+                image: './static-demo/outfit/outfit_020.png',
                 styleTag: '温柔法式风',
                 suitable: '适合：梨形身材 · 暖白皮',
                 description: '奶白色V领短袖针织衫 + 深卡其色高腰A字半身裙 + 米色尖头平底鞋',
@@ -8037,7 +8349,7 @@
                 title: '职场通勤妆容快速上手',
                 subtitle: '10分钟打造精致职场妆容，提升专业气质',
                 tags: ['妆容', '通勤'],
-                image: 'https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&q=80&w=400',
+                image: './static-demo/outfit/outfit_000.png',
                 styleTag: '清新通勤妆',
                 suitable: '适合：鹅蛋脸 · 冷白皮',
                 description: '轻薄底妆 + 大地色眼影 + 豆沙色口红 + 自然眉形',
@@ -8052,7 +8364,7 @@
                 title: '适合圆脸的短发造型',
                 subtitle: '修饰脸型，让五官更立体的短发指南',
                 tags: ['发型', '短发'],
-                image: 'https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&q=80&w=400',
+                image: './static-demo/hairstyle/tut_007.jpg',
                 styleTag: '利落短发',
                 suitable: '适合：圆脸 · 发质细软',
                 description: '空气刘海 + 层次短发 + 微微内扣',
@@ -8067,7 +8379,7 @@
                 title: '极简职场穿搭公式',
                 subtitle: '经典不出错，打造高级职场形象',
                 tags: ['穿搭', '职场'],
-                image: 'https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?auto=format&fit=crop&q=80&w=400',
+                image: './static-demo/outfit/outfit_022.png',
                 styleTag: '极简高级风',
                 suitable: '适合：直筒身材 · 任何肤色',
                 description: '黑色西装外套 + 白色衬衫 + 深色直筒裤 + 尖头高跟鞋',
@@ -8082,7 +8394,7 @@
                 title: '甜美约会妆容教程',
                 subtitle: '打造元气满满，让人一见倾心的妆容',
                 tags: ['妆容', '约会'],
-                image: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=400',
+                image: './static-demo/hairstyle/tut_003.jpg',
                 styleTag: '甜美蜜桃妆',
                 suitable: '适合：圆脸 · 暖白皮',
                 description: '粉色眼影 + 蜜桃腮红 + 草莓色唇釉 + 卧蚕提亮',
@@ -8097,7 +8409,7 @@
                 title: '优雅低马尾扎发技巧',
                 subtitle: '简单几步，打造精致优雅的职场发型',
                 tags: ['发型', '职场'],
-                image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=400',
+                image: './static-demo/hairstyle/hair_027.png',
                 styleTag: '优雅低马尾',
                 suitable: '适合：长发 · 任何脸型',
                 description: '三七分 + 蓬松颅顶 + 低马尾 + 碎发修饰',
@@ -8114,7 +8426,7 @@
 
             const filtered = category === 'all' ? inspirationData : inspirationData.filter(item => item.category === category);
 
-            container.innerHTML = `<div class="space-y-3">${filtered.map(item => `
+            container.innerHTML = `<div class="mt-auto space-y-3">${filtered.map(item => `
                 <div onclick="openInspirationDetail('${item.id}')" class="bg-white rounded-2xl overflow-hidden border border-flax-200/80 shadow-sm">
                     <div class="relative w-full h-32 overflow-hidden">
                         <img src="${item.image}" class="w-full h-full object-cover" alt="${item.title}">
@@ -8214,7 +8526,7 @@
                             <h3 class="serif-title text-base font-bold text-champagne-800 mb-2">上传${isOutfit ? '全身' : '正面'}照片</h3>
                             <p class="text-[10px] text-flax-500">${isOutfit ? '请上传一张全身照，以便生成穿搭效果图' : '请上传一张正面照，以便生成妆容/发型效果图'}</p>
                         </div>
-                        <div class="space-y-3">
+                        <div class="mt-auto space-y-3">
                             <div class="border-2 border-dashed border-flax-200 rounded-2xl p-8 text-center cursor-pointer hover:border-peach-300 transition-colors">
                                 <i class="fas fa-image text-flax-300 text-3xl mb-3"></i>
                                 <p class="text-[10px] text-flax-500">点击上传${isOutfit ? '全身' : '正面'}照片</p>
@@ -8367,7 +8679,7 @@
                     <div class="text-center mb-4">
                         <h3 class="serif-title text-lg font-bold text-champagne-800 mb-2">Q${question.id}. ${question.question}</h3>
                     </div>
-                    <div class="space-y-3">
+                    <div class="mt-auto space-y-3">
                         ${question.options.map(opt => `
                             <button onclick="selectStyleAnswer(${question.id}, '${opt.key}', this)" class="w-full p-4 bg-flax-50 rounded-xl text-left flex items-center justify-between hover:bg-peach-50 transition-colors border-2 border-transparent">
                                 <div class="flex items-center gap-3">
@@ -8582,7 +8894,7 @@
                             <i class="fas fa-times text-xs"></i>
                         </button>
                     </div>
-                    <div class="space-y-3">
+                    <div class="mt-auto space-y-3">
                         <div class="border-2 border-peach-500 rounded-xl p-4 relative">
                             <div class="absolute -top-2 left-4 px-2 bg-peach-500 text-white text-[8px] rounded-full font-bold">推荐</div>
                             <h4 class="text-sm font-bold text-champagne-800">悦己会员</h4>
@@ -8640,7 +8952,7 @@
                             <i class="fas fa-times text-xs"></i>
                         </button>
                     </div>
-                    <div class="space-y-3">
+                    <div class="mt-auto space-y-3">
                         <div class="bg-flax-50 rounded-xl p-3 flex items-center justify-between">
                             <div class="flex items-center gap-3">
                                 <div class="w-10 h-10 rounded-lg bg-peach-100 flex items-center justify-center"><i class="fas fa-image text-peach-500"></i></div>
@@ -9208,3 +9520,5 @@
     </script>
 </body>
 </html>
+
+

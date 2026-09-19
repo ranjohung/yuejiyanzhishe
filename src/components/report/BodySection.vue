@@ -29,7 +29,7 @@ defineProps({
   tags: { type: Array, default: () => ['身高: 165cm', '体型: 梨形', 'BMI: 21.5'] }
 })
 
-const { items: outfitRefs } = useMaterials('outfit', { , kind: 'image', limit: 6 })
+const { items: outfitRefs } = useMaterials('outfit', { kind: 'image', limit: 6 })
 
 function onSelect(item) {
   console.log('BodySection selected:', item)

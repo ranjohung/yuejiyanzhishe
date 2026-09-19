@@ -25,8 +25,8 @@ defineProps({
   tags: { type: Array, default: () => ['主风格: 优雅', '气质: 自然', '场景: 日常'] }
 })
 
-const { items: outfitItems } = useMaterials('outfit', { , limit: 99 })
-const { items: faceItems } = useMaterials('face', { , limit: 99 })
+const { items: outfitItems } = useMaterials('outfit', { limit: 99 })
+const { items: faceItems } = useMaterials('face', { limit: 99 })
 const outfitCount = outfitItems.length
 const faceCount = faceItems.length
 </script>

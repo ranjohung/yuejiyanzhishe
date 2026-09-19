@@ -29,7 +29,7 @@ defineProps({
   tags: { type: Array, default: () => ['脸型: 椭圆', '五官: 协调', '肤质: 干性'] }
 })
 
-const { images } = useMaterials('face', { , kind: 'image', limit: 6 })
+const { images } = useMaterials('face', { kind: 'image', limit: 6 })
 
 function onSelect(item) {
   console.log('FaceSection selected:', item)

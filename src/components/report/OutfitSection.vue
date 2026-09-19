@@ -1,4 +1,4 @@
-﻿<template>
+<template>
   <view class="section">
     <view class="section-header">
       <text class="section-icon">👗</text>
@@ -29,7 +29,7 @@ defineProps({
   tags: { type: Array, default: () => ['场景: 通勤', '风格: 优雅', '色系: 米白'] }
 })
 
-const { items } = useMaterials('outfit', { , limit: 6 })
+const { items } = useMaterials('outfit', { limit: 6 })
 
 function onSelect(item) {
   console.log('OutfitSection selected:', item)

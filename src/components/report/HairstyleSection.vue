@@ -36,7 +36,7 @@ defineProps({
   tags: { type: Array, default: () => ['长度: 中长', '卷直: 波浪', '刘海: 空气'] }
 })
 
-const { items } = useMaterials('hairstyle', { , limit: 24 })
+const { items } = useMaterials('hairstyle', { limit: 24 })
 const refs = items.filter(m => m.type === 'reference').slice(0, 6)
 const tutorials = items.filter(m => m.type === 'tutorial').slice(0, 4)
 

@@ -1,3 +1,4 @@
+﻿import { NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 import { verifyPassword, generateToken } from '@/lib/auth'
 import { responseSuccess, responseError } from '@/lib/utils'
@@ -8,26 +9,26 @@ export async function POST(request: Request) {
     const { phone, password } = body
 
     if (!phone || !password) {
-      return Response.json(responseError(400, '缺少必要参数'))
+      return NextResponse.json(responseError(400, '缺少必要参数'))
     }
 
     const user = await prisma.user.findUnique({ where: { phone } })
     if (!user) {
-      return Response.json(responseError(401, '手机号或密码错误'))
+      return NextResponse.json(responseError(401, '手机号或密码错误'))
     }
 
     const isValidPassword = await verifyPassword(password, user.password)
     if (!isValidPassword) {
-      return Response.json(responseError(401, '手机号或密码错误'))
+      return NextResponse.json(responseError(401, '手机号或密码错误'))
     }
 
     if (user.status !== 1) {
-      return Response.json(responseError(403, '账号已被禁用'))
+      return NextResponse.json(responseError(403, '账号已被禁用'))
     }
 
     const token = generateToken(user.id)
 
-    return Response.json(
+    return NextResponse.json(
       responseSuccess({
         token,
         user: {
@@ -40,6 +41,6 @@ export async function POST(request: Request) {
       })
     )
   } catch (error) {
-    return Response.json(responseError(500, '服务器内部错误'))
+    return NextResponse.json(responseError(500, '服务器内部错误'))
   }
 }

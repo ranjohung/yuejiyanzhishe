@@ -1,4 +1,4 @@
-/**
+﻿/**
  * POST /api/v1/order/create
  * 创建支付订单（V2 用，V1 先写骨架）
  *
@@ -55,7 +55,7 @@ export async function POST(req: NextRequest) {
   const orderNo = genOrderNo()
   const order = await prisma.order.create({
     data: {
-      user_id: auth.userId!,
+      user: { connect: { id: auth.userId! } },
       order_no: orderNo,
       order_type,
       item_id: item_id ?? null,

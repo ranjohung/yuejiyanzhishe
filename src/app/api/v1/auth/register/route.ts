@@ -1,3 +1,4 @@
+﻿import { NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 import { hashPassword, generateToken } from '@/lib/auth'
 import { responseSuccess, responseError } from '@/lib/utils'
@@ -8,17 +9,17 @@ export async function POST(request: Request) {
     const { phone, password, nickname, email } = body
 
     if (!phone || !password || !nickname) {
-      return Response.json(responseError(400, '缺少必要参数'))
+      return NextResponse.json(responseError(400, '缺少必要参数'))
     }
 
     const existingUser = await prisma.user.findUnique({ where: { phone } })
     if (existingUser) {
-      return Response.json(responseError(409, '该手机号已注册'))
+      return NextResponse.json(responseError(409, '该手机号已注册'))
     }
 
     const existingNickname = await prisma.user.findUnique({ where: { nickname } })
     if (existingNickname) {
-      return Response.json(responseError(409, '该昵称已被使用'))
+      return NextResponse.json(responseError(409, '该昵称已被使用'))
     }
 
     const hashedPassword = await hashPassword(password)
@@ -34,7 +35,7 @@ export async function POST(request: Request) {
 
     const token = generateToken(user.id)
 
-    return Response.json(
+    return NextResponse.json(
       responseSuccess({
         token,
         user: {
@@ -47,6 +48,6 @@ export async function POST(request: Request) {
       })
     )
   } catch (error) {
-    return Response.json(responseError(500, '服务器内部错误'))
+    return NextResponse.json(responseError(500, '服务器内部错误'))
   }
 }

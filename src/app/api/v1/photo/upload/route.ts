@@ -1,4 +1,4 @@
-/**
+﻿/**
  * POST /api/v1/photo/upload
  * 照片上传接口 — 用 FormData，支持 face_photo + body_photo 同时传
  *
@@ -32,7 +32,7 @@ async function saveFile(file: File, userId: string, type: number) {
   const url = `${BASE_URL}/uploads/${userId}/${type}/${hash}.jpg`
   const photo = await prisma.photo.create({
     data: {
-      user_id: userId,
+      user: { id: userId },
       photo_type: type,
       url,
       hash,

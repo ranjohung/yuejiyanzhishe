@@ -1,4 +1,4 @@
-/**
+﻿/**
  * POST /api/v1/tryon/generate
  * 溶图（AI 换装/换发型/换妆容）接口
  *
@@ -46,7 +46,7 @@ export async function POST(req: NextRequest) {
 
   // 验证照片
   const photo = await prisma.photo.findFirst({
-    where: { id: sourcePhotoId, user_id: auth.userId, status: 1 },
+    where: { id: sourcePhotoId, user: { id: auth.userId }, status: 1 },
   })
   if (!photo) {
     return NextResponse.json(responseError(400, 'source_photo_id 无效或已过期'), { status: 400 })
@@ -56,7 +56,7 @@ export async function POST(req: NextRequest) {
   if (body?.idempotency_key) {
     const existing = await prisma.tryon.findFirst({
       where: {
-        user_id: auth.userId,
+        user: { id: auth.userId },
         tryon_type: TRYON_TYPE_MAP[type],
         idempotency_key: body.idempotency_key,
       },
@@ -72,7 +72,7 @@ export async function POST(req: NextRequest) {
   // 创建任务
   const task = await prisma.tryon.create({
     data: {
-      user_id: auth.userId,
+      user: { id: auth.userId },
       report_id: body?.report_id,
       tryon_type: TRYON_TYPE_MAP[type],
       source_photo_url: photo.url,

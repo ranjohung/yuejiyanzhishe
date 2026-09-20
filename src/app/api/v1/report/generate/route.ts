@@ -1,4 +1,4 @@
-/**
+﻿/**
  * POST /api/v1/report/generate
  * 创建美学分析报告 — 核心状态机入口
  *
@@ -46,7 +46,7 @@ export async function POST(req: NextRequest) {
   // 1. 幂等去重：同一用户 8 小时内同一 idempotency_key 不重复分析
   if (idempotency_key) {
     const existing = await prisma.report.findFirst({
-      where: { user_id: auth.userId, idempotency_key },
+      where: { user: { id: auth.userId }, idempotency_key },
       orderBy: { created_at: 'desc' },
     })
     if (existing) {
@@ -60,7 +60,7 @@ export async function POST(req: NextRequest) {
 
   // 2. 验证照片存在且属于当前用户
   const frontPhoto = await prisma.photo.findFirst({
-    where: { id: front_photo_id, user_id: auth.userId, status: 1 },
+    where: { id: front_photo_id, user: { id: auth.userId }, status: 1 },
   })
   if (!frontPhoto) {
     return NextResponse.json(responseError(400, 'front_photo_id 无效或已过期'), { status: 400 })
@@ -69,7 +69,7 @@ export async function POST(req: NextRequest) {
   // 3. 创建 Report 记录（pending）
   const report = await prisma.report.create({
     data: {
-      user_id: auth.userId,
+      user: { id: auth.userId },
       front_photo_id,
       body_photo_id: body_photo_id,
       scene,
